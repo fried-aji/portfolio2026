@@ -1,0 +1,36 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import ImageVi from '@/assets/global/img_vi.png';
+import Layout from '@/layouts/Layout.astro';
+import AstroLink from '@/components/helper/AstroLink.astro';
+import Calendar from '@/components/ui/Calendar.astro';
+import siteNav from '@/data/siteNav';
+---
+
+<Layout>
+  <main class="p-home">
+    <h1 class="title">
+      <Icon name="logo_site" role="img" aria-label="ポートフォリオ バージョン2.0" width={320} height={71} />
+    </h1>
+    <div class="vi">
+      <Image src={ImageVi} alt="" width={580} height={751} />
+    </div>
+    <ul class="list">
+      {
+        siteNav.map((item) => (
+          <li class="item">
+            <AstroLink href={item.href.url} target={item.href.target ?? undefined} class="link">
+              <Icon name={`icon_${item.icon.id}`} role="img" aria-hidden="true" width={36} height={36} class="icon" />
+              <span class="text">
+                <span class="ja">{item.title.ja}</span>
+                <span class="en">{item.title.en}</span>
+              </span>
+            </AstroLink>
+          </li>
+        ))
+      }
+    </ul>
+    <Calendar class="calendar" />
+  </main>
+</Layout>

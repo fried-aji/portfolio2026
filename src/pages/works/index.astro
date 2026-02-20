@@ -1,0 +1,83 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import ImageFrame from '@/components/helper/ImageFrame.astro';
+import PageHdg from '@/components/ui/PageHdg.astro';
+import PageNav from '@/components/ui/PageNav.astro';
+
+const metaData = {
+  title: '制作実績 | Naganoma Rikuのポートフォリオ',
+  description: '管理人の詳細。SNSをフォローしてもらえると喜びます。',
+};
+
+const pageHdgData = {
+  title: {
+    ja: '制作実績',
+    en: 'WORKS',
+  },
+};
+
+const pageNavData = {
+  description: '管理人の詳細。SNSをフォローしてもらえると喜びます。',
+  nav: [
+    {
+      text: 'ホームに戻る',
+      href: '/',
+    },
+    {
+      text: '私について',
+      href: '/about/',
+    },
+  ],
+};
+
+const worksData: CollectionEntry<'works'>[] = (await getCollection('works')).sort(
+  (a: CollectionEntry<'works'>, b: CollectionEntry<'works'>) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+---
+
+<Layout {...metaData}>
+  <main class="p-works">
+    <PageHdg {...pageHdgData} />
+    <div role="tablist">
+      {
+        worksData.map((item) => (
+          <button
+            role="tab"
+            aria-label={item.data.title.ja}
+            aria-controls={`tabpanel-${item.id}`}
+            class:list={[
+              //
+              '',
+            ]}
+          >
+            <ImageFrame srcPaths={[`works/img_${item.id}01.jpg`]} />
+          </button>
+        ))
+      }
+    </div>
+    <div>
+      {
+        worksData.map((item) => (
+          <div
+            role="tabpanel"
+            aria-labelledby={`tabpanel-title-${item.id}`}
+            id={`tabpanel-${item.id}`}
+            class:list={['']}
+          >
+            <h2 id={`title-${item.id}`} class="title">
+              <span class="client">{item.data.client.en}</span>
+              <span class="page">{item.data.title.ja}</span>
+            </h2>
+            <p class="desc">{item.data.description}</p>
+            <a href={`/works/${item.id}/`} class="link">
+              View Details
+            </a>
+          </div>
+        ))
+      }
+    </div>
+    <PageNav {...pageNavData} />
+  </main>
+</Layout>

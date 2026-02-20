@@ -1,0 +1,38 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHdg from '@/components/ui/PageHdg.astro';
+import PageNav from '@/components/ui/PageNav.astro';
+
+const metaData = {
+  title: '',
+  description: '',
+};
+
+const pageHdgData = {
+  title: {
+    ja: '',
+    en: '',
+  },
+};
+
+const pageNavData = {
+  description: '管理人の詳細。SNSをフォローしてもらえると喜びます。',
+  nav: [
+    {
+      text: 'ホームに戻る',
+      href: '/',
+    },
+    {
+      text: 'セカイを見る',
+      href: '/world/',
+    },
+  ],
+};
+---
+
+<Layout {...metaData}>
+  <main class="p-world">
+    <PageHdg {...pageHdgData} />
+    <PageNav {...pageNavData} />
+  </main>
+</Layout>

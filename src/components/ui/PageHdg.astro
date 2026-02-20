@@ -1,0 +1,27 @@
+---
+interface Props {
+  class?: string;
+  title: {
+    ja: string;
+    en: string;
+  };
+}
+
+const {
+  //
+  class: className,
+  title,
+  ...props
+} = Astro.props;
+---
+
+<h1
+  class:list={[
+    //
+    'c-pagehdg',
+    className,
+  ]}
+>
+  <span class="ja">{title.ja}</span>
+  <span class="en">{title.en}</span>
+</h1>

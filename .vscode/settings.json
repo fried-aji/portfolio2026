@@ -1,0 +1,40 @@
+{
+  /* Text Editor */
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "never"
+  },
+
+  // https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode#default-formatter
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  /* Text Editor > Formatting */
+  "editor.formatOnSave": true,
+
+  /* Extensions > Emmet */
+  "emmet.includeLanguages": {
+    "astro": "html",
+    "mdx": "javascriptreact"
+  },
+
+  /* Extensions > Stylelint */
+  "css.validate": false,
+  "scss.validate": false,
+  "stylelint.validate": [
+    //
+    "css",
+    "astro"
+  ],
+
+  /* Extensions > CSS Variable  */
+  // https://qiita.com/xrxoxcxox/items/2df0c48c6543886102b7
+  "cssVariables.lookupFiles": [
+    //
+    "**/*.css",
+    "**/*.astro"
+  ],
+
+  /* Extensions > Prettier */
+  // https://gist.github.com/JLarky/b26a165d628984723fe285201ca699e5
+  "prettier.documentSelectors": ["**/*.astro"]
+}

@@ -1,0 +1,76 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import Layout from '@/layouts/Layout.astro';
+import ImageFrame from '@/components/helper/ImageFrame.astro';
+import { render } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'works'>;
+}
+
+export async function getStaticPaths() {
+  const worksEntries = await getCollection('works');
+  return worksEntries.map((entry: CollectionEntry<'works'>) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const metaTitle = `${entry.data.title.ja} | 制作実績 | Naganoma Rikuのポートフォリオ`;
+const metaDescription = entry.data.description || '';
+---
+
+<Layout title={metaTitle} description={metaDescription}>
+  <article class="p-works-detail">
+    <div>
+      <hgroup>
+        <p>{entry.data.client.en}</p>
+        <h1>{entry.data.title.ja}</h1>
+      </hgroup>
+      <div>
+        <Content />
+      </div>
+    </div>
+    <div id="works-carousel" class="carousel">
+      <div class="viewport">
+        {
+          Array.from({ length: entry.data.gallery }, (_, i) => (
+            <ImageFrame srcPaths={[`works/img_${entry.id}${String(i + 1).padStart(2, '0')}.jpg`]} />
+          ))
+        }
+      </div>
+      <div class="control">
+        <button
+          type="button"
+          aria-controls="works-carousel"
+          class:list={[
+            //
+            '',
+          ]}
+        >
+          <Icon name="icon_arrow" role="img" aria-label="前の画像に戻る" width={18} height={18} />
+        </button>
+        <p>
+          <span>1</span>
+          <span>/</span>
+          <span>{entry.data.gallery}</span>
+        </p>
+        <button
+          type="button"
+          aria-controls="works-carousel"
+          class:list={[
+            //
+            '',
+          ]}
+        >
+          <Icon name="icon_arrow" role="img" aria-label="次の画像に進む" width={18} height={18} />
+        </button>
+      </div>
+    </div>
+  </article>
+</Layout>

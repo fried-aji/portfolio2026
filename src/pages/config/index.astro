@@ -1,0 +1,34 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHdg from '@/components/ui/PageHdg.astro';
+import PageNav from '@/components/ui/PageNav.astro';
+
+const metaData = {
+  title: 'コンフィグ | Naganoma Rikuのポートフォリオ',
+  description: '本サイトの環境設定を変更できます。',
+};
+
+const pageHdgData = {
+  title: {
+    ja: 'コンフィグ',
+    en: 'CONFIG',
+  },
+};
+
+const pageNavData = {
+  description: '本サイトの環境設定を変更できます。',
+  nav: [
+    {
+      text: 'ホームに戻る',
+      href: '/',
+    },
+  ],
+};
+---
+
+<Layout {...metaData}>
+  <main class="p-config">
+    <PageHdg {...pageHdgData} />
+    <PageNav {...pageNavData} />
+  </main>
+</Layout>

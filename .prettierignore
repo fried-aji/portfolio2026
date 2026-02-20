@@ -1,0 +1,12 @@
+node_modules/
+.astro/
+build/
+dist/
+out/
+public/
+package.json
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+*.mdx
+.claude/

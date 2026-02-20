@@ -1,0 +1,38 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHdg from '@/components/ui/PageHdg.astro';
+import PageNav from '@/components/ui/PageNav.astro';
+
+const metaData = {
+  title: '私について | Naganoma Rikuのポートフォリオ',
+  description: '管理人の詳細。SNSをフォローしてもらえると喜びます。',
+};
+
+const pageHdgData = {
+  title: {
+    ja: '私について',
+    en: 'ABOUT',
+  },
+};
+
+const pageNavData = {
+  description: '管理人の詳細。SNSをフォローしてもらえると喜びます。',
+  nav: [
+    {
+      text: 'ホームに戻る',
+      href: '/',
+    },
+    {
+      text: 'セカイを見る',
+      href: '/world/',
+    },
+  ],
+};
+---
+
+<Layout {...metaData}>
+  <main class="p-about">
+    <PageHdg {...pageHdgData} />
+    <PageNav {...pageNavData} />
+  </main>
+</Layout>

@@ -1,0 +1,71 @@
+---
+/* 
+使い方 
+import ImageFrame from '@/components/helper/ImageFrame.astro'
+
+・単一画像の場合
+<ImageFrame srcPaths={['hoge_1.jpg']} />
+・レスポンシブ画像の場合
+<ImageFrame srcPaths={['hoge_1.jpg','hoge_2.jpg']} mediaQuery={900} />	
+*/
+
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+
+interface Props {
+  srcPaths: [string, string?];
+  mediaQuery?: number;
+  classNames?: string;
+  alt?: string;
+  loading?: 'lazy' | 'eager';
+  format?: 'webp' | 'avif' | 'svg';
+}
+
+const { srcPaths, mediaQuery = 768, classNames, alt = '', loading = 'lazy', format = 'webp', ...props } = Astro.props;
+
+const importImage = async (src: string) => {
+  const imageFile = import.meta.glob<{ default: ImageMetadata }>(`/src/assets/**/*`);
+
+  const pathToAssets = '/src/assets/';
+  if (!imageFile[`${pathToAssets}${src}`]) return;
+  const moduleImage = await imageFile[`${pathToAssets}${src}`]();
+
+  const { default: imageSrc } = moduleImage;
+  const image = await getImage({ src: imageSrc, format: format });
+  const { loading: loadingMode, ...attributes } = image.attributes;
+  return { src: image.src, attributes };
+};
+
+const importImages = async () => {
+  return Promise.all(
+    srcPaths.map(async (src) => {
+      if (!src) return;
+      return importImage(src);
+    }),
+  );
+};
+
+const images = await importImages();
+---
+
+{
+  (
+    <>
+      {images.length === 1 ? (
+        <img
+          src={images[0]?.src}
+          {...images[0]?.attributes}
+          loading={loading}
+          alt={alt}
+          class:list={[classNames]}
+          {...props}
+        />
+      ) : (
+        <picture class:list={[classNames]} {...props}>
+          <source media={`(width >= ${mediaQuery}px)`} srcset={images[0]?.src} />
+          <img src={images[1]?.src} {...images[1]?.attributes} loading={loading} alt={alt} />
+        </picture>
+      )}
+    </>
+  )
+}

@@ -1,0 +1,80 @@
+---
+import { Icon } from 'astro-icon/components';
+import AstroLink from '@/components/helper/AstroLink.astro';
+import Calendar from '@/components/ui/Calendar.astro';
+import siteNav from '@/data/siteNav';
+import snsNav from '@/data/snsNav';
+
+interface Props {
+  class?: string;
+}
+
+const {
+  //
+  class: className,
+  ...props
+} = Astro.props;
+---
+
+<header
+  id="header"
+  class:list={[
+    //
+    'l-header',
+  ]}
+>
+  <nav class="nav" aria-label="グローバルナビゲーション">
+    <button
+      type="button"
+      aria-label="全てのメニューを開く"
+      aria-expanded="false"
+      class:list={[
+        //
+        'open',
+      ]}></button>
+    <dialog
+      autofocus
+      aria-label="全てのメニュー"
+      data-lenis-prevent
+      class:list={[
+        //
+        'menu',
+      ]}
+    >
+      <button
+        type="button"
+        aria-label="全てのメニューを閉じる"
+        aria-expanded="false"
+        class:list={[
+          //
+          'close',
+        ]}></button>
+      <Calendar class="calendar" />
+      <ul class="list">
+        {
+          siteNav.map((item) => (
+            <li class="item">
+              <AstroLink href={item.href.url} target={item.href.target ?? undefined} class="link">
+                {item.title.ja}
+              </AstroLink>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="lower">
+        <div class="sns">
+          {
+            snsNav.map((item) => (
+              <AstroLink href={item.href} target="_blank" class="link">
+                <Icon name={`icon_${item.id}`} />
+              </AstroLink>
+            ))
+          }
+        </div>
+        <AstroLink href="/" class="home">
+          <Icon name="logo_site" role="img" aria-label="ホームに戻る" width={300} height={60} class="logo" />
+        </AstroLink>
+      </div>
+    </dialog>
+  </nav>
+</header>

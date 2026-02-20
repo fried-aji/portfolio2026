@@ -1,0 +1,52 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'a'> {
+  href: string;
+  class?: string;
+  target?: string;
+  rel?: string;
+}
+const {
+  //
+  class: className,
+  href,
+  target,
+  rel,
+  ...props
+} = Astro.props;
+
+/* rel属性の自動付与 */
+const relValue = rel === null ? (target === '_blank' ? 'noreferrer' : null) : rel;
+
+/* aria-current属性の自動付与 */
+const currentPath = Astro.url.pathname;
+// 現在のパスを配列に変換
+const currentPathArray = currentPath.split('/').filter(Boolean);
+// hrefを絶対パスに変換
+const absoluteHref = new URL(href, Astro.url.origin).pathname;
+// href属性を配列に変換
+const hrefArray = absoluteHref.split('/').filter(Boolean);
+// パスが含まれているか判定
+const isContain = hrefArray.length > 0 && hrefArray.every((item, i) => currentPathArray[i] === item);
+// 完全一致
+const isCurrent = currentPath === absoluteHref;
+if (isCurrent) {
+  props['aria-current'] = 'page';
+} else if (isContain) {
+  props['aria-current'] = 'true';
+}
+---
+
+<a
+  class:list={[
+    //
+    className,
+  ]}
+  href={href}
+  target={target}
+  rel={relValue}
+  {...props}
+>
+  <slot />
+</a>

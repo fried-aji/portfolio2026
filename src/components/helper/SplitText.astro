@@ -1,0 +1,30 @@
+---
+interface Props {
+  text: string;
+  class?: string;
+}
+
+const {
+  //
+  text,
+  class: className,
+  ...props
+} = Astro.props;
+
+const letters = [...text];
+---
+
+{
+  letters.map((letter, index) => (
+    <span
+      class:list={[
+        //
+        className,
+      ]}
+      {...props}
+      style={`--index: ${index}`}
+    >
+      {letter}
+    </span>
+  ))
+}
