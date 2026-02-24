@@ -15,6 +15,7 @@ const works = defineCollection({
     }),
     description: z.string().optional(),
     gallery: z.number(),
+    siteUrl: z.string().optional(),
   }),
 });
 

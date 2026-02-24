@@ -8,6 +8,20 @@
   font-family: var(--font-mplus);
 }
 
+button {
+  cursor: pointer;
+}
+
 [x-cloak] {
   display: none !important;
+}
+
+.l-container {
+  --_container-w: 1280;
+
+  display: grid;
+  grid-template-rows: 1fr max-content;
+  min-height: 100lvh;
+  container-type: inline-size;
+  overflow: clip;
 }

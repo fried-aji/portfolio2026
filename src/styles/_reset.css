@@ -22,7 +22,7 @@
 }
 
 :where(body) {
-  min-height: 100dvb;
+  min-height: 100lvh;
   margin: unset;
 }
 
@@ -100,6 +100,7 @@
 
 :where(img, svg, video, canvas, audio, iframe, embed, object) {
   display: block;
+  height: auto;
   vertical-align: middle;
 }
 

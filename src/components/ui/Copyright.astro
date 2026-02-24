@@ -1,0 +1,34 @@
+---
+interface Props {
+  class?: string;
+}
+
+const {
+  //
+  class: className,
+  ...props
+} = Astro.props;
+---
+
+<small
+  translate="no"
+  class:list={[
+    //
+    'c-copyright',
+    className,
+  ]}>© 2026 Riku Naganoma</small
+>
+
+<style>
+  @import '@/styles/_mql.css';
+
+  .c-copyright {
+    font-family: var(--font-zen-dots);
+    line-height: 1;
+    color: var(--color-lynch);
+
+    @media (--mql-md) {
+      font-size: calc(12 / var(--_container-w) * 100cqi);
+    }
+  }
+</style>

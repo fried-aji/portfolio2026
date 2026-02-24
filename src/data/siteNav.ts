@@ -25,14 +25,14 @@ export const siteNav = [
   },
   {
     title: {
-      ja: 'お問い合わせ',
-      en: 'CONTACT',
+      ja: 'セカイ',
+      en: 'WORLD',
     },
     href: {
-      url: 'mailto:ittentoppariku@gmail.com',
+      url: '/world/',
     },
     icon: {
-      id: 'email',
+      id: 'global',
     },
   },
   {
@@ -50,14 +50,14 @@ export const siteNav = [
   },
   {
     title: {
-      ja: 'セカイ',
-      en: 'WORLD',
+      ja: 'お問い合わせ',
+      en: 'CONTACT',
     },
     href: {
-      url: '/world/',
+      url: 'mailto:ittentoppariku@gmail.com',
     },
     icon: {
-      id: 'global',
+      id: 'email',
     },
   },
   {

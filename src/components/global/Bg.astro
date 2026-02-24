@@ -1,0 +1,174 @@
+---
+const circleData = [
+  {
+    pc: {
+      src: 'img_circle-blue01.svg',
+      width: '1028',
+      height: '1028',
+    },
+    sp: {
+      src: '',
+      width: '',
+      height: '',
+    },
+  },
+  {
+    pc: {
+      src: 'img_circle-blue02.svg',
+      width: '920',
+      height: '920',
+    },
+    sp: {
+      src: '',
+      width: '',
+      height: '',
+    },
+  },
+  {
+    pc: {
+      src: 'img_circle-pink01.svg',
+      width: '829',
+      height: '829',
+    },
+    sp: {
+      src: '',
+      width: '',
+      height: '',
+    },
+  },
+  {
+    pc: {
+      src: 'img_circle-blue03.svg',
+      width: '1080',
+      height: '1080',
+    },
+    sp: {
+      src: '',
+      width: '',
+      height: '',
+    },
+  },
+  {
+    pc: {
+      src: 'img_circle-pink02.svg',
+      width: '1085',
+      height: '1085',
+    },
+    sp: {
+      src: '',
+      width: '',
+      height: '',
+    },
+  },
+];
+---
+
+<div class="l-bg">
+  <div class="base">
+    <picture class="upper">
+      <source media="(width >= 768px)" srcset="/img/global/img_bg-upper.svg" width="1280" height="397" />
+      <img src="/img/global/img_bg-upper_sp.svg" alt="" width="1280" height="397" />
+    </picture>
+    <picture class="lower">
+      <source media="(width >= 768px)" srcset="/img/global/img_bg-lower.svg" width="1280" height="674" />
+      <img src="/img/global/img_bg-lower_sp.svg" alt="" width="1280" height="674" />
+    </picture>
+  </div>
+  <div class="anime">
+    {
+      circleData.map((item) => (
+        <picture class="circle">
+          <source
+            media="(width >= 768px)"
+            srcset={`/img/global/${item.pc.src}`}
+            width={item.pc.width}
+            height={item.pc.height}
+          />
+          <img src={`/img/global/${item.sp.src}`} alt="" width={item.sp.width} height={item.sp.height} />
+        </picture>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  @import '@/styles/_mql.css';
+
+  .l-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    display: grid;
+    grid-template-areas: 'item';
+    width: 100%;
+    height: max-content;
+    min-height: 100%;
+    margin: auto;
+    pointer-events: none;
+  }
+
+  .base {
+    display: grid;
+    grid-area: item;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .lower {
+    align-self: flex-end;
+  }
+
+  .anime {
+    display: grid;
+    grid-area: item;
+    grid-template-areas: 'circle';
+    place-items: center;
+    place-self: center;
+    height: max-content;
+  }
+
+  .circle {
+    grid-area: circle;
+    animation: rotation 100s linear infinite var(--_anime-dir, normal);
+
+    &:first-of-type {
+      @media (--mql-md) {
+        --_w: calc(1028 / var(--screens-xl) * 100cqi);
+      }
+    }
+
+    &:nth-of-type(2) {
+      @media (--mql-md) {
+        --_w: calc(920 / var(--screens-xl) * 100cqi);
+      }
+    }
+
+    &:nth-of-type(3) {
+      --_anime-dir: reverse;
+
+      @media (--mql-md) {
+        --_w: calc(829 / var(--screens-xl) * 100cqi);
+      }
+    }
+
+    &:nth-of-type(4) {
+      @media (--mql-md) {
+        --_w: calc(1080 / var(--screens-xl) * 100cqi);
+      }
+    }
+
+    &:nth-of-type(5) {
+      --_anime-dir: reverse;
+
+      @media (--mql-md) {
+        --_w: calc(1085 / var(--screens-xl) * 100cqi);
+      }
+    }
+
+    img {
+      width: var(--_w);
+    }
+  }
+</style>

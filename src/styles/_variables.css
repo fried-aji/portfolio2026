@@ -1,4 +1,13 @@
 :root {
+  /* breakpoint */
+  --screens-xl: 1280;
+  --screens-lg: 1024;
+  --screens-md: 768;
+  --screens-xs: 400;
+
+  /* z-index */
+  --z-header: 10;
+
   /* color */
   --color-pure-white: #fff;
   --color-pure-black: #000;

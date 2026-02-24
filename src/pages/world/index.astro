@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import PageHdg from '@/components/ui/PageHdg.astro';
-import PageNav from '@/components/ui/PageNav.astro';
+import PageFooter from '@/components/ui/PageFooter.astro';
 
 const metaData = {
   title: '',
@@ -15,7 +15,7 @@ const pageHdgData = {
   },
 };
 
-const pageNavData = {
+const PageFooterData = {
   description: '管理人の詳細。SNSをフォローしてもらえると喜びます。',
   nav: [
     {
@@ -33,6 +33,6 @@ const pageNavData = {
 <Layout {...metaData}>
   <main class="p-world">
     <PageHdg {...pageHdgData} />
-    <PageNav {...pageNavData} />
+    <PageFooter {...PageFooterData} />
   </main>
 </Layout>

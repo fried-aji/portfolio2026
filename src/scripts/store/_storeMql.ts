@@ -8,7 +8,7 @@ const value = {
   // ブレイクポイント
   XXL: window.matchMedia('(width >= 1440px)'),
   XL: window.matchMedia('(width >= 1280px)'),
-  LG: window.matchMedia('(width >= 1120px)'),
+  LG: window.matchMedia('(width >= 1024px)'),
   MD: window.matchMedia('(width >= 768px)'),
   XS: window.matchMedia('(width >= 400px)'),
   // 視差効果

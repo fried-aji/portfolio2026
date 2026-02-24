@@ -1,8 +1,8 @@
 /* breakpoint */
-@custom-media --screens-xl (width >= 1440px);
-@custom-media --screens-lg (width >= 1024px);
-@custom-media --screens-md (width >= 768px);
-@custom-media --screens-xs (width >= 400px);
+@custom-media --mdl-xl (width >= 1280px);
+@custom-media --mql-lg (width >= 1024px);
+@custom-media --mql-md (width >= 768px);
+@custom-media --mql-xs (width >= 400px);
 
 /* hover */
 @custom-media --hover (any-hover: hover);

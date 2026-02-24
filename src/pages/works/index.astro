@@ -4,11 +4,12 @@ import { getCollection } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import ImageFrame from '@/components/helper/ImageFrame.astro';
 import PageHdg from '@/components/ui/PageHdg.astro';
-import PageNav from '@/components/ui/PageNav.astro';
+import PageFooter from '@/components/ui/PageFooter.astro';
+import Deco from '@/components/ui/Deco.astro';
 
 const metaData = {
   title: '制作実績 | Naganoma Rikuのポートフォリオ',
-  description: '管理人の詳細。SNSをフォローしてもらえると喜びます。',
+  description: '制作実績一覧。クリックすると詳細へ。',
 };
 
 const pageHdgData = {
@@ -18,8 +19,8 @@ const pageHdgData = {
   },
 };
 
-const pageNavData = {
-  description: '管理人の詳細。SNSをフォローしてもらえると喜びます。',
+const PageFooterData = {
+  description: '制作実績一覧。クリックすると詳細へ。',
   nav: [
     {
       text: 'ホームに戻る',
@@ -37,47 +38,214 @@ const worksData: CollectionEntry<'works'>[] = (await getCollection('works')).sor
 );
 ---
 
-<Layout {...metaData}>
+<Layout title={metaData.title} description={metaData.description}>
   <main class="p-works">
     <PageHdg {...pageHdgData} />
-    <div role="tablist">
+    <div x-data="tabMenu" class="tab-menu">
+      <div role="tablist" class="tab-list">
+        {
+          worksData.map((item, index) => (
+            <button
+              x-bind={`tab(${index})`}
+              role="tab"
+              aria-label={item.data.title.ja}
+              aria-controls={`tabpanel-${item.id}`}
+              class:list={[
+                //
+                'tab',
+              ]}
+            >
+              <ImageFrame srcPaths={[`works/img_${item.id}01.jpg`]} />
+            </button>
+          ))
+        }
+      </div>
       {
-        worksData.map((item) => (
-          <button
-            role="tab"
-            aria-label={item.data.title.ja}
-            aria-controls={`tabpanel-${item.id}`}
-            class:list={[
-              //
-              '',
-            ]}
-          >
-            <ImageFrame srcPaths={[`works/img_${item.id}01.jpg`]} />
-          </button>
-        ))
-      }
-    </div>
-    <div>
-      {
-        worksData.map((item) => (
+        worksData.map((item, index) => (
           <div
+            x-bind={`tabpanel(${index})`}
             role="tabpanel"
             aria-labelledby={`tabpanel-title-${item.id}`}
             id={`tabpanel-${item.id}`}
-            class:list={['']}
+            class:list={['tab-panel']}
+            x-cloak={index > 0 || undefined}
           >
-            <h2 id={`title-${item.id}`} class="title">
-              <span class="client">{item.data.client.en}</span>
-              <span class="page">{item.data.title.ja}</span>
-            </h2>
-            <p class="desc">{item.data.description}</p>
-            <a href={`/works/${item.id}/`} class="link">
-              View Details
+            <div class="thumb">
+              <ImageFrame srcPaths={[`works/img_${item.id}01.jpg`]} />
+            </div>
+            <a href={`/works/${item.id}/`} class="info">
+              <h2 id={`title-${item.id}`} class="title">
+                <span class="client">{item.data.client.en}</span>
+                <span class="page">{item.data.title.ja}</span>
+              </h2>
+              <p class="desc">{item.data.description}</p>
+              <div class="detail">View Details</div>
             </a>
           </div>
         ))
       }
+      <Deco>
+        <div class="deco">
+          {
+            worksData.map((item, index) => (
+              <div
+                x-show={`currentIndex == ${index}`}
+                x-transition:enter-start="is-hidden"
+                x-transition:leave-end="is-hidden"
+                class:list={[
+                  //
+                  'deco-text',
+                ]}
+              >
+                <div class="deco-client">{item.data.client.en}</div>
+                <div class="deco-title">{item.data.title.en}</div>
+              </div>
+            ))
+          }
+        </div>
+      </Deco>
     </div>
-    <PageNav {...pageNavData} />
   </main>
+  <PageFooter {...PageFooterData} />
 </Layout>
+
+<style>
+  @import '@/styles/_mql.css';
+
+  .p-works {
+    display: grid;
+    place-items: center;
+  }
+
+  .tab-menu {
+    position: relative;
+    display: grid;
+
+    @media (--mql-md) {
+      grid-template-columns: calc(384 / var(--_container-w) * 100cqi) calc(680 / var(--_container-w) * 100cqi);
+      gap: calc(42 / var(--_container-w) * 100cqi) calc(88 / var(--_container-w) * 100cqi);
+      margin: calc(120 / var(--_container-w) * 100cqi) calc(64 / var(--_container-w) * 100cqi)
+        calc(64 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .tab-list {
+    display: grid;
+
+    @media (--mql-md) {
+      grid-area: 1 / 1 / 2 / 2;
+      grid-template-columns: repeat(3, calc(120 / var(--_container-w) * 100cqi));
+      gap: calc(12 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .tab-panel {
+    transition: opacity 0.3s ease;
+
+    @media (--mql-md) {
+      grid-area: 2 / 1 / 3 / 2;
+    }
+
+    &.is-hidden {
+      --_pos: absolute;
+
+      opacity: 0;
+    }
+  }
+
+  .thumb {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    align-items: center;
+
+    @media (--mql-md) {
+      width: calc(680 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .info {
+    position: var(--_pos);
+    display: block;
+  }
+
+  .title {
+    display: grid;
+  }
+
+  .client {
+    font-family: var(--font-zen-dots);
+    line-height: 1;
+
+    @media (--mql-md) {
+      font-size: calc(12 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .page {
+    font-family: var(--font-dela-gothic);
+
+    @media (--mql-md) {
+      font-size: calc(36 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .desc {
+    font-weight: 500;
+
+    @media (--mql-md) {
+      margin-top: calc(8 / var(--_container-w) * 100cqi);
+      font-size: calc(12 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .detail {
+    --_line-bottom: calc(4 / var(--_container-w) * 100cqi);
+
+    width: fit-content;
+    font-family: var(--font-zen-dots);
+    background-image: linear-gradient(var(--color-pure-white) 0 0);
+    background-repeat: no-repeat;
+    background-position: 0 calc(100% - var(--_line-bottom));
+    background-size: 100% calc(4 / var(--_container-w) * 100cqi);
+
+    @media (--mql-md) {
+      margin-top: calc(24 / var(--_container-w) * 100cqi);
+      font-size: calc(14 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .deco {
+    position: absolute;
+    display: grid;
+    grid-template-areas: 'text';
+    font-family: var(--font-zen-dots);
+    line-height: 1;
+    color: var(--color-pure-white);
+    opacity: 0.4;
+
+    @media (--mql-md) {
+      --_base-w: 1280;
+      --_base-h: 720;
+
+      top: calc(221 / var(--_base-h) * 100%);
+      left: calc(39 / var(--_base-w) * 100%);
+      font-size: calc(120 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .deco-text {
+    grid-area: text;
+    white-space: nowrap;
+    transform: skewX(-16deg);
+    rotate: -8deg;
+    transition: opacity 0.3s ease;
+
+    &.is-hidden {
+      position: absolute;
+      opacity: 0;
+    }
+  }
+</style>

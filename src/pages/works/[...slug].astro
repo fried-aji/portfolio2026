@@ -1,10 +1,12 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import Layout from '@/layouts/Layout.astro';
 import ImageFrame from '@/components/helper/ImageFrame.astro';
-import { render } from 'astro:content';
+import PageHdg from '@/components/ui/PageHdg.astro';
+import PageFooter from '@/components/ui/PageFooter.astro';
+import Deco from '@/components/ui/Deco.astro';
 
 interface Props {
   entry: CollectionEntry<'works'>;
@@ -21,56 +23,278 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 
-const metaTitle = `${entry.data.title.ja} | 制作実績 | Naganoma Rikuのポートフォリオ`;
-const metaDescription = entry.data.description || '';
+const metaData = {
+  title: `${entry.data.title.ja} | 制作実績 | Naganoma Rikuのポートフォリオ`,
+  description: entry.data.description || '',
+};
+
+const pageHdgData = {
+  tag: 'h2' as const,
+  title: {
+    ja: '制作実績',
+    en: 'WORKS',
+  },
+};
+
+const PageFooterData = {
+  description: '制作実績の詳細。「サイトを見る」で該当ページに移動。',
+  nav: [
+    {
+      text: '一覧に戻る',
+      href: '/works/',
+    },
+    {
+      text: 'サイトを見る',
+      href: entry.data.siteUrl || '',
+      target: '_blank',
+    },
+  ],
+};
 ---
 
-<Layout title={metaTitle} description={metaDescription}>
-  <article class="p-works-detail">
-    <div>
-      <hgroup>
-        <p>{entry.data.client.en}</p>
-        <h1>{entry.data.title.ja}</h1>
+<Layout title={metaData.title} description={metaData.description}>
+  <PageHdg {...pageHdgData} />
+  <main class="p-works-detail">
+    <article class="article">
+      <hgroup class="heading">
+        <p class="heading-client">{entry.data.client.en}</p>
+        <h1 class="heading-title">{entry.data.title.ja}</h1>
       </hgroup>
-      <div>
+      <div class="p-works-detail-body">
         <Content />
       </div>
-    </div>
-    <div id="works-carousel" class="carousel">
-      <div class="viewport">
-        {
-          Array.from({ length: entry.data.gallery }, (_, i) => (
-            <ImageFrame srcPaths={[`works/img_${entry.id}${String(i + 1).padStart(2, '0')}.jpg`]} />
-          ))
-        }
+      <div id="works-carousel" class="carousel">
+        <div class="carousel-viewport">
+          {
+            Array.from({ length: entry.data.gallery }, (_, i) => (
+              <ImageFrame srcPaths={[`works/img_${entry.id}${String(i + 1).padStart(2, '0')}.jpg`]} />
+            ))
+          }
+        </div>
+        <div class="carousel-control">
+          <button
+            type="button"
+            aria-controls="works-carousel"
+            data-type="prev"
+            class:list={[
+              //
+              'carousel-arrow',
+            ]}
+          >
+            <Icon name="icon_arrow" role="img" aria-label="前の画像に戻る" width={18} height={18} />
+          </button>
+          <p class="carousel-num">
+            <span>1</span>
+            <span class="carousel-line">/</span>
+            <span>{entry.data.gallery}</span>
+          </p>
+          <button
+            type="button"
+            aria-controls="works-carousel"
+            data-type="next"
+            class:list={[
+              //
+              'carousel-arrow',
+            ]}
+          >
+            <Icon name="icon_arrow" role="img" aria-label="次の画像に進む" width={18} height={18} />
+          </button>
+        </div>
       </div>
-      <div class="control">
-        <button
-          type="button"
-          aria-controls="works-carousel"
-          class:list={[
-            //
-            '',
-          ]}
-        >
-          <Icon name="icon_arrow" role="img" aria-label="前の画像に戻る" width={18} height={18} />
-        </button>
-        <p>
-          <span>1</span>
-          <span>/</span>
-          <span>{entry.data.gallery}</span>
-        </p>
-        <button
-          type="button"
-          aria-controls="works-carousel"
-          class:list={[
-            //
-            '',
-          ]}
-        >
-          <Icon name="icon_arrow" role="img" aria-label="次の画像に進む" width={18} height={18} />
-        </button>
+    </article>
+    <Deco>
+      <div class="deco">
+        {entry.data.client.en}<br />{entry.data.title.en}
       </div>
-    </div>
-  </article>
+    </Deco>
+  </main>
+  <PageFooter {...PageFooterData} />
 </Layout>
+
+<style>
+  @import '@/styles/_mql.css';
+
+  .p-works-detail {
+    display: grid;
+    place-items: center;
+  }
+
+  .article {
+    display: grid;
+    grid-template-areas: 'hdg hdg' 'body carousel';
+
+    @media (--mql-md) {
+      grid-template-columns: 1fr max-content;
+      gap: 0 calc(80 / var(--_container-w) * 100cqi);
+      margin: calc(42 / var(--_container-w) * 100cqi) calc(64 / var(--_container-w) * 100cqi)
+        calc(64 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .heading {
+    display: grid;
+    grid-area: hdg;
+    line-height: 1;
+    transform: skewX(-16deg);
+    rotate: -8deg;
+
+    @media (--mql-md) {
+      row-gap: calc(4 / var(--_container-w) * 100cqi);
+      margin-left: calc(16 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .heading-client {
+    font-family: var(--font-zen-dots);
+    color: var(--color-dark-gray);
+
+    @media (--mql-md) {
+      font-size: calc(16 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .heading-title {
+    font-family: var(--font-dela-gothic);
+
+    @media (--mql-md) {
+      font-size: calc(72 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .p-works-detail-body {
+    grid-area: body;
+
+    @media (--mql-md) {
+      margin-top: calc(116 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .carousel {
+    grid-area: carousel;
+
+    @media (--mql-md) {
+      width: calc(680 / var(--_container-w) * 100cqi);
+      margin-top: calc(36 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .carousel-control {
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    align-items: center;
+    width: fit-content;
+    margin-left: auto;
+    color: var(--color-pure-white);
+    background-color: var(--color-black);
+    border-radius: var(--infinity);
+
+    @media (--mql-md) {
+      column-gap: calc(22 / var(--_container-w) * 100cqi);
+      padding: calc(6 / var(--_container-w) * 100cqi) calc(10 / var(--_container-w) * 100cqi);
+      margin-top: calc(16 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .carousel-arrow {
+    aspect-ratio: 1;
+
+    @media (--mql-md) {
+      width: calc(18 / var(--_container-w) * 100cqi);
+    }
+
+    &[data-type='prev'] {
+      rotate: -180deg;
+    }
+
+    svg {
+      width: 100%;
+    }
+  }
+
+  .carousel-num {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-zen-dots);
+    line-height: 1;
+
+    @media (--mql-md) {
+      column-gap: calc(10 / var(--_container-w) * 100cqi);
+      font-size: calc(14 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .carousel-line {
+    @media (--mql-md) {
+      font-size: calc(10 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .deco {
+    position: absolute;
+    font-family: var(--font-zen-dots);
+    line-height: 1;
+    color: var(--color-pure-white);
+    white-space: nowrap;
+    opacity: 0.4;
+    transform: skewX(-16deg);
+    rotate: -8deg;
+
+    @media (--mql-md) {
+      --_base-w: 1280;
+      --_base-h: 720;
+
+      top: calc(221 / var(--_base-h) * 100%);
+      left: calc(39 / var(--_base-w) * 100%);
+      font-size: calc(120 / var(--_container-w) * 100cqi);
+    }
+  }
+</style>
+
+<style is:global>
+  @import '@/styles/_mql.css';
+
+  .p-works-detail-body {
+    * {
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    h3 {
+      --_clip: calc(12 / 177 * 100%);
+
+      font-family: var(--font-dela-gothic);
+      line-height: 1;
+      color: var(--color-pure-white);
+      text-align: center;
+      background-color: var(--color-black);
+      clip-path: polygon(var(--_clip) 0%, 100% 0%, calc(100% - var(--_clip)) 100%, 0% 100%);
+
+      @media (--mql-md) {
+        width: calc(178 / var(--_container-w) * 100cqi);
+        padding: calc(8 / var(--_container-w) * 100cqi) calc(16 / var(--_container-w) * 100cqi)
+          calc(10 / var(--_container-w) * 100cqi);
+        margin-top: calc(24 / var(--_container-w) * 100cqi);
+        font-size: calc(16 / var(--_container-w) * 100cqi);
+      }
+
+      + * {
+        @media (--mql-md) {
+          margin-top: calc(12 / var(--_container-w) * 100cqi);
+        }
+      }
+    }
+
+    p {
+      font-weight: 500;
+
+      @media (--mql-md) {
+        font-size: calc(14 / var(--_container-w) * 100cqi);
+      }
+    }
+  }
+</style>

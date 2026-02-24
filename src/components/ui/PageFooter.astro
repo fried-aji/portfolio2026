@@ -1,0 +1,131 @@
+---
+import AstroLink from '@/components/helper/AstroLink.astro';
+
+interface Props {
+  class?: string;
+  description: string;
+  nav?: {
+    text: string;
+    href: string;
+    target?: string;
+  }[];
+}
+
+const {
+  //
+  class: className,
+  description,
+  nav,
+  ...props
+} = Astro.props;
+---
+
+<footer
+  class:list={[
+    //
+    'c-page-footer',
+    className,
+  ]}
+>
+  <p class="desc">{description}</p>
+  {
+    nav?.map((item) => (
+      <AstroLink href={item.href} target={item.target ?? undefined} class="link">
+        <span class="link-text">{item.text}</span>
+      </AstroLink>
+    ))
+  }
+</footer>
+
+<style>
+  @import '@/styles/_mql.css';
+
+  .c-page-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: calc(var(--z-header) - 1);
+    background-color: var(--color-neon-blue);
+  }
+
+  .desc {
+    --_clip: calc(20 / 600 * 100%);
+
+    font-weight: 500;
+    text-align: center;
+    background-color: var(--color-pure-white);
+    clip-path: polygon(var(--_clip) 0%, 100% 0%, calc(100% - var(--_clip)) 100%, 0% 100%);
+
+    @media (--mql-md) {
+      width: calc(600 / var(--screens-xl) * 100cqi);
+      padding: calc(10 / var(--screens-xl) * 100cqi) calc(16 / var(--screens-xl) * 100cqi)
+        calc(12 / var(--screens-xl) * 100cqi);
+      margin-right: auto;
+      margin-left: auto;
+      font-size: calc(12 / var(--screens-xl) * 100cqi);
+    }
+  }
+
+  .link {
+    position: absolute;
+    font-family: var(--font-dela-gothic);
+    text-align: center;
+
+    @media (--mql-md) {
+      --_clip-x: calc(10 / 140 * 100%);
+      --_clip-y: calc(10 / 36 * 100%);
+      --_clip-path: polygon(
+        var(--_clip-x) 0%,
+        100% 0,
+        100% calc(100% - var(--_clip-y)),
+        calc(100% - var(--_clip-x)) 100%,
+        0 100%,
+        0% var(--_clip-y)
+      );
+
+      top: calc(-12 / var(--screens-xl) * 100cqi);
+      width: calc(140 / var(--screens-xl) * 100cqi);
+      padding: calc(8 / var(--screens-xl) * 100cqi) calc(16 / var(--screens-xl) * 100cqi);
+      font-size: calc(13 / var(--screens-xl) * 100cqi);
+    }
+
+    &:first-of-type {
+      @media (--mql-md) {
+        left: calc(42 / var(--screens-xl) * 100cqi);
+      }
+    }
+
+    &:last-of-type {
+      @media (--mql-md) {
+        right: calc(42 / var(--screens-xl) * 100cqi);
+      }
+    }
+
+    &::before,
+    &::after {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      content: '';
+      clip-path: var(--_clip-path);
+    }
+
+    &::after {
+      inset: 0;
+      background-color: var(--color-rose-pink);
+    }
+
+    &::before {
+      background-color: var(--color-black);
+
+      @media (--mql-md) {
+        top: calc(2 / var(--screens-xl) * 100cqi);
+        right: calc(-2 / var(--screens-xl) * 100cqi);
+      }
+    }
+  }
+
+  .link-text {
+    position: relative;
+    z-index: 1;
+  }
+</style>

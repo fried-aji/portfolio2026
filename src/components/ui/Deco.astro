@@ -1,0 +1,67 @@
+---
+interface Props {
+  class?: string;
+}
+
+const {
+  //
+  class: className,
+} = Astro.props;
+---
+
+<div role="img" aria-hidden="true" class:list={['c-deco', className]}>
+  <slot />
+</div>
+
+<style>
+  .c-deco {
+    --_base-w: 1280;
+    --_base-h: 720;
+
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-color: rgb(255 255 255 / 40%);
+    backdrop-filter: blur(2px);
+
+    &::before,
+    &::after {
+      position: absolute;
+      content: '';
+    }
+
+    &::before {
+      top: calc(69 / var(--_base-h) * 100%);
+      left: 0;
+      width: calc(864 / var(--_base-w) * 100%);
+      height: calc(630 / var(--_base-h) * 100%);
+      background-color: var(--color-neon-blue);
+      opacity: 0.4;
+      clip-path: polygon(
+        0 calc(132 / 630 * 100%),
+        100% 0%,
+        calc(580 / 864 * 100%) calc(100% - 122 / 630 * 100%),
+        0% 100%
+      );
+    }
+
+    &::after {
+      top: 0;
+      right: 0;
+      width: calc(700 / var(--_base-w) * 100%);
+      height: calc(680 / var(--_base-h) * 100%);
+      background-color: var(--color-pastel-pink);
+      opacity: 0.2;
+      clip-path: polygon(
+        calc(322 / 700 * 100%) 0,
+        100% 0,
+        100% 100%,
+        calc(119 / 700 * 100%) 100%,
+        0 calc(100% - 103 / 680 * 100%)
+      );
+    }
+  }
+</style>

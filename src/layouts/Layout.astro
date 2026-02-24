@@ -1,6 +1,7 @@
 ---
 import '@/styles/app.css';
 import Header from '@/components/global/Header.astro';
+import Bg from '@/components/global/Bg.astro';
 
 interface Props {
   title?: string;
@@ -55,7 +56,9 @@ const lang = Astro.currentLocale;
   </head>
   <body>
     <Header />
-    <slot />
-    <small translate="no" class="copy">© 2026 Riku Naganoma</small>
+    <div class="l-container">
+      <slot />
+    </div>
+    <Bg />
   </body>
 </html>

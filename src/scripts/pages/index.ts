@@ -1,1 +1,1 @@
-import.meta.glob('./*.{js,ts,jsx,tsx}', { eager: true });
+import.meta.glob('./*/*.{js,ts,jsx,tsx}', { eager: true });

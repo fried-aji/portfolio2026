@@ -1,6 +1,7 @@
 ---
 interface Props {
   class?: string;
+  tag?: 'h1' | 'h2' | 'h3';
   title: {
     ja: string;
     en: string;
@@ -10,18 +11,72 @@ interface Props {
 const {
   //
   class: className,
+  tag = 'h1',
   title,
   ...props
 } = Astro.props;
+
+const TagName = tag;
 ---
 
-<h1
+<header
   class:list={[
     //
     'c-pagehdg',
     className,
   ]}
 >
-  <span class="ja">{title.ja}</span>
-  <span class="en">{title.en}</span>
-</h1>
+  <div class="text">
+    <TagName class="ja">{title.ja}</TagName>
+    <div aria-hidden="true" class="en">{title.en}</div>
+  </div>
+</header>
+
+<style>
+  @import '@/styles/_mql.css';
+
+  .c-pagehdg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: calc(var(--z-header) - 1);
+    color: var(--color-pure-white);
+    background-color: var(--color-black);
+    clip-path: polygon(0 0, 0% 100%, 100% 0);
+
+    @media (--mql-md) {
+      width: calc(722 / var(--screens-xl) * 100cqi);
+      aspect-ratio: 722 / 89;
+      padding: calc(18 / var(--screens-xl) * 100cqi) calc(34 / var(--screens-xl) * 100cqi);
+    }
+
+    .text {
+      display: flex;
+      align-items: flex-end;
+      width: max-content;
+      line-height: 1;
+
+      @media (--mql-md) {
+        column-gap: calc(12 / var(--screens-xl) * 100cqi);
+        transform: skewX(-7deg);
+        rotate: -7deg;
+      }
+    }
+
+    .ja {
+      font-family: var(--font-dela-gothic);
+
+      @media (--mql-md) {
+        font-size: calc(32 / var(--screens-xl) * 100cqi);
+      }
+    }
+
+    .en {
+      font-family: var(--font-zen-dots);
+
+      @media (--mql-md) {
+        font-size: calc(12 / var(--screens-xl) * 100cqi);
+      }
+    }
+  }
+</style>

@@ -5,32 +5,206 @@ import ImageVi from '@/assets/global/img_vi.png';
 import Layout from '@/layouts/Layout.astro';
 import AstroLink from '@/components/helper/AstroLink.astro';
 import Calendar from '@/components/ui/Calendar.astro';
+import Copyright from '@/components/ui/Copyright.astro';
 import siteNav from '@/data/siteNav';
 ---
 
 <Layout>
   <main class="p-home">
-    <h1 class="title">
-      <Icon name="logo_site" role="img" aria-label="ポートフォリオ バージョン2.0" width={320} height={71} />
-    </h1>
-    <div class="vi">
-      <Image src={ImageVi} alt="" width={580} height={751} />
+    <div class="container">
+      <h1 class="title">
+        <Icon
+          name="logo_site"
+          role="img"
+          aria-label="ポートフォリオ バージョン2.0"
+          width={320}
+          height={71}
+          class="logo"
+        />
+      </h1>
+      <ul class="list">
+        {
+          siteNav.map((item) => (
+            <li class="item">
+              <AstroLink
+                href={item.href.url}
+                target={item.href.target ?? undefined}
+                class:list={[
+                  //
+                  'link',
+                ]}
+              >
+                <Icon
+                  name={`icon_${item.icon.id}`}
+                  role="img"
+                  aria-hidden="true"
+                  width={36}
+                  height={36}
+                  class="link-icon"
+                />
+                <span class="link-text">
+                  <span class="link-ja">{item.title.ja}</span>
+                  <span class="link-en">{item.title.en}</span>
+                </span>
+              </AstroLink>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="vi">
+        <Image src={ImageVi} alt="" width={580} height={751} />
+      </div>
     </div>
-    <ul class="list">
-      {
-        siteNav.map((item) => (
-          <li class="item">
-            <AstroLink href={item.href.url} target={item.href.target ?? undefined} class="link">
-              <Icon name={`icon_${item.icon.id}`} role="img" aria-hidden="true" width={36} height={36} class="icon" />
-              <span class="text">
-                <span class="ja">{item.title.ja}</span>
-                <span class="en">{item.title.en}</span>
-              </span>
-            </AstroLink>
-          </li>
-        ))
-      }
-    </ul>
     <Calendar class="calendar" />
+    <Copyright class="copyright" />
   </main>
 </Layout>
+
+<style>
+  @import '@/styles/_mql.css';
+
+  .p-home {
+    position: relative;
+    display: grid;
+
+    :global(.calendar) {
+      position: absolute;
+
+      @media (--mql-md) {
+        top: calc(16 / var(--_container-w) * 100cqi);
+        left: calc(16 / var(--_container-w) * 100cqi);
+      }
+    }
+
+    :global(.copyright) {
+      position: absolute;
+
+      @media (--mql-md) {
+        right: calc(24 / var(--_container-w) * 100cqi);
+        bottom: calc(24 / var(--_container-w) * 100cqi);
+      }
+    }
+  }
+
+  .container {
+    position: relative;
+
+    @media (--mql-md) {
+      align-self: center;
+      height: calc(720 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .title {
+    position: absolute;
+
+    @media (--mql-md) {
+      bottom: calc(24 / var(--_container-w) * 100cqi);
+      left: calc(24 / var(--_container-w) * 100cqi);
+      width: calc(320 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .logo {
+    width: 100%;
+  }
+
+  .list {
+    position: absolute;
+    left: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+
+    @media (--mql-md) {
+      --_offset: (16 / var(--_container-w) * 100cqi);
+
+      top: calc(196 / var(--_container-w) * 100cqi);
+      row-gap: calc(20 / var(--_container-w) * 100cqi);
+      width: calc(100% + var(--_offset) * 2);
+    }
+  }
+
+  .item {
+    @media (--mql-md) {
+      rotate: -12deg;
+    }
+
+    &:nth-of-type(odd) {
+      translate: calc(var(--_offset) * -1) 0;
+    }
+
+    &:nth-of-type(even) {
+      translate: var(--_offset) 0;
+
+      .link {
+        @media (--mql-md) {
+          padding-left: calc(302 / var(--_container-w) * 100cqi);
+        }
+      }
+    }
+  }
+
+  .link {
+    display: grid;
+    align-items: center;
+    color: var(--color-pure-white);
+    background-color: var(--color-black);
+
+    @media (--mql-md) {
+      grid-template-columns: calc(36 / var(--_container-w) * 100cqi) 1fr;
+      column-gap: calc(16 / var(--_container-w) * 100cqi);
+      padding: calc(8 / var(--_container-w) * 100cqi) calc(78 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .link-icon {
+    width: 100%;
+    transform: skewX(-12deg);
+  }
+
+  .link-text {
+    display: grid;
+    transform: skewX(-12deg);
+
+    @media (--mql-md) {
+      row-gap: calc(6 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .link-ja {
+    font-family: var(--font-dela-gothic);
+    line-height: 1;
+
+    @media (--mql-md) {
+      font-size: calc(32 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .link-en {
+    font-family: var(--font-zen-dots);
+    line-height: 1;
+
+    @media (--mql-md) {
+      font-size: calc(16 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .vi {
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+
+    @media (--mql-md) {
+      width: calc(580 / var(--_container-w) * 100cqi);
+    }
+
+    img {
+      width: 100%;
+
+      @media (--mql-md) {
+        filter: drop-shadow(calc(-20 / var(--_container-w) * 100cqi) 0 0 rgb(255 179 237 / 30%));
+      }
+    }
+  }
+</style>
