@@ -1,6 +1,9 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import ImageMenu from '@/assets/global/img_menu.jpg';
 import AstroLink from '@/components/helper/AstroLink.astro';
+import MenuToggle from '@/components/ui/MenuToggle.astro';
 import Calendar from '@/components/ui/Calendar.astro';
 import siteNav from '@/data/siteNav';
 import snsNav from '@/data/snsNav';
@@ -23,21 +26,15 @@ const {
     'l-header',
   ]}
 >
-  <nav class="nav" aria-label="グローバルナビゲーション">
-    <button
-      type="button"
-      aria-label="全てのメニューを開く"
-      aria-expanded="false"
-      class:list={[
-        //
-        'open',
-      ]}
-    >
-      <span class="icon">
-        <span class="line"></span>
-      </span>
-    </button>
+  <nav
+    x-data="globalMenu"
+    aria-label="グローバルナビゲーション"
+    class:list={//
+    'nav'}
+  >
+    <MenuToggle title="全てのメニューを開く" x-bind="bindOpen" aria-expanded="false" class="open" />
     <dialog
+      x-bind="bindDialog"
       autofocus
       aria-label="全てのメニュー"
       data-lenis-prevent
@@ -46,39 +43,37 @@ const {
         'menu',
       ]}
     >
-      <button
-        type="button"
-        aria-label="全てのメニューを閉じる"
-        aria-expanded="false"
-        class:list={[
-          //
-          'close',
-        ]}></button>
+      <MenuToggle title="全てのメニューを閉じる" x-bind="bindClose" aria-expanded="false" class="close" />
       <Calendar class="calendar" />
-      <ul class="list">
-        {
-          siteNav.map((item) => (
-            <li class="item">
-              <AstroLink href={item.href.url} target={item.href.target ?? undefined} class="link">
-                {item.title.ja}
-              </AstroLink>
-            </li>
-          ))
-        }
-      </ul>
-      <div class="lower">
-        <div class="sns">
+      <div class="outer">
+        <ul class="upper">
           {
-            snsNav.map((item) => (
-              <AstroLink href={item.href} target="_blank" class="link">
-                <Icon name={`icon_${item.id}`} />
-              </AstroLink>
+            siteNav.map((item) => (
+              <li class="upper-item">
+                <AstroLink href={item.href.url} target={item.href.target ?? undefined} class="upper-link">
+                  {item.title.en}
+                </AstroLink>
+              </li>
             ))
           }
+        </ul>
+        <div class="lower">
+          <div class="sns">
+            {
+              snsNav.map((item) => (
+                <AstroLink href={item.href} target="_blank" class="sns-link">
+                  <Icon name={`icon_${item.id}`} class="sns-logo" />
+                </AstroLink>
+              ))
+            }
+          </div>
+          <AstroLink href="/" class="home">
+            <Icon name="logo_site" role="img" aria-label="ホームに戻る" width={300} height={60} class="home-logo" />
+          </AstroLink>
         </div>
-        <AstroLink href="/" class="home">
-          <Icon name="logo_site" role="img" aria-label="ホームに戻る" width={300} height={60} class="logo" />
-        </AstroLink>
+      </div>
+      <div class="bg">
+        <Image src={ImageMenu} densities={[1, 2]} alt="" width={1280} height={720} />
       </div>
     </dialog>
   </nav>
@@ -93,68 +88,177 @@ const {
     left: 0;
     z-index: var(--z-header);
     width: 100%;
+
+    :global(.open) {
+      margin-left: auto;
+    }
   }
 
-  .open {
-    display: grid;
-    place-items: center;
-    margin-left: auto;
+  .menu {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
     color: var(--color-pure-white);
-    background-color: var(--color-black);
+    transition: opacity 0.3s ease;
 
-    @media (--mql-md) {
-      width: calc(84 / var(--screens-xl) * 100cqi);
-      aspect-ratio: 21 / 20;
-      clip-path: polygon(0 0, 100% 0, 100% 100%, calc(43 / 84 * 100%) 100%, 0 calc(42 / 80 * 100%));
+    &[data-toggle='close'] {
+      opacity: 0;
     }
 
-    .icon {
-      display: grid;
-      grid-template-areas: 'line';
+    :global(.close) {
+      --_toggle-color: var(--color-black);
+      --_toggle-bg: var(--color-pure-white);
+
+      position: fixed;
+      top: 0;
+      right: 0;
+    }
+
+    :global(.calendar) {
+      position: absolute;
 
       @media (--mql-md) {
-        margin-top: calc(-6 / var(--screens-xl) * 100cqi);
-        margin-left: calc(3 / var(--screens-xl) * 100cqi);
+        top: calc(16 / var(--screens-xl) * 100cqi);
+        left: calc(16 / var(--screens-xl) * 100cqi);
       }
+    }
+  }
 
-      &::before,
-      &::after {
-        content: '';
-      }
+  .bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
 
-      &::before,
-      &::after,
-      .line {
-        grid-area: line;
-        margin-left: auto;
-        background-color: currentColor;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-        @media (--mql-md) {
-          --_h: 3;
+    &::before,
+    &::after {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      content: '';
+    }
 
-          height: calc(var(--_h) / var(--screens-xl) * 100cqi);
-        }
-      }
+    &::before {
+      background-color: rgb(105 123 147 / 30%);
+      backdrop-filter: blur(6px);
+    }
 
-      &::before {
-        @media (--mql-md) {
-          aspect-ratio: 38 / var(--_h);
-          translate: 0 calc(-12 / var(--screens-xl) * 100cqi);
-        }
-      }
+    &::after {
+      --_size: 1px;
+      --_gap: 2px;
 
-      &::after {
-        @media (--mql-md) {
-          aspect-ratio: 16 / var(--_h);
-          translate: 0 calc(12 / var(--screens-xl) * 100cqi);
-        }
-      }
+      background-image: radial-gradient(
+        circle,
+        var(--color-electro-nlue) calc(var(--_size) / 2),
+        transparent calc(var(--_size) / 2)
+      );
+      background-position: 0 0;
+      background-size: calc(var(--_size) + var(--_gap)) calc(var(--_size) + var(--_gap));
+    }
+  }
 
-      .line {
-        @media (--mql-md) {
-          aspect-ratio: 28 / var(--_h);
-        }
-      }
+  .outer {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+
+    @media (--mql-md) {
+      row-gap: calc(80 / var(--screens-xl) * 100cqi);
+      padding: calc(160 / var(--screens-xl) * 100cqi) calc(40 / var(--screens-xl) * 100cqi)
+        calc(42 / var(--screens-xl) * 100cqi);
+    }
+  }
+
+  .upper {
+    display: grid;
+    width: max-content;
+
+    @media (--mql-md) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: calc(80 / var(--screens-xl) * 100cqi) calc(120 / var(--screens-xl) * 100cqi);
+      margin-right: calc(40 / var(--screens-xl) * 100cqi);
+      margin-left: calc(40 / var(--screens-xl) * 100cqi);
+    }
+  }
+
+  .upper-link {
+    font-family: var(--font-zen-dots);
+    line-height: 1;
+
+    @media (--mql-md) {
+      font-size: calc(48 / var(--screens-xl) * 100cqi);
+    }
+  }
+
+  .lower {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    align-items: flex-end;
+    align-self: flex-end;
+  }
+
+  .sns {
+    display: flex;
+    height: fit-content;
+
+    @media (--mql-md) {
+      column-gap: calc(16 / var(--screens-xl) * 100cqi);
+    }
+  }
+
+  .sns-link {
+    --_clip-offset: calc((1 - 10 / 40) * 100%);
+    --_clip-path: polygon(0 0, 100% 0, 100% var(--_clip-offset), var(--_clip-offset) 100%, 0 100%);
+    --_border-offset: 2px;
+
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    filter: drop-shadow(calc(var(--_border-offset) * -1) var(--_border-offset) 0 var(--color-lynch))
+      drop-shadow(var(--_border-offset) -2px 0 var(--color-lynch))
+      drop-shadow(calc(var(--_border-offset) * -1) calc(var(--_border-offset) * -1) 0 var(--color-lynch))
+      drop-shadow(var(--_border-offset) var(--_border-offset) 0 var(--color-lynch));
+    clip-path: var(--_clip-path);
+
+    @media (--mql-md) {
+      width: calc(42 / var(--screens-xl) * 100cqi);
+    }
+
+    &::before {
+      position: absolute;
+      inset: 0;
+      width: calc(100% - var(--_border-offset));
+      aspect-ratio: 1;
+      margin: auto;
+      pointer-events: none;
+      content: '';
+      background-color: rgb(255 255 255 / 80%);
+      clip-path: var(--_clip-path);
+    }
+  }
+
+  .sns-logo {
+    position: relative;
+    z-index: 1;
+    width: 50%;
+  }
+
+  .home {
+    @media (--mql-md) {
+      width: calc(320 / var(--screens-xl) * 100cqi);
+    }
+
+    svg {
+      width: 100%;
     }
   }
 </style>

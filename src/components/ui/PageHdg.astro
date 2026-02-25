@@ -41,13 +41,14 @@ const TagName = tag;
     left: 0;
     z-index: calc(var(--z-header) - 1);
     color: var(--color-pure-white);
+    letter-spacing: 0.04em;
     background-color: var(--color-black);
     clip-path: polygon(0 0, 0% 100%, 100% 0);
 
     @media (--mql-md) {
-      width: calc(722 / var(--screens-xl) * 100cqi);
-      aspect-ratio: 722 / 89;
-      padding: calc(18 / var(--screens-xl) * 100cqi) calc(34 / var(--screens-xl) * 100cqi);
+      width: calc(664 / var(--screens-xl) * 100cqi);
+      aspect-ratio: 664 / 74;
+      padding: calc(14 / var(--screens-xl) * 100cqi) calc(32 / var(--screens-xl) * 100cqi);
     }
 
     .text {
@@ -58,8 +59,8 @@ const TagName = tag;
 
       @media (--mql-md) {
         column-gap: calc(12 / var(--screens-xl) * 100cqi);
-        transform: skewX(-7deg);
-        rotate: -7deg;
+        transform: skewX(-6deg);
+        rotate: -6deg;
       }
     }
 
@@ -67,7 +68,7 @@ const TagName = tag;
       font-family: var(--font-dela-gothic);
 
       @media (--mql-md) {
-        font-size: calc(32 / var(--screens-xl) * 100cqi);
+        font-size: calc(28 / var(--screens-xl) * 100cqi);
       }
     }
 

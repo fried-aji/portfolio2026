@@ -1,30 +1,34 @@
 ---
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import ImageVi from '@/assets/global/img_vi.png';
+import LogoCf from '@/assets/global/logo_cloudflare.png';
 import Layout from '@/layouts/Layout.astro';
 import PageHdg from '@/components/ui/PageHdg.astro';
 import PageFooter from '@/components/ui/PageFooter.astro';
 
 const metaData = {
-  title: '',
-  description: '',
+  title: 'セカイ | Naganoma Rikuのポートフォリオ',
+  description: '本サイト制作の経緯や世界観についてご紹介します。',
 };
 
 const pageHdgData = {
   title: {
-    ja: '',
-    en: '',
+    ja: 'セカイ',
+    en: 'WORLD',
   },
 };
 
 const PageFooterData = {
-  description: '管理人の詳細。SNSをフォローしてもらえると喜びます。',
+  description: '本サイト制作の経緯や世界観についてご紹介します。',
   nav: [
     {
       text: 'ホームに戻る',
       href: '/',
     },
     {
-      text: 'セカイを見る',
-      href: '/world/',
+      text: '制作実績',
+      href: '/works/',
     },
   ],
 };
@@ -33,6 +37,281 @@ const PageFooterData = {
 <Layout {...metaData}>
   <main class="p-world">
     <PageHdg {...pageHdgData} />
-    <PageFooter {...PageFooterData} />
+    <div class="outer">
+      <section class="section">
+        <h2 class="title">Concept</h2>
+        <p class="lead">最適化と感情の両立</p>
+        <p class="desc">
+          クリエイティブに取り組む上で大切にしている<br />「最適化」と「感情」をテーマに、<br
+          />機械的な精密性と人間らしい温かみを両立させるUI設計に努めました。
+        </p>
+      </section>
+      <section class="section">
+        <h2 class="title">Design</h2>
+        <p class="desc">
+          寒色と近未来テイストなフォントをベースに<br />不規則な図形やドットを取り入れることで、<br
+          />規則性の中に人間味のある”ほころび”を表現しています。
+        </p>
+        <ul class="design-list">
+          <li class="design-item" data-type="logo">
+            <Icon name="logo_site" role="img" aria-hidden="true" width={180} height={38} />
+          </li>
+          <li class="design-item" data-type="font" data-font="ja-sub">Dela Gothic One</li>
+          <li class="design-item" data-type="font" data-font="en">Zen Dots</li>
+          <li class="design-item" data-type="font" data-font="ja">Mplus 1p</li>
+          <li class="design-item" data-type="color"></li>
+          <li class="design-item" data-type="color"></li>
+          <li class="design-item" data-type="color"></li>
+          <li class="design-item" data-type="color"></li>
+          <li class="design-item" data-type="color"></li>
+        </ul>
+      </section>
+      <section class="section">
+        <h2 class="title">Character</h2>
+        <p class="desc">
+          コンセプトをより強固に表現するために、<br />独自のビジュアルアイデンティティを構築。<br
+          />「理想に相対する不完全な存在」という設定をもとに、<br />サイトに命を吹き込みました。
+        </p>
+        <div class="character-img">
+          <Image src={ImageVi} densities={[1, 2]} alt="" width={150} height={194} />
+        </div>
+      </section>
+      <section class="section">
+        <h2 class="title">Develop</h2>
+        <p class="desc">
+          Astroを用いたプレーンな設計により、<br />耐久性・拡張性の確保を意識。<br />ホスティングにはCloudflare
+          Workersを採用し、<br />GitHubのリポジトリと連携した<br />Jamstack構成をとっています。
+        </p>
+        <ul class="dev-list">
+          <li class="dev-item">
+            <Icon name="logo_astro" role="img" aria-label="Astro" width={110} height={29} />
+          </li>
+          <li class="dev-item">
+            <Image src={LogoCf} densities={[1, 2]} alt="Cloudflare" width={110} height={37} />
+          </li>
+        </ul>
+      </section>
+      <div class="section">
+        <p class="desc">
+          本サイトを通してクリエイティブ対する姿勢が<br />ご理解いただければ嬉しい限りです。<br
+          />私という人間に少しでも興味が湧いたようでしたら<br />ぜひお気軽にお問い合わせください。
+        </p>
+        <a href="mailto:ittentoppariku@gmail.com" class="contact">お問い合わせはこちら</a>
+      </div>
+    </div>
   </main>
+  <PageFooter {...PageFooterData} />
 </Layout>
+
+<style>
+  @import '@/styles/_mql.css';
+
+  .outer {
+    @media (--mql-md) {
+      margin: calc(274 / 720 * 100cqb) calc(120 / var(--_container-w) * 100cqi) 0;
+    }
+  }
+
+  .section {
+    width: max-content;
+    min-height: 100lvh;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+
+    &:last-child {
+      min-height: 50lvh;
+    }
+  }
+
+  .title {
+    font-family: var(--font-zen-dots);
+    line-height: 1;
+
+    @media (--mql-md) {
+      font-size: calc(20 / var(--_container-w) * 100cqi);
+    }
+
+    + .lead {
+      @media (--mql-md) {
+        margin-top: calc(24 / var(--_container-w) * 100cqi);
+      }
+    }
+
+    + .desc {
+      @media (--mql-md) {
+        margin-top: calc(20 / var(--_container-w) * 100cqi);
+      }
+    }
+  }
+
+  .lead {
+    font-family: var(--font-dela-gothic);
+    line-height: 1;
+
+    @media (--mql-md) {
+      font-size: calc(32 / var(--_container-w) * 100cqi);
+    }
+
+    + .desc {
+      @media (--mql-md) {
+        margin-top: calc(36 / var(--_container-w) * 100cqi);
+      }
+    }
+  }
+
+  .desc {
+    font-weight: 500;
+
+    @media (--mql-md) {
+      font-size: calc(14 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .design-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @media (--mql-md) {
+      gap: calc(20 / var(--_container-w) * 100cqi);
+      width: calc(580 / var(--_container-w) * 100cqi);
+      margin-top: calc(42 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .design-item {
+    display: grid;
+    place-items: center;
+    background-color: var(--color-pure-white);
+    border: 1px solid rgb(168 168 168 / 30%);
+
+    @media (--mql-md) {
+      height: calc(80 / var(--_container-w) * 100cqi);
+      border-radius: calc(4 / var(--_container-w) * 100cqi);
+    }
+
+    &[data-type='logo'] {
+      @media (--mql-md) {
+        width: calc(320 / var(--_container-w) * 100cqi);
+        margin-right: calc(130 / var(--_container-w) * 100cqi);
+        margin-left: calc(130 / var(--_container-w) * 100cqi);
+      }
+    }
+
+    &[data-type='font'] {
+      @media (--mql-md) {
+        width: calc(180 / var(--_container-w) * 100cqi);
+        font-size: calc(16 / var(--_container-w) * 100cqi);
+      }
+    }
+
+    &[data-font='en'] {
+      font-family: var(--font-zen-dots);
+    }
+
+    &[data-font='ja-sub'] {
+      font-family: var(--font-dela-gothic);
+    }
+
+    &[data-type='color'] {
+      aspect-ratio: 1;
+
+      &::before {
+        width: 50%;
+        aspect-ratio: 1;
+        content: '';
+        background-color: var(--_color-tip);
+      }
+    }
+
+    &:nth-child(1 of [data-type='color']) {
+      --_color-tip: var(--color-neon-blue);
+    }
+
+    &:nth-child(2 of [data-type='color']) {
+      --_color-tip: var(--color-pastel-pink);
+    }
+
+    &:nth-child(3 of [data-type='color']) {
+      --_color-tip: var(--color-lynch);
+    }
+
+    &:nth-child(4 of [data-type='color']) {
+      --_color-tip: var(--color-black);
+    }
+
+    &:nth-child(5 of [data-type='color']) {
+      --_color-tip: var(--color-dark-gray);
+    }
+  }
+
+  .character-img {
+    display: grid;
+    place-items: flex-end center;
+    aspect-ratio: 1;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: var(--color-pure-white);
+    border: 1px solid rgb(168 168 168 / 30%);
+
+    @media (--mql-md) {
+      width: calc(200 / var(--_container-w) * 100cqi);
+      margin-top: calc(42 / var(--_container-w) * 100cqi);
+      border-radius: calc(4 / var(--_container-w) * 100cqi);
+    }
+
+    img {
+      @media (--mql-md) {
+        width: calc(150 / var(--_container-w) * 100cqi);
+      }
+    }
+  }
+
+  .dev-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @media (--mql-md) {
+      gap: calc(32 / var(--_container-w) * 100cqi);
+      margin-top: calc(42 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .dev-item {
+    display: grid;
+    place-items: center;
+    background-color: var(--color-pure-white);
+    border: 1px solid rgb(168 168 168 / 30%);
+
+    @media (--mql-md) {
+      width: calc(180 / var(--_container-w) * 100cqi);
+      aspect-ratio: 9 / 4;
+      border-radius: calc(4 / var(--_container-w) * 100cqi);
+    }
+
+    img {
+      @media (--mql-md) {
+        width: calc(110 / var(--_container-w) * 100cqi);
+      }
+    }
+  }
+
+  .contact {
+    display: block;
+    width: fit-content;
+    margin-right: auto;
+    margin-left: auto;
+    font-family: var(--font-dela-gothic);
+    background-image: linear-gradient(var(--color-neon-blue) 0 0);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: 100% calc(4 / var(--_container-w) * 100cqi);
+
+    @media (--mql-md) {
+      margin-top: calc(28 / var(--_container-w) * 100cqi);
+      font-size: calc(16 / var(--_container-w) * 100cqi);
+    }
+  }
+</style>

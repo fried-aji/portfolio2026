@@ -29,6 +29,399 @@ const PageFooterData = {
 <Layout {...metaData}>
   <main class="p-config">
     <PageHdg {...pageHdgData} />
-    <PageFooter {...PageFooterData} />
+    <div class="content">
+      <dl class="list">
+        <div class="item">
+          <dt class="title">カラーモード</dt>
+          <dd class="info">
+            <p class="desc">背景や文字色のカラーモードを設定します。</p>
+            <ul class="input-list">
+              <li class="radio">
+                <ul class="radio-list">
+                  <li class="radio-item">
+                    <input
+                      id="input-color-light"
+                      type="radio"
+                      name="colormode"
+                      value="light"
+                      checked
+                      class="radio-btn"
+                    />
+                    <label for="input-color-light" class="radio-label">ライト</label>
+                  </li>
+                  <li class="radio-item">
+                    <input id="input-color-dark" type="radio" name="colormode" value="dark" class="radio-btn" />
+                    <label for="input-color-dark" class="radio-label">ダーク</label>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </dd>
+        </div>
+        <div class="item">
+          <dt class="title">アニメーション</dt>
+          <dd class="info">
+            <p class="desc">ページ遷移やマウスオーバーなどの演出の有無を設定します。</p>
+            <ul class="input-list">
+              <li class="radio">
+                <ul class="radio-list">
+                  <li class="radio-item">
+                    <input id="input-anime-on" type="radio" name="anime" value="on" checked class="radio-btn" />
+                    <label for="input-anime-on" class="radio-label">ON</label>
+                  </li>
+                  <li class="radio-item">
+                    <input id="input-anime-off" type="radio" name="anime" value="off" class="radio-btn" />
+                    <label for="input-anime-off" class="radio-label">OFF</label>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </dd>
+        </div>
+        <div class="item">
+          <dt class="title">サウンド</dt>
+          <dd class="info">
+            <p class="desc">サイト内の音声を設定します。</p>
+            <ul class="input-list">
+              <li class="progress">
+                <label for="input-sound-bgm" class="progress-label">BGM</label>
+                <input type="range" id="input-sound-bgm" name="sound" min="0" max="1" step="0.1" class="progress-bar" />
+                <button type="button" class="input-reset">初期化</button>
+              </li>
+              <li class="progress">
+                <label for="input-sound-effect" class="progress-label">効果音</label>
+                <input
+                  type="range"
+                  id="input-sound-effect"
+                  name="sound"
+                  min="0"
+                  max="1"
+                  step="0.1"
+                  class="progress-bar"
+                />
+                <button type="button" class="input-reset">初期化</button>
+              </li>
+              <li class="checkbox">
+                <input type="checkbox" id="input-sound-inactive" name="sound" value="inactive" class="checkbox-btn" />
+                <label for="input-sound-inactive" class="checkbox-label"
+                  >タブが非アクティブの場合は音声をOFFにする</label
+                >
+              </li>
+            </ul>
+          </dd>
+        </div>
+        <div class="item">
+          <dt class="title">マウスカーソル</dt>
+          <dd class="info">
+            <p class="desc">マウスカーソルの速度やデザインを設定します。</p>
+            <ul class="input-list">
+              <li class="progress">
+                <label for="input-mouse-speed" class="progress-label">速度</label>
+                <input
+                  type="range"
+                  id="input-mouse-speed"
+                  name="mouse-speed"
+                  min="0"
+                  max="1"
+                  step="0.1"
+                  class="progress-bar"
+                />
+                <button type="button" class="input-reset">初期化</button>
+              </li>
+              <li class="radio">
+                <p class="radio-name">デザイン</p>
+                <ul class="radio-list">
+                  <li class="radio-item">
+                    <input id="input-mouse-normal" type="radio" name="mouse" value="normal" checked class="radio-btn" />
+                    <label for="input-mouse-normal" class="radio-label">通常</label>
+                  </li>
+                  <li class="radio-item">
+                    <input id="input-mouse-custom" type="radio" name="mouse" value="custom" class="radio-btn" />
+                    <label for="input-mouse-custom" class="radio-label">カスタム</label>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </dd>
+        </div>
+        <div class="item">
+          <dt class="title">スクロール</dt>
+          <dd class="info">
+            <p class="desc">スクロールの速度を設定します。</p>
+            <ul class="input-list">
+              <li class="progress">
+                <label for="input-scroll-speed" class="progress-label">速度</label>
+                <input
+                  type="range"
+                  id="input-scroll-speed"
+                  name="scroll-speed"
+                  min="0"
+                  max="1"
+                  step="0.1"
+                  class="progress-bar"
+                />
+                <button type="button" class="input-reset">初期化</button>
+              </li>
+            </ul>
+          </dd>
+        </div>
+      </dl>
+      <div class="bg">
+        <picture>
+          <source media={`(width >= 768px)`} srcset="/img/config/img_bg.svg" width="1100" height="536" />
+          <img src="/img/config/img_bg_sp.svg" alt="" width="368" height="899" />
+        </picture>
+      </div>
+    </div>
   </main>
+  <PageFooter {...PageFooterData} />
 </Layout>
+
+<style>
+  @import '@/styles/_mql.css';
+
+  .p-config {
+    display: grid;
+    place-items: center;
+
+    &::before {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      content: '';
+      background-color: rgb(255 255 255 / 40%);
+      backdrop-filter: blur(2px);
+    }
+  }
+
+  .content {
+    display: grid;
+    grid-template-areas: 'item';
+
+    @media (--mql-md) {
+      width: calc(1100 / var(--_container-w) * 100cqi);
+      margin: calc(74 / var(--_container-w) * 100cqi) calc(64 / var(--_container-w) * 100cqi)
+        calc(44 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .list {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-area: item;
+
+    @media (--mql-md) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: calc(28 / var(--_container-w) * 100cqi) calc(80 / var(--_container-w) * 100cqi);
+      padding: calc(48 / var(--_container-w) * 100cqi) calc(72 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .title {
+    font-family: var(--font-dela-gothic);
+
+    @media (--mql-md) {
+      font-size: calc(24 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .info {
+    @media (--mql-md) {
+      margin-top: calc(4 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .desc {
+    font-weight: 500;
+
+    @media (--mql-md) {
+      font-size: calc(12 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .radio-label {
+    font-weight: 500;
+
+    @media (--mql-md) {
+      font-size: calc(14 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .input-list {
+    display: grid;
+
+    @media (--mql-md) {
+      row-gap: calc(16 / var(--_container-w) * 100cqi);
+      margin-top: calc(18 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .input-reset {
+    font-weight: 500;
+    background-color: var(--color-pure-white);
+    border-radius: var(--infinity);
+
+    @media (--mql-md) {
+      padding: calc(5 / var(--_container-w) * 100cqi) calc(16 / var(--_container-w) * 100cqi)
+        calc(6 / var(--_container-w) * 100cqi);
+      font-size: calc(10 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .radio {
+    display: flex;
+    align-items: center;
+
+    @media (--mql-md) {
+      column-gap: calc(24 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .radio-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    @media (--mql-md) {
+      gap: calc(20 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .radio-item {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    align-items: center;
+
+    @media (--mql-md) {
+      column-gap: calc(8 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .radio-btn {
+    --_border-color: rgb(168 168 168 / 30%);
+
+    position: relative;
+    aspect-ratio: 1;
+
+    @media (--mql-md) {
+      width: calc(20 / var(--_container-w) * 100cqi);
+    }
+
+    &:checked {
+      --_border-color: var(--color-black);
+      --_display-check: block;
+    }
+
+    &::before,
+    &::after {
+      position: absolute;
+      inset: 0;
+      aspect-ratio: 1;
+      margin: auto;
+      content: '';
+      border-radius: var(--infinity);
+    }
+
+    &::before {
+      width: 100%;
+      background-color: var(--color-pure-white);
+      border: 1px solid var(--_border-color);
+    }
+
+    &::after {
+      display: var(--_display-check, none);
+      width: calc(12 / 20 * 100%);
+      background-color: var(--color-black);
+    }
+  }
+
+  .radio-name {
+    font-family: var(--font-dela-gothic);
+
+    @media (--mql-md) {
+      font-size: calc(15 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .progress {
+    display: flex;
+    align-items: center;
+
+    @media (--mql-md) {
+      column-gap: calc(10 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .progress-label {
+    font-family: var(--font-dela-gothic);
+
+    @media (--mql-md) {
+      font-size: calc(15 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .progress-bar {
+    border: 1px solid var(--color-pure-white);
+    border-radius: var(--infinity);
+
+    @media (--mql-md) {
+      width: calc(280 / var(--_container-w) * 100cqi);
+      aspect-ratio: 280 / 26;
+      margin-left: calc(2 / var(--_container-w) * 100cqi);
+    }
+
+    &::-webkit-slider-thumb {
+      width: calc(24 / var(--_container-w) * 100cqi);
+      aspect-ratio: 1;
+      background-color: var(--color-pure-white);
+      border-radius: var(--infinity);
+    }
+  }
+
+  .checkbox {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    align-items: center;
+
+    @media (--mql-md) {
+      column-gap: calc(8 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .checkbox-btn {
+    --_border-color: rgb(168 168 168 / 30%);
+
+    aspect-ratio: 1;
+    background-color: var(--color-pure-white);
+    border: 1px solid var(--_border-color);
+
+    @media (--mql-md) {
+      width: calc(18 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .checkbox-label {
+    font-weight: 500;
+
+    @media (--mql-md) {
+      font-size: calc(14 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .bg {
+    grid-area: item;
+    pointer-events: none;
+
+    @media (--mql-md) {
+      width: calc(1100 / var(--_container-w) * 100cqi);
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+</style>

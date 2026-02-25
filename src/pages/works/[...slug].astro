@@ -53,8 +53,8 @@ const PageFooterData = {
 ---
 
 <Layout title={metaData.title} description={metaData.description}>
-  <PageHdg {...pageHdgData} />
   <main class="p-works-detail">
+    <PageHdg {...pageHdgData} />
     <article class="article">
       <hgroup class="heading">
         <p class="heading-client">{entry.data.client.en}</p>
@@ -231,20 +231,22 @@ const PageFooterData = {
 
   .deco {
     position: absolute;
+    z-index: 1;
     font-family: var(--font-zen-dots);
     line-height: 1;
     color: var(--color-pure-white);
     white-space: nowrap;
     opacity: 0.4;
     transform: skewX(-16deg);
+    transform-origin: left top;
     rotate: -8deg;
 
     @media (--mql-md) {
       --_base-w: 1280;
       --_base-h: 720;
 
-      top: calc(221 / var(--_base-h) * 100%);
-      left: calc(39 / var(--_base-w) * 100%);
+      top: calc(308 / var(--_base-h) * 100%);
+      left: calc(24 / var(--_base-w) * 100%);
       font-size: calc(120 / var(--_container-w) * 100cqi);
     }
   }
@@ -265,7 +267,7 @@ const PageFooterData = {
     }
 
     h3 {
-      --_clip: calc(12 / 177 * 100%);
+      --_clip: calc(12 / 178 * 100%);
 
       font-family: var(--font-dela-gothic);
       line-height: 1;

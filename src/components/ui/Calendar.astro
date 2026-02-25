@@ -21,8 +21,7 @@ const {
   <span class="upper">
     <span class="meridiem">AM</span>
     <span class="time">
-      <span class="hour">12:00</span>
-      <span class="sec">.00</span>
+      <span class="hour">12:00</span><span class="sec">.00</span>
     </span>
   </span>
   <span class="lower">
@@ -37,9 +36,10 @@ const {
   .c-calendar {
     display: grid;
     font-family: var(--font-zen-dots);
+    letter-spacing: 0.04em;
 
     @media (--mql-md) {
-      row-gap: calc(6 / var(--screens-xl) * 100cqi);
+      row-gap: calc(4 / var(--screens-xl) * 100cqi);
     }
   }
 
@@ -49,25 +49,25 @@ const {
     line-height: 1;
 
     @media (--mql-md) {
-      column-gap: calc(6 / var(--screens-xl) * 100cqi);
+      column-gap: calc(4 / var(--screens-xl) * 100cqi);
     }
   }
 
   .meridiem {
     @media (--mql-md) {
-      font-size: calc(14 / var(--screens-xl) * 100cqi);
+      font-size: calc(12 / var(--screens-xl) * 100cqi);
     }
   }
 
   .hour {
     @media (--mql-md) {
-      font-size: calc(24 / var(--screens-xl) * 100cqi);
+      font-size: calc(20 / var(--screens-xl) * 100cqi);
     }
   }
 
   .sec {
     @media (--mql-md) {
-      font-size: calc(14 / var(--screens-xl) * 100cqi);
+      font-size: calc(12 / var(--screens-xl) * 100cqi);
     }
   }
 

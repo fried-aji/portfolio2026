@@ -6,10 +6,35 @@
 
 :root {
   font-family: var(--font-mplus);
+  color: var(--color-black);
 }
 
 button {
   cursor: pointer;
+}
+
+input {
+  padding: 0;
+  margin: 0;
+  appearance: none;
+  cursor: pointer;
+  outline: unset;
+  background-color: unset;
+  border: unset;
+  border-radius: 0;
+}
+
+input[type='range'] {
+  &::-webkit-slider-thumb,
+  &::-moz-range-thumb {
+    appearance: none;
+  }
+}
+
+dialog {
+  &::backdrop {
+    display: none;
+  }
 }
 
 [x-cloak] {

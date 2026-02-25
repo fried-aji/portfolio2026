@@ -1,0 +1,114 @@
+---
+interface Props {
+  class?: string;
+  title: string;
+}
+
+const {
+  //
+  class: className,
+  title,
+  ...props
+} = Astro.props;
+---
+
+<button
+  type="button"
+  aria-label={title}
+  class:list={[
+    //
+    'c-menu-toggle',
+    className,
+  ]}
+  {...props}
+>
+  <span class="icon">
+    <span class="line"></span>
+  </span>
+</button>
+
+<style>
+  @import '@/styles/_mql.css';
+
+  .c-menu-toggle {
+    display: grid;
+    place-items: center;
+    color: var(--_toggle-color, var(--color-pure-white));
+    background-color: var(--_toggle-bg, var(--color-black));
+
+    @media (--mql-md) {
+      --_w: 80;
+      --_h: 56;
+
+      width: calc(var(--_w) / var(--screens-xl) * 100cqi);
+      aspect-ratio: var(--_w) / var(--_h);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, calc(44 / var(--_w) * 100%) 100%, 0 calc(28 / var(--_h) * 100%));
+    }
+
+    &[aria-expanded='true'] {
+      .icon {
+        margin-left: calc(8 / var(--screens-xl) * 100cqi);
+
+        .line {
+          opacity: 0;
+        }
+
+        &::before,
+        &::after {
+          width: calc(40 / var(--screens-xl) * 100cqi);
+          translate: 0 0;
+        }
+      }
+    }
+  }
+
+  .icon {
+    display: grid;
+    grid-template-areas: 'line';
+
+    @media (--mql-md) {
+      margin-top: calc(-6 / var(--screens-xl) * 100cqi);
+      margin-left: calc(3 / var(--screens-xl) * 100cqi);
+    }
+
+    &::before,
+    &::after {
+      content: '';
+    }
+
+    &::before,
+    &::after,
+    .line {
+      grid-area: line;
+      margin-left: auto;
+      background-color: currentColor;
+      border-radius: var(--infinity);
+
+      @media (--mql-md) {
+        --_h: 3;
+
+        height: calc(var(--_h) / var(--screens-xl) * 100cqi);
+      }
+    }
+
+    .line {
+      @media (--mql-md) {
+        width: calc(36 / var(--screens-xl) * 100cqi);
+      }
+    }
+
+    &::before {
+      @media (--mql-md) {
+        width: calc(46 / var(--screens-xl) * 100cqi);
+        translate: 0 calc(-9 / var(--screens-xl) * 100cqi);
+      }
+    }
+
+    &::after {
+      @media (--mql-md) {
+        width: calc(20 / var(--screens-xl) * 100cqi);
+        translate: 0 calc(9 / var(--screens-xl) * 100cqi);
+      }
+    }
+  }
+</style>

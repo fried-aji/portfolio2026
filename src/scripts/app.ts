@@ -6,6 +6,8 @@ import '@/scripts/pages';
 
 window.Alpine = Alpine;
 
+Alpine.store('scroll').onStart();
+
 document.addEventListener('DOMContentLoaded', () => {
   Alpine.start();
 });

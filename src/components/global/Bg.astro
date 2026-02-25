@@ -95,21 +95,20 @@ const circleData = [
   @import '@/styles/_mql.css';
 
   .l-bg {
-    position: fixed;
-    inset: 0;
+    position: relative;
     z-index: -2;
+    pointer-events: none;
+  }
+
+  .base {
+    position: fixed;
+    top: 0;
+    left: 0;
     display: grid;
     grid-template-areas: 'item';
     width: 100%;
     height: max-content;
     min-height: 100%;
-    margin: auto;
-    pointer-events: none;
-  }
-
-  .base {
-    display: grid;
-    grid-area: item;
 
     img {
       width: 100%;
@@ -121,12 +120,13 @@ const circleData = [
   }
 
   .anime {
+    position: fixed;
+    inset: 0;
     display: grid;
-    grid-area: item;
     grid-template-areas: 'circle';
     place-items: center;
-    place-self: center;
     height: max-content;
+    margin: auto;
   }
 
   .circle {

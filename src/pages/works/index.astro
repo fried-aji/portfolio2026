@@ -219,6 +219,7 @@ const worksData: CollectionEntry<'works'>[] = (await getCollection('works')).sor
 
   .deco {
     position: absolute;
+    z-index: 1;
     display: grid;
     grid-template-areas: 'text';
     font-family: var(--font-zen-dots);
@@ -230,8 +231,8 @@ const worksData: CollectionEntry<'works'>[] = (await getCollection('works')).sor
       --_base-w: 1280;
       --_base-h: 720;
 
-      top: calc(221 / var(--_base-h) * 100%);
-      left: calc(39 / var(--_base-w) * 100%);
+      top: calc(308 / var(--_base-h) * 100%);
+      left: calc(24 / var(--_base-w) * 100%);
       font-size: calc(120 / var(--_container-w) * 100cqi);
     }
   }
@@ -240,6 +241,7 @@ const worksData: CollectionEntry<'works'>[] = (await getCollection('works')).sor
     grid-area: text;
     white-space: nowrap;
     transform: skewX(-16deg);
+    transform-origin: left top;
     rotate: -8deg;
     transition: opacity 0.3s ease;
 

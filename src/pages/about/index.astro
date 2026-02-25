@@ -1,7 +1,12 @@
 ---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import ImageVi from '@/assets/global/img_vi.png';
 import Layout from '@/layouts/Layout.astro';
+import snsNav from '@/data/snsNav';
 import PageHdg from '@/components/ui/PageHdg.astro';
 import PageFooter from '@/components/ui/PageFooter.astro';
+import Deco from '@/components/ui/Deco.astro';
 
 const metaData = {
   title: '私について | Naganoma Rikuのポートフォリオ',
@@ -30,9 +35,251 @@ const PageFooterData = {
 };
 ---
 
-<Layout {...metaData}>
+<Layout title={metaData.title} description={metaData.description}>
   <main class="p-about">
     <PageHdg {...pageHdgData} />
-    <PageFooter {...PageFooterData} />
+    <div class="col">
+      <div class="body">
+        <hgroup class="heading">
+          <h2 class="heading-name">ナガノマ リク</h2>
+          <p class="heading-age">Age 28</p>
+        </hgroup>
+        <div class="info">
+          <section class="sec">
+            <h3 class="sec-title">プロフィール</h3>
+            <p class="sec-desc">
+              1997年 大阪府出身。<br />2020年に大手飲料メーカーのパッケージ開発に従事し、<br
+              />2023年からWeb業界にキャリアチェンジ。<br
+              />フロントエンドエンジニア約3年間、Webサイトの受託開発に務める。
+            </p>
+          </section>
+          <section class="sec">
+            <h3 class="sec-title">言語 ・ スキル</h3>
+            <ul class="sec-list">
+              <li class="sec-item">
+                <h4 class="sec-subtitle">言語</h4>
+                <p class="sec-desc">HTML、CSS、JavaScript（TypeScript）、PHP</p>
+              </li>
+              <li class="sec-item">
+                <h4 class="sec-subtitle">フレームワーク</h4>
+                <p class="sec-desc">Astro、Nuxt.js、Vue、Alpine.js</p>
+              </li>
+              <li class="sec-item">
+                <h4 class="sec-subtitle">その他</h4>
+                <p class="sec-desc">WordPress、microCMS、Git、Docker、Claude Code</p>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </div>
+      <div class="visual">
+        <Image src={ImageVi} densities={[1, 2]} alt="" width={470} height={608} class="vi" />
+        <div class="sns">
+          {
+            snsNav.map((item) => (
+              <a href={item.href} target="_blank" class="sns-link">
+                <Icon name={`icon_${item.id}`} width={20} height={20} class="sns-logo" />
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <Deco>
+      <div class="deco">
+        NAGANOMA<br />RIKU
+      </div>
+    </Deco>
   </main>
+  <PageFooter {...PageFooterData} />
 </Layout>
+
+<style>
+  @import '@/styles/_mql.css';
+
+  .p-about {
+    display: grid;
+    align-items: center;
+  }
+
+  .col {
+    display: grid;
+
+    @media (--mql-md) {
+      grid-template-columns: 1fr calc(470 / var(--_container-w) * 100cqi);
+      margin: calc(78 / var(--_container-w) * 100cqi) calc(64 / var(--_container-w) * 100cqi) 0;
+    }
+  }
+
+  .heading {
+    display: flex;
+    align-items: flex-end;
+    line-height: 1;
+    transform: skewX(-16deg);
+    rotate: -8deg;
+
+    @media (--mql-md) {
+      column-gap: calc(16 / var(--_container-w) * 100cqi);
+      margin-left: calc(12 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .heading-name {
+    font-family: var(--font-dela-gothic);
+
+    @media (--mql-md) {
+      font-size: calc(72 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .heading-age {
+    font-family: var(--font-zen-dots);
+
+    @media (--mql-md) {
+      margin-bottom: calc(8 / var(--_container-w) * 100cqi);
+      font-size: calc(18 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .info {
+    display: grid;
+
+    @media (--mql-md) {
+      row-gap: calc(24 / var(--_container-w) * 100cqi);
+      margin-top: calc(70 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .sec-title {
+    --_clip: calc(12 / 178 * 100%);
+
+    font-family: var(--font-dela-gothic);
+    line-height: 1;
+    color: var(--color-pure-white);
+    text-align: center;
+    background-color: var(--color-pure-black);
+    clip-path: polygon(var(--_clip) 0%, 100% 0%, calc(100% - var(--_clip)) 100%, 0% 100%);
+
+    @media (--mql-md) {
+      width: calc(178 / var(--_container-w) * 100cqi);
+      padding: calc(8 / var(--_container-w) * 100cqi) calc(16 / var(--_container-w) * 100cqi)
+        calc(10 / var(--_container-w) * 100cqi);
+      font-size: calc(16 / var(--_container-w) * 100cqi);
+    }
+
+    + * {
+      @media (--mql-md) {
+        margin-top: calc(12 / var(--_container-w) * 100cqi);
+      }
+    }
+  }
+
+  .sec-desc {
+    font-weight: 500;
+
+    @media (--mql-md) {
+      font-size: calc(14 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .sec-list {
+    display: grid;
+
+    @media (--mql-md) {
+      row-gap: calc(8 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .sec-subtitle {
+    font-family: var(--font-dela-gothic);
+
+    @media (--mql-md) {
+      font-size: calc(16 / var(--_container-w) * 100cqi);
+    }
+
+    + * {
+      @media (--mql-md) {
+        margin-top: calc(2 / var(--_container-w) * 100cqi);
+      }
+    }
+  }
+
+  .visual {
+    position: relative;
+  }
+
+  .vi {
+    @media (--mql-md) {
+      width: calc(470 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .sns {
+    position: absolute;
+    display: grid;
+
+    @media (--mql-md) {
+      bottom: calc(100 / var(--_container-w) * 100cqi);
+      left: calc(18 / var(--_container-w) * 100cqi);
+      row-gap: calc(10 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .sns-link {
+    --_clip-offset: calc(100% - 8 / 40 * 100%);
+    --_clip-path: polygon(100% 0, 100% var(--_clip-offset), var(--_clip-offset) 100%, 0 100%, 0 0);
+
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    background-color: var(--color-black);
+    clip-path: var(--_clip-path);
+
+    @media (--mql-md) {
+      width: calc(40 / var(--_container-w) * 100cqi);
+    }
+
+    &::before {
+      position: absolute;
+      inset: 0;
+      width: calc(100% - 2px);
+      height: calc(100% - 2px);
+      margin: auto;
+      pointer-events: none;
+      content: '';
+      background-color: var(--color-pure-white);
+      clip-path: var(--_clip-path);
+    }
+  }
+
+  .sns-logo {
+    position: relative;
+
+    @media (--mql-md) {
+      width: calc(20 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .deco {
+    position: absolute;
+    z-index: 1;
+    font-family: var(--font-zen-dots);
+    line-height: 1;
+    color: var(--color-pure-white);
+    white-space: nowrap;
+    opacity: 0.4;
+    transform: skewX(-16deg);
+    transform-origin: left top;
+    rotate: -8deg;
+
+    @media (--mql-md) {
+      --_base-w: 1280;
+      --_base-h: 720;
+
+      top: calc(282 / var(--_base-h) * 100%);
+      left: calc(24 / var(--_base-w) * 100%);
+      font-size: calc(120 / var(--_container-w) * 100cqi);
+    }
+  }
+</style>
