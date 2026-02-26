@@ -63,16 +63,21 @@ const PageFooterData = {
       <div class="p-works-detail-body">
         <Content />
       </div>
-      <div id="works-carousel" class="carousel">
-        <div class="carousel-viewport">
-          {
-            Array.from({ length: entry.data.gallery }, (_, i) => (
-              <ImageFrame srcPaths={[`works/img_${entry.id}${String(i + 1).padStart(2, '0')}.jpg`]} />
-            ))
-          }
+      <div x-data="carousel" id="works-carousel" class="carousel">
+        <div x-ref="viewport" class="carousel-viewport">
+          <div class="carousel-list">
+            {
+              Array.from({ length: entry.data.gallery }, (_, i) => (
+                <div x-bind={`bindSlide(${i})`} class="carousel-slide">
+                  <ImageFrame srcPaths={[`works/img_${entry.id}${String(i + 1).padStart(2, '0')}.jpg`]} />
+                </div>
+              ))
+            }
+          </div>
         </div>
         <div class="carousel-control">
           <button
+            @click="onPrev"
             type="button"
             aria-controls="works-carousel"
             data-type="prev"
@@ -84,11 +89,12 @@ const PageFooterData = {
             <Icon name="icon_arrow" role="img" aria-label="前の画像に戻る" width={18} height={18} />
           </button>
           <p class="carousel-num">
-            <span>1</span>
+            <span x-text="String(currentIndex + 1).padStart(2, '0')" class="carousel-current">01</span>
             <span class="carousel-line">/</span>
-            <span>{entry.data.gallery}</span>
+            <span class="carousel-total">{String(entry.data.gallery).padStart(2, '0')}</span>
           </p>
           <button
+            @click="onNext"
             type="button"
             aria-controls="works-carousel"
             data-type="next"
@@ -116,7 +122,7 @@ const PageFooterData = {
 
   .p-works-detail {
     display: grid;
-    place-items: center;
+    align-items: center;
   }
 
   .article {
@@ -126,8 +132,8 @@ const PageFooterData = {
     @media (--mql-md) {
       grid-template-columns: 1fr max-content;
       gap: 0 calc(80 / var(--_container-w) * 100cqi);
-      margin: calc(42 / var(--_container-w) * 100cqi) calc(64 / var(--_container-w) * 100cqi)
-        calc(64 / var(--_container-w) * 100cqi);
+      margin: calc(32 / var(--_container-w) * 100cqi) calc(64 / var(--_container-w) * 100cqi)
+        calc(80 / var(--_container-w) * 100cqi);
     }
   }
 
@@ -173,8 +179,27 @@ const PageFooterData = {
     grid-area: carousel;
 
     @media (--mql-md) {
-      width: calc(680 / var(--_container-w) * 100cqi);
-      margin-top: calc(36 / var(--_container-w) * 100cqi);
+      width: calc(670 / var(--_container-w) * 100cqi);
+      margin-top: calc(56 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .carousel-viewport {
+    overflow: hidden;
+  }
+
+  .carousel-list {
+    display: flex;
+  }
+
+  .carousel-slide {
+    flex: 0 0 101%;
+    aspect-ratio: 16 / 9;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 
@@ -189,7 +214,7 @@ const PageFooterData = {
     border-radius: var(--infinity);
 
     @media (--mql-md) {
-      column-gap: calc(22 / var(--_container-w) * 100cqi);
+      column-gap: calc(16 / var(--_container-w) * 100cqi);
       padding: calc(6 / var(--_container-w) * 100cqi) calc(10 / var(--_container-w) * 100cqi);
       margin-top: calc(16 / var(--_container-w) * 100cqi);
     }
@@ -218,8 +243,17 @@ const PageFooterData = {
     line-height: 1;
 
     @media (--mql-md) {
-      column-gap: calc(10 / var(--_container-w) * 100cqi);
-      font-size: calc(14 / var(--_container-w) * 100cqi);
+      column-gap: calc(8 / var(--_container-w) * 100cqi);
+      font-size: calc(12 / var(--_container-w) * 100cqi);
+    }
+  }
+
+  .carousel-current,
+  .carousel-total {
+    text-align: center;
+
+    @media (--mql-md) {
+      min-width: calc(27 / var(--_container-w) * 100cqi);
     }
   }
 

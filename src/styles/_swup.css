@@ -1,0 +1,17 @@
+html {
+  &.is-changing {
+    * {
+      cursor: wait;
+    }
+
+    .swup-transition-container {
+      transition: opacity 0.4s ease;
+    }
+  }
+
+  &.is-animating {
+    .swup-transition-container {
+      opacity: 0;
+    }
+  }
+}

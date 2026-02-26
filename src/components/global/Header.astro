@@ -35,7 +35,6 @@ const {
     <MenuToggle title="全てのメニューを開く" x-bind="bindOpen" aria-expanded="false" class="open" />
     <dialog
       x-bind="bindDialog"
-      autofocus
       aria-label="全てのメニュー"
       data-lenis-prevent
       class:list={[
@@ -91,6 +90,13 @@ const {
 
     :global(.open) {
       margin-left: auto;
+
+      @media (any-hover: hover) {
+        &:hover {
+          color: var(--color-black);
+          background-color: var(--color-golden-yellow);
+        }
+      }
     }
   }
 
@@ -218,15 +224,17 @@ const {
     --_clip-offset: calc((1 - 10 / 40) * 100%);
     --_clip-path: polygon(0 0, 100% 0, 100% var(--_clip-offset), var(--_clip-offset) 100%, 0 100%);
     --_border-offset: 2px;
+    --_border-color: var(--color-lynch);
+    --_border: drop-shadow(calc(var(--_border-offset) * -1) var(--_border-offset) 0 var(--_border-color))
+      drop-shadow(var(--_border-offset) calc(var(--_border-offset) * -1) 0 var(--_border-color))
+      drop-shadow(calc(var(--_border-offset) * -1) calc(var(--_border-offset) * -1) 0 var(--_border-color))
+      drop-shadow(var(--_border-offset) var(--_border-offset) 0 var(--_border-color));
 
     position: relative;
     display: grid;
     place-items: center;
     aspect-ratio: 1;
-    filter: drop-shadow(calc(var(--_border-offset) * -1) var(--_border-offset) 0 var(--color-lynch))
-      drop-shadow(var(--_border-offset) -2px 0 var(--color-lynch))
-      drop-shadow(calc(var(--_border-offset) * -1) calc(var(--_border-offset) * -1) 0 var(--color-lynch))
-      drop-shadow(var(--_border-offset) var(--_border-offset) 0 var(--color-lynch));
+    filter: var(--_border);
     clip-path: var(--_clip-path);
 
     @media (--mql-md) {

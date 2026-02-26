@@ -1,3 +1,5 @@
+@import './_mql.css';
+
 *,
 ::after,
 ::before {
@@ -7,6 +9,12 @@
 :root {
   font-family: var(--font-mplus);
   color: var(--color-black);
+}
+
+body {
+  &.is-fixed {
+    overflow: hidden;
+  }
 }
 
 button {
@@ -42,11 +50,15 @@ dialog {
 }
 
 .l-container {
-  --_container-w: 1280;
+  --_container-w: var(--screens-xs);
 
   display: grid;
   grid-template-rows: 1fr max-content;
   min-height: 100lvh;
   container-type: inline-size;
   overflow: clip;
+
+  @media (--mql-md) {
+    --_container-w: var(--screens-xl);
+  }
 }

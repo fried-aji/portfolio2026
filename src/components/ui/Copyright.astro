@@ -23,12 +23,16 @@ const {
   @import '@/styles/_mql.css';
 
   .c-copyright {
+    --_fz: 10;
+
+    display: block;
     font-family: var(--font-zen-dots);
+    font-size: calc(var(--_fz) / var(--_container-w) * 100cqi);
     line-height: 1;
     color: var(--color-lynch);
 
     @media (--mql-md) {
-      font-size: calc(12 / var(--_container-w) * 100cqi);
+      --_fz: 12;
     }
   }
 </style>

@@ -3,6 +3,3 @@
 @custom-media --mql-lg (width >= 1024px);
 @custom-media --mql-md (width >= 768px);
 @custom-media --mql-xs (width >= 400px);
-
-/* hover */
-@custom-media --hover (any-hover: hover);

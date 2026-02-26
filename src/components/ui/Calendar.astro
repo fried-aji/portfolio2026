@@ -34,12 +34,15 @@ const {
   @import '@/styles/_mql.css';
 
   .c-calendar {
+    --_container-w: var(--screens-xs);
+
     display: grid;
+    row-gap: calc(4 / var(--_container-w) * 100cqi);
     font-family: var(--font-zen-dots);
     letter-spacing: 0.04em;
 
     @media (--mql-md) {
-      row-gap: calc(4 / var(--screens-xl) * 100cqi);
+      --_container-w: var(--screens-xl);
     }
   }
 
@@ -49,31 +52,29 @@ const {
     line-height: 1;
 
     @media (--mql-md) {
-      column-gap: calc(4 / var(--screens-xl) * 100cqi);
+      column-gap: calc(4 / var(--_container-w) * 100cqi);
     }
   }
 
-  .meridiem {
+  .meridiem,
+  .sec,
+  .lower {
+    --_fz: 10;
+
+    font-size: calc(var(--_fz) / var(--_container-w) * 100cqi);
+
     @media (--mql-md) {
-      font-size: calc(12 / var(--screens-xl) * 100cqi);
+      --_fz: 12;
     }
   }
 
   .hour {
-    @media (--mql-md) {
-      font-size: calc(20 / var(--screens-xl) * 100cqi);
-    }
-  }
+    --_fz: 16;
 
-  .sec {
-    @media (--mql-md) {
-      font-size: calc(12 / var(--screens-xl) * 100cqi);
-    }
-  }
+    font-size: calc(var(--_fz) / var(--_container-w) * 100cqi);
 
-  .lower {
     @media (--mql-md) {
-      font-size: calc(12 / var(--screens-xl) * 100cqi);
+      --_fz: 20;
     }
   }
 </style>

@@ -1,6 +1,6 @@
-@import 'lenis/dist/lenis.css';
 @import './_reset.css';
 @import './_variables.css';
 @import './_mql.css';
 @import './_base.css';
 @import './_keyframes.css';
+@import './_swup.css';

@@ -9,6 +9,7 @@ export default defineConfig([
   globalIgnores([
     //
     '.astro/**/*',
+    'integration/**/*',
     'public/**/*',
     'dist/**/*',
   ]),
@@ -18,18 +19,11 @@ export default defineConfig([
   tseslint.configs.recommended,
   // https://github.com/sindresorhus/eslint-plugin-unicorn?tab=readme-ov-file#rules
   eslintPluginUnicorn.configs.recommended,
-  astro.configs['flat/jsx-a11y-recommended'],
-  {
-    // .astroファイルのフロントマターにTypeScriptパーサーを明示
-    files: ['**/*.astro'],
-    languageOptions: {
-      parserOptions: {
-        parser: tsParser,
-      },
-    },
-  },
   {
     rules: {
+      /* 未使用変数のチェックはTypeScriptに任せる */
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
       /*
        * https://github.com/sindresorhus/eslint-plugin-unicorn?tab=readme-ov-file#rules
        */
@@ -58,6 +52,16 @@ export default defineConfig([
       'unicorn/prefer-query-selector': 0,
       /* 略語の使用を許可 */
       'unicorn/prevent-abbreviations': 0,
+    },
+  },
+  astro.configs['flat/jsx-a11y-recommended'],
+  {
+    files: ['**/*.astro'],
+    languageOptions: {
+      parserOptions: {
+        parser: '@typescript-eslint/parser',
+        extraFileExtensions: ['.astro'],
+      },
     },
   },
   {

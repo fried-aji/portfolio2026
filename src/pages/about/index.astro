@@ -228,12 +228,18 @@ const PageFooterData = {
   .sns-link {
     --_clip-offset: calc(100% - 8 / 40 * 100%);
     --_clip-path: polygon(100% 0, 100% var(--_clip-offset), var(--_clip-offset) 100%, 0 100%, 0 0);
+    --_border-offset: 2px;
+    --_border-color: var(--color-lynch);
+    --_border: drop-shadow(calc(var(--_border-offset) * -1) var(--_border-offset) 0 var(--_border-color))
+      drop-shadow(var(--_border-offset) calc(var(--_border-offset) * -1) 0 var(--_border-color))
+      drop-shadow(calc(var(--_border-offset) * -1) calc(var(--_border-offset) * -1) 0 var(--_border-color))
+      drop-shadow(var(--_border-offset) var(--_border-offset) 0 var(--_border-color));
 
     position: relative;
     display: grid;
     place-items: center;
     aspect-ratio: 1;
-    background-color: var(--color-black);
+    filter: var(--_border);
     clip-path: var(--_clip-path);
 
     @media (--mql-md) {
@@ -243,8 +249,8 @@ const PageFooterData = {
     &::before {
       position: absolute;
       inset: 0;
-      width: calc(100% - 2px);
-      height: calc(100% - 2px);
+      width: calc(100% - var(--_border-offset));
+      aspect-ratio: 1;
       margin: auto;
       pointer-events: none;
       content: '';

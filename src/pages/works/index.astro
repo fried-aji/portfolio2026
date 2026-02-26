@@ -33,7 +33,8 @@ const PageFooterData = {
   ],
 };
 
-const worksData: CollectionEntry<'works'>[] = (await getCollection('works')).sort(
+const works = await getCollection('works');
+const worksData: CollectionEntry<'works'>[] = works.toSorted(
   (a: CollectionEntry<'works'>, b: CollectionEntry<'works'>) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
 );
 ---
@@ -114,7 +115,7 @@ const worksData: CollectionEntry<'works'>[] = (await getCollection('works')).sor
 
   .p-works {
     display: grid;
-    place-items: center;
+    align-items: center;
   }
 
   .tab-menu {

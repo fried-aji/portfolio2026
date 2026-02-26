@@ -19,9 +19,12 @@ import siteNav from '@/data/siteNav';
           aria-label="ポートフォリオ バージョン2.0"
           width={320}
           height={71}
-          class="logo"
+          class="title-logo"
         />
       </h1>
+      <div class="vi">
+        <Image src={ImageVi} densities={[1, 2]} alt="" width={580} height={751} />
+      </div>
       <ul class="list">
         {
           siteNav.map((item) => (
@@ -51,9 +54,6 @@ import siteNav from '@/data/siteNav';
           ))
         }
       </ul>
-      <div class="vi">
-        <Image src={ImageVi} densities={[1, 2]} alt="" width={580} height={751} />
-      </div>
     </div>
     <Calendar class="calendar" />
     <Copyright class="copyright" />
@@ -66,22 +66,40 @@ import siteNav from '@/data/siteNav';
   .p-home {
     position: relative;
     display: grid;
+    padding-top: calc(90 / var(--_container-w) * 100cqi);
+    padding-bottom: calc(16 / var(--_container-w) * 100cqi);
+
+    @media (--mql-md) {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
 
     :global(.calendar) {
+      --_top: 12;
+      --_left: 12;
+
       position: absolute;
+      top: calc(var(--_top) / var(--_container-w) * 100cqi);
+      left: calc(var(--_left) / var(--_container-w) * 100cqi);
 
       @media (--mql-md) {
-        top: calc(16 / var(--_container-w) * 100cqi);
-        left: calc(16 / var(--_container-w) * 100cqi);
+        --_top: 16;
+        --_left: 16;
       }
     }
 
     :global(.copyright) {
-      position: absolute;
+      margin-top: calc(64 / var(--_container-w) * 100cqi);
+      margin-right: calc(16 / var(--_container-w) * 100cqi);
+      margin-left: auto;
 
       @media (--mql-md) {
+        position: absolute;
         right: calc(24 / var(--_container-w) * 100cqi);
         bottom: calc(24 / var(--_container-w) * 100cqi);
+        margin-top: 0;
+        margin-right: 0;
+        margin-left: 0;
       }
     }
   }
@@ -96,32 +114,44 @@ import siteNav from '@/data/siteNav';
   }
 
   .title {
-    position: absolute;
+    --_w: 300;
+
+    width: calc(var(--_w) / var(--_container-w) * 100cqi);
+    margin-right: calc(20 / var(--_container-w) * 100cqi);
+    margin-left: auto;
 
     @media (--mql-md) {
+      --_w: 320;
+
+      position: absolute;
       bottom: calc(24 / var(--_container-w) * 100cqi);
       left: calc(24 / var(--_container-w) * 100cqi);
-      width: calc(320 / var(--_container-w) * 100cqi);
+      margin-right: 0;
+      margin-left: 0;
     }
   }
 
-  .logo {
+  .title-logo {
     width: 100%;
   }
 
   .list {
-    position: absolute;
-    left: 0;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    width: 100%;
+    gap: calc(12 / var(--_container-w) * 100cqi);
+    margin-right: calc(12 / var(--_container-w) * 100cqi);
+    margin-left: calc(12 / var(--_container-w) * 100cqi);
 
     @media (--mql-md) {
       --_offset: (16 / var(--_container-w) * 100cqi);
 
+      position: absolute;
       top: calc(196 / var(--_container-w) * 100cqi);
-      row-gap: calc(16 / var(--_container-w) * 100cqi);
+      left: 0;
+      gap: calc(16 / var(--_container-w) * 100cqi) 0;
       width: calc(100% + var(--_offset) * 2);
+      margin-right: 0;
+      margin-left: 0;
     }
   }
 
@@ -154,67 +184,95 @@ import siteNav from '@/data/siteNav';
 
   .link {
     display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: calc(10 / var(--_container-w) * 100cqi);
     align-items: center;
+    padding: calc(12 / var(--_container-w) * 100cqi) calc(16 / var(--_container-w) * 100cqi);
     color: var(--color-pure-white);
     background-color: var(--color-black);
 
     @media (--mql-md) {
-      grid-template-columns: calc(36 / var(--_container-w) * 100cqi) 1fr;
       column-gap: calc(16 / var(--_container-w) * 100cqi);
       padding: calc(8 / var(--_container-w) * 100cqi) calc(78 / var(--_container-w) * 100cqi);
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: var(--color-black);
+        background-color: var(--color-golden-yellow);
+      }
     }
   }
 
   .link-icon {
-    width: 100%;
-    transform: skewX(-12deg);
+    --_w: 20;
+
+    width: calc(var(--_w) / var(--_container-w) * 100cqi);
+
+    @media (--mql-md) {
+      --_w: 36;
+
+      transform: skewX(-12deg);
+    }
   }
 
   .link-text {
+    --_gap: 6;
+
     display: grid;
-    transform: skewX(-12deg);
+    row-gap: calc(var(--_gap) / var(--_container-w) * 100cqi);
 
     @media (--mql-md) {
-      row-gap: calc(6 / var(--_container-w) * 100cqi);
+      transform: skewX(-12deg);
     }
   }
 
   .link-ja {
+    --_fz: 16;
+
     font-family: var(--font-dela-gothic);
+    font-size: calc(var(--_fz) / var(--_container-w) * 100cqi);
     line-height: 1;
     letter-spacing: 0.04em;
 
     @media (--mql-md) {
-      font-size: calc(30 / var(--_container-w) * 100cqi);
+      --_fz: 30;
     }
   }
 
   .link-en {
+    --_fz: 10;
+
     font-family: var(--font-zen-dots);
+    font-size: calc(var(--_fz) / var(--_container-w) * 100cqi);
     line-height: 1;
     letter-spacing: 0.04em;
 
     @media (--mql-md) {
-      font-size: calc(14 / var(--_container-w) * 100cqi);
+      --_fz: 14;
     }
   }
 
   .vi {
+    --_w: 360;
+
     position: relative;
+    z-index: 1;
+    width: calc(var(--_w) / var(--_container-w) * 100cqi);
+    margin-top: calc(16 / var(--_container-w) * 100cqi);
     margin-right: auto;
     margin-left: auto;
 
     @media (--mql-md) {
+      --_w: 580;
+
       right: calc(16 / var(--_container-w) * 100cqi);
-      width: calc(580 / var(--_container-w) * 100cqi);
+      margin-top: 0;
     }
 
     img {
       width: 100%;
-
-      @media (--mql-md) {
-        filter: drop-shadow(calc(-20 / var(--_container-w) * 100cqi) 0 0 rgb(255 179 237 / 30%));
-      }
+      filter: drop-shadow(calc(-20 / var(--_container-w) * 100cqi) 0 0 rgb(255 179 237 / 30%));
     }
   }
 </style>

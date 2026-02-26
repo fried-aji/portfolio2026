@@ -45,6 +45,27 @@ const {
     bottom: 0;
     z-index: calc(var(--z-header) - 1);
     background-color: var(--color-neon-blue);
+
+    &::after {
+      --_size: calc(4 / var(--screens-xl) * 100cqi);
+      --_gap: calc(10 / var(--screens-xl) * 100cqi);
+
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      content: '';
+      background-image: radial-gradient(
+        circle,
+        var(--color-electro-nlue) calc(var(--_size) / 2),
+        transparent calc(var(--_size) / 2)
+      );
+      background-position: 0 0;
+      background-size: calc(var(--_size) + var(--_gap)) calc(var(--_size) + var(--_gap));
+      opacity: 0.6;
+    }
   }
 
   .desc {
@@ -88,6 +109,14 @@ const {
       font-size: calc(13 / var(--screens-xl) * 100cqi);
     }
 
+    @media (any-hover: hover) {
+      &:hover {
+        &::after {
+          background-color: var(--color-golden-yellow);
+        }
+      }
+    }
+
     &:first-of-type {
       @media (--mql-md) {
         left: calc(32 / var(--screens-xl) * 100cqi);
@@ -103,6 +132,7 @@ const {
     &::before,
     &::after {
       position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       content: '';
@@ -110,7 +140,6 @@ const {
     }
 
     &::after {
-      inset: 0;
       background-color: var(--color-rose-pink);
     }
 
@@ -118,8 +147,9 @@ const {
       background-color: var(--color-black);
 
       @media (--mql-md) {
-        top: calc(2 / var(--screens-xl) * 100cqi);
-        right: calc(-2 / var(--screens-xl) * 100cqi);
+        /* top: calc(2 / var(--screens-xl) * 100cqi);
+        right: calc(-2 / var(--screens-xl) * 100cqi); */
+        translate: calc(4 / var(--screens-xl) * 100cqi) calc(4 / var(--screens-xl) * 100cqi);
       }
     }
   }

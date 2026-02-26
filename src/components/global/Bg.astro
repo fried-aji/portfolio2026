@@ -7,9 +7,9 @@ const circleData = [
       height: '1028',
     },
     sp: {
-      src: '',
-      width: '',
-      height: '',
+      src: 'img_circle-blue01_sp.svg',
+      width: '610',
+      height: '610',
     },
   },
   {
@@ -19,9 +19,9 @@ const circleData = [
       height: '920',
     },
     sp: {
-      src: '',
-      width: '',
-      height: '',
+      src: 'img_circle-blue02_sp.svg',
+      width: '720',
+      height: '720',
     },
   },
   {
@@ -31,9 +31,9 @@ const circleData = [
       height: '829',
     },
     sp: {
-      src: '',
-      width: '',
-      height: '',
+      src: 'img_circle-pink01_sp.svg',
+      width: '500',
+      height: '500',
     },
   },
   {
@@ -43,9 +43,9 @@ const circleData = [
       height: '1080',
     },
     sp: {
-      src: '',
-      width: '',
-      height: '',
+      src: 'img_circle-blue03_sp.svg',
+      width: '717',
+      height: '717',
     },
   },
   {
@@ -55,9 +55,9 @@ const circleData = [
       height: '1085',
     },
     sp: {
-      src: '',
-      width: '',
-      height: '',
+      src: 'img_circle-pink02_sp.svg',
+      width: '741',
+      height: '741',
     },
   },
 ];
@@ -95,9 +95,15 @@ const circleData = [
   @import '@/styles/_mql.css';
 
   .l-bg {
+    --_container-w: var(--screens-xs);
+
     position: relative;
     z-index: -2;
     pointer-events: none;
+
+    @media (--mql-md) {
+      --_container-w: var(--screens-xl);
+    }
   }
 
   .base {
@@ -121,12 +127,16 @@ const circleData = [
 
   .anime {
     position: fixed;
-    inset: 0;
+    inset: 0 0 0 auto;
     display: grid;
     grid-template-areas: 'circle';
     place-items: center;
     height: max-content;
-    margin: auto;
+
+    @media (--mql-md) {
+      inset: 0;
+      margin: auto;
+    }
   }
 
   .circle {
@@ -134,41 +144,50 @@ const circleData = [
     animation: rotation 100s linear infinite var(--_anime-dir, normal);
 
     &:first-of-type {
+      --_w: 610;
+
       @media (--mql-md) {
-        --_w: calc(1028 / var(--screens-xl) * 100cqi);
+        --_w: 1028;
       }
     }
 
     &:nth-of-type(2) {
+      --_w: 720;
+
       @media (--mql-md) {
-        --_w: calc(920 / var(--screens-xl) * 100cqi);
+        --_w: 920;
       }
     }
 
     &:nth-of-type(3) {
+      --_w: 500;
       --_anime-dir: reverse;
 
       @media (--mql-md) {
-        --_w: calc(829 / var(--screens-xl) * 100cqi);
+        --_w: 829;
       }
     }
 
     &:nth-of-type(4) {
+      --_w: 717;
+
       @media (--mql-md) {
-        --_w: calc(1080 / var(--screens-xl) * 100cqi);
+        --_w: 1080;
       }
     }
 
     &:nth-of-type(5) {
+      --_w: 741;
       --_anime-dir: reverse;
 
       @media (--mql-md) {
-        --_w: calc(1085 / var(--screens-xl) * 100cqi);
+        --_w: 1085;
       }
     }
 
     img {
-      width: var(--_w);
+      width: calc(var(--_w) / var(--_container-w) * 100cqi);
+      max-width: unset;
     }
   }
 </style>
