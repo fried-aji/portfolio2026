@@ -1,0 +1,16 @@
+@import './_mql.css';
+
+.l-container {
+  --_container-w: var(--screens-xs);
+
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr max-content;
+  min-height: 100lvh;
+  container-type: inline-size;
+  overflow: clip;
+
+  @media (--mql-md) {
+    --_container-w: var(--screens-xl);
+  }
+}
