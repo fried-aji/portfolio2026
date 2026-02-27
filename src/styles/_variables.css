@@ -1,13 +1,12 @@
+@import './_mql.css';
+
+@property --vw {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 0;
+}
+
 :root {
-  /* breakpoint */
-  --screens-xl: 1280;
-  --screens-lg: 1024;
-  --screens-md: 768;
-  --screens-xs: 400;
-
-  /* z-index */
-  --z-header: 10;
-
   /* color */
   --color-pure-white: #fff;
   --color-pure-black: #000;
@@ -19,6 +18,9 @@
   --color-rose-pink: #ff9adc;
   --color-lynch: #697b93;
   --color-golden-yellow: #f3ff4c;
+
+  /* z-index */
+  --z-header: 10;
 
   /* font */
   --font-mplus: 'M PLUS 1p', sans-serif;
@@ -54,5 +56,20 @@
   /* infinity */
   --infinity: calc(infinity * 1px);
 
-  /* clip-path + border */
+  /* breakpoint */
+  --screens-xl: 1280;
+  --screens-lg: 1024;
+  --screens-md: 768;
+  --screens-xs: 400;
+
+  /* unit */
+  --vw: 100vw;
+  --vw-to-px: calc(tan(atan2(var(--vw), 1px)));
+  --scale: calc(var(--vw-to-px) / var(--screens-xs));
+  --px: calc(1px * var(--scale));
+  --rem: calc(1rem / 16 * var(--scale));
+
+  @media (--mql-md) {
+    --scale: calc(var(--vw-to-px) / var(--screens-xl));
+  }
 }

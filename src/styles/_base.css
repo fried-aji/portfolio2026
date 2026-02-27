@@ -48,17 +48,3 @@ dialog {
 [x-cloak] {
   display: none !important;
 }
-
-.l-container {
-  --_container-w: var(--screens-xs);
-
-  display: grid;
-  grid-template-rows: 1fr max-content;
-  min-height: 100lvh;
-  container-type: inline-size;
-  overflow: clip;
-
-  @media (--mql-md) {
-    --_container-w: var(--screens-xl);
-  }
-}

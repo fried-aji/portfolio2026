@@ -13,7 +13,7 @@ Alpine.data('globalMenu', () => {
     init() {
       dialogEl = this.$el.querySelector('dialog') as HTMLDialogElement;
       // デバッグ用
-      //   this.onOpen();
+      // this.onOpen();
 
       abortController = new AbortController();
       if (dialogEl) {
@@ -31,11 +31,11 @@ Alpine.data('globalMenu', () => {
         }
       }
 
-      this.$watch('$store.mql.isMD', (mql: boolean) => {
-        if (mql && this.isOpen) {
-          this.onClose();
-        }
-      });
+      // this.$watch('$store.mql.isMD', (mql: boolean) => {
+      //   if (mql && this.isOpen) {
+      //     this.onClose();
+      //   }
+      // });
     },
 
     destroy() {

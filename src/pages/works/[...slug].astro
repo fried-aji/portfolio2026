@@ -53,7 +53,7 @@ const PageFooterData = {
 ---
 
 <Layout title={metaData.title} description={metaData.description}>
-  <main class="p-works-detail">
+  <main class="p-works-detail u-page-overlay">
     <PageHdg {...pageHdgData} />
     <article class="article">
       <hgroup class="heading">
@@ -121,6 +121,7 @@ const PageFooterData = {
   @import '@/styles/_mql.css';
 
   .p-works-detail {
+    position: relative;
     display: grid;
     align-items: center;
   }
@@ -131,9 +132,8 @@ const PageFooterData = {
 
     @media (--mql-md) {
       grid-template-columns: 1fr max-content;
-      gap: 0 calc(80 / var(--_container-w) * 100cqi);
-      margin: calc(32 / var(--_container-w) * 100cqi) calc(64 / var(--_container-w) * 100cqi)
-        calc(80 / var(--_container-w) * 100cqi);
+      gap: 0 calc(80 * var(--px));
+      margin: calc(32 * var(--px)) calc(64 * var(--px)) calc(80 * var(--px));
     }
   }
 
@@ -145,8 +145,8 @@ const PageFooterData = {
     rotate: -8deg;
 
     @media (--mql-md) {
-      row-gap: calc(4 / var(--_container-w) * 100cqi);
-      margin-left: calc(16 / var(--_container-w) * 100cqi);
+      row-gap: calc(4 * var(--px));
+      margin-left: calc(16 * var(--px));
     }
   }
 
@@ -155,7 +155,7 @@ const PageFooterData = {
     color: var(--color-dark-gray);
 
     @media (--mql-md) {
-      font-size: calc(16 / var(--_container-w) * 100cqi);
+      font-size: calc(16 * var(--rem));
     }
   }
 
@@ -163,7 +163,7 @@ const PageFooterData = {
     font-family: var(--font-dela-gothic);
 
     @media (--mql-md) {
-      font-size: calc(72 / var(--_container-w) * 100cqi);
+      font-size: calc(72 * var(--rem));
     }
   }
 
@@ -171,7 +171,7 @@ const PageFooterData = {
     grid-area: body;
 
     @media (--mql-md) {
-      margin-top: calc(116 / var(--_container-w) * 100cqi);
+      margin-top: calc(116 * var(--px));
     }
   }
 
@@ -179,8 +179,8 @@ const PageFooterData = {
     grid-area: carousel;
 
     @media (--mql-md) {
-      width: calc(670 / var(--_container-w) * 100cqi);
-      margin-top: calc(56 / var(--_container-w) * 100cqi);
+      width: calc(670 * var(--px));
+      margin-top: calc(56 * var(--px));
     }
   }
 
@@ -214,9 +214,9 @@ const PageFooterData = {
     border-radius: var(--infinity);
 
     @media (--mql-md) {
-      column-gap: calc(16 / var(--_container-w) * 100cqi);
-      padding: calc(6 / var(--_container-w) * 100cqi) calc(10 / var(--_container-w) * 100cqi);
-      margin-top: calc(16 / var(--_container-w) * 100cqi);
+      column-gap: calc(16 * var(--px));
+      padding: calc(6 * var(--px)) calc(10 * var(--px));
+      margin-top: calc(16 * var(--px));
     }
   }
 
@@ -224,7 +224,7 @@ const PageFooterData = {
     aspect-ratio: 1;
 
     @media (--mql-md) {
-      width: calc(18 / var(--_container-w) * 100cqi);
+      width: calc(18 * var(--px));
     }
 
     &[data-type='prev'] {
@@ -243,8 +243,8 @@ const PageFooterData = {
     line-height: 1;
 
     @media (--mql-md) {
-      column-gap: calc(8 / var(--_container-w) * 100cqi);
-      font-size: calc(12 / var(--_container-w) * 100cqi);
+      column-gap: calc(8 * var(--px));
+      font-size: calc(12 * var(--rem));
     }
   }
 
@@ -253,13 +253,13 @@ const PageFooterData = {
     text-align: center;
 
     @media (--mql-md) {
-      min-width: calc(27 / var(--_container-w) * 100cqi);
+      min-width: calc(27 * var(--px));
     }
   }
 
   .carousel-line {
     @media (--mql-md) {
-      font-size: calc(10 / var(--_container-w) * 100cqi);
+      font-size: calc(10 * var(--rem));
     }
   }
 
@@ -276,12 +276,9 @@ const PageFooterData = {
     rotate: -8deg;
 
     @media (--mql-md) {
-      --_base-w: 1280;
-      --_base-h: 720;
-
-      top: calc(308 / var(--_base-h) * 100%);
-      left: calc(24 / var(--_base-w) * 100%);
-      font-size: calc(120 / var(--_container-w) * 100cqi);
+      top: calc(198 * var(--px));
+      left: calc(24 * var(--px));
+      font-size: calc(140 * var(--rem));
     }
   }
 </style>
@@ -311,16 +308,15 @@ const PageFooterData = {
       clip-path: polygon(var(--_clip) 0%, 100% 0%, calc(100% - var(--_clip)) 100%, 0% 100%);
 
       @media (--mql-md) {
-        width: calc(178 / var(--_container-w) * 100cqi);
-        padding: calc(8 / var(--_container-w) * 100cqi) calc(16 / var(--_container-w) * 100cqi)
-          calc(10 / var(--_container-w) * 100cqi);
-        margin-top: calc(24 / var(--_container-w) * 100cqi);
-        font-size: calc(16 / var(--_container-w) * 100cqi);
+        width: calc(178 * var(--px));
+        padding: calc(8 * var(--px)) calc(16 * var(--px)) calc(10 * var(--px));
+        margin-top: calc(24 * var(--px));
+        font-size: calc(16 * var(--rem));
       }
 
       + * {
         @media (--mql-md) {
-          margin-top: calc(12 / var(--_container-w) * 100cqi);
+          margin-top: calc(12 * var(--px));
         }
       }
     }
@@ -329,7 +325,7 @@ const PageFooterData = {
       font-weight: 500;
 
       @media (--mql-md) {
-        font-size: calc(14 / var(--_container-w) * 100cqi);
+        font-size: calc(14 * var(--rem));
       }
     }
   }

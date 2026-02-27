@@ -36,7 +36,6 @@ const {
     <dialog
       x-bind="bindDialog"
       aria-label="全てのメニュー"
-      data-lenis-prevent
       class:list={[
         //
         'menu',
@@ -104,6 +103,7 @@ const {
     width: 100%;
     height: 100%;
     overflow-y: auto;
+    overscroll-behavior: contain;
     color: var(--color-pure-white);
     transition: opacity 0.3s ease;
 
@@ -121,11 +121,16 @@ const {
     }
 
     :global(.calendar) {
+      --_top: 12;
+      --_left: 12;
+
       position: absolute;
+      top: calc(var(--_top) * var(--px));
+      left: calc(var(--_left) * var(--px));
 
       @media (--mql-md) {
-        top: calc(16 / var(--screens-xl) * 100cqi);
-        left: calc(16 / var(--screens-xl) * 100cqi);
+        --_top: 16;
+        --_left: 16;
       }
     }
   }
@@ -174,53 +179,67 @@ const {
   .outer {
     display: grid;
     grid-template-rows: auto 1fr;
-    height: 100%;
+    min-height: calc(100% + 1px);
+    padding: calc(120 * var(--px)) calc(20 * var(--px)) calc(48 * var(--px));
 
     @media (--mql-md) {
-      row-gap: calc(80 / var(--screens-xl) * 100cqi);
-      padding: calc(160 / var(--screens-xl) * 100cqi) calc(40 / var(--screens-xl) * 100cqi)
-        calc(42 / var(--screens-xl) * 100cqi);
+      row-gap: calc(80 * var(--px));
+      padding: calc(160 * var(--px)) calc(40 * var(--px)) calc(42 * var(--px));
     }
   }
 
   .upper {
     display: grid;
+    gap: calc(42 * var(--px));
     width: max-content;
+    margin-right: calc(12 * var(--px));
+    margin-left: calc(12 * var(--px));
 
     @media (--mql-md) {
       grid-template-columns: repeat(2, 1fr);
-      gap: calc(80 / var(--screens-xl) * 100cqi) calc(120 / var(--screens-xl) * 100cqi);
-      margin-right: calc(40 / var(--screens-xl) * 100cqi);
-      margin-left: calc(40 / var(--screens-xl) * 100cqi);
+      gap: calc(80 * var(--px)) calc(120 * var(--px));
+      margin-right: calc(40 * var(--px));
+      margin-left: calc(40 * var(--px));
     }
   }
 
   .upper-link {
     font-family: var(--font-zen-dots);
+    font-size: calc(28 * var(--rem));
     line-height: 1;
 
     @media (--mql-md) {
-      font-size: calc(48 / var(--screens-xl) * 100cqi);
+      font-size: calc(48 * var(--rem));
     }
   }
 
   .lower {
     display: grid;
     grid-template-columns: 1fr max-content;
+    column-gap: calc(24 * var(--px));
     align-items: flex-end;
     align-self: flex-end;
+    margin-top: calc(120 * var(--px));
+
+    @media (--mql-md) {
+      margin-top: 0;
+    }
   }
 
   .sns {
+    --_gap: 10;
+
     display: flex;
+    column-gap: calc(var(--_gap) * var(--px));
     height: fit-content;
 
     @media (--mql-md) {
-      column-gap: calc(16 / var(--screens-xl) * 100cqi);
+      --_gap: 16;
     }
   }
 
   .sns-link {
+    --_w: 34;
     --_clip-offset: calc((1 - 10 / 40) * 100%);
     --_clip-path: polygon(0 0, 100% 0, 100% var(--_clip-offset), var(--_clip-offset) 100%, 0 100%);
     --_border-offset: 2px;
@@ -233,12 +252,13 @@ const {
     position: relative;
     display: grid;
     place-items: center;
+    width: calc(var(--_w) * var(--px));
     aspect-ratio: 1;
     filter: var(--_border);
     clip-path: var(--_clip-path);
 
     @media (--mql-md) {
-      width: calc(42 / var(--screens-xl) * 100cqi);
+      --_w: 40;
     }
 
     &::before {
@@ -261,8 +281,12 @@ const {
   }
 
   .home {
+    --_w: 181;
+
+    width: calc(var(--_w) * var(--px));
+
     @media (--mql-md) {
-      width: calc(320 / var(--screens-xl) * 100cqi);
+      --_w: 320;
     }
 
     svg {

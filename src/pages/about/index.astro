@@ -36,44 +36,43 @@ const PageFooterData = {
 ---
 
 <Layout title={metaData.title} description={metaData.description}>
-  <main class="p-about">
+  <main class="p-about u-page-overlay">
     <PageHdg {...pageHdgData} />
     <div class="col">
-      <div class="body">
-        <hgroup class="heading">
-          <h2 class="heading-name">ナガノマ リク</h2>
-          <p class="heading-age">Age 28</p>
-        </hgroup>
-        <div class="info">
-          <section class="sec">
-            <h3 class="sec-title">プロフィール</h3>
-            <p class="sec-desc">
-              1997年 大阪府出身。<br />2020年に大手飲料メーカーのパッケージ開発に従事し、<br
-              />2023年からWeb業界にキャリアチェンジ。<br
-              />フロントエンドエンジニア約3年間、Webサイトの受託開発に務める。
-            </p>
-          </section>
-          <section class="sec">
-            <h3 class="sec-title">言語 ・ スキル</h3>
-            <ul class="sec-list">
-              <li class="sec-item">
-                <h4 class="sec-subtitle">言語</h4>
-                <p class="sec-desc">HTML、CSS、JavaScript（TypeScript）、PHP</p>
-              </li>
-              <li class="sec-item">
-                <h4 class="sec-subtitle">フレームワーク</h4>
-                <p class="sec-desc">Astro、Nuxt.js、Vue、Alpine.js</p>
-              </li>
-              <li class="sec-item">
-                <h4 class="sec-subtitle">その他</h4>
-                <p class="sec-desc">WordPress、microCMS、Git、Docker、Claude Code</p>
-              </li>
-            </ul>
-          </section>
-        </div>
+      <hgroup class="heading">
+        <h2 class="heading-name">ナガノマ リク</h2>
+        <p class="heading-age">Age 28</p>
+      </hgroup>
+      <div class="info">
+        <section class="sec">
+          <h3 class="sec-title">プロフィール</h3>
+          <p class="sec-desc">
+            1997年 大阪府出身。<br />2020年に大手飲料メーカーのパッケージ開発に従事し、<br
+            />2023年からWeb業界にキャリアチェンジ。<br />フロントエンドエンジニア約3年間、<br
+              class="u-md:hidden"
+            />Webサイトの受託開発に勤める。
+          </p>
+        </section>
+        <section class="sec">
+          <h3 class="sec-title">言語 ・ スキル</h3>
+          <ul class="sec-list">
+            <li class="sec-item">
+              <h4 class="sec-subtitle">言語</h4>
+              <p class="sec-desc">HTML、CSS、JavaScript（TypeScript）、PHP</p>
+            </li>
+            <li class="sec-item">
+              <h4 class="sec-subtitle">フレームワーク</h4>
+              <p class="sec-desc">Astro、Nuxt.js、Vue、Alpine.js</p>
+            </li>
+            <li class="sec-item">
+              <h4 class="sec-subtitle">その他</h4>
+              <p class="sec-desc">WordPress、microCMS、Git、Docker、Claude Code</p>
+            </li>
+          </ul>
+        </section>
       </div>
       <div class="visual">
-        <Image src={ImageVi} densities={[1, 2]} alt="" width={470} height={608} class="vi" />
+        <Image src={ImageVi} alt="" class="vi" />
         <div class="sns">
           {
             snsNav.map((item) => (
@@ -98,62 +97,80 @@ const PageFooterData = {
   @import '@/styles/_mql.css';
 
   .p-about {
+    position: relative;
     display: grid;
     align-items: center;
   }
 
   .col {
     display: grid;
+    grid-template-areas: 'heading' 'visual' 'info';
+    margin: calc(98 * var(--px)) calc(16 * var(--px)) calc(80 * var(--px));
 
     @media (--mql-md) {
-      grid-template-columns: 1fr calc(470 / var(--_container-w) * 100cqi);
-      margin: calc(78 / var(--_container-w) * 100cqi) calc(64 / var(--_container-w) * 100cqi) 0;
+      grid-template:
+        'heading visual' max-content
+        'info visual' 1fr
+        / 1fr calc(470 * var(--px));
+      margin: calc(78 * var(--px)) calc(64 * var(--px)) 0;
     }
   }
 
   .heading {
     display: flex;
+    grid-area: heading;
+    column-gap: calc(8 * var(--px));
     align-items: flex-end;
+    margin-left: calc(4 * var(--px));
     line-height: 1;
-    transform: skewX(-16deg);
-    rotate: -8deg;
+    transform: skewX(-14deg);
+    rotate: -14deg;
 
     @media (--mql-md) {
-      column-gap: calc(16 / var(--_container-w) * 100cqi);
-      margin-left: calc(12 / var(--_container-w) * 100cqi);
+      column-gap: calc(16 * var(--px));
+      margin-left: calc(12 * var(--px));
+      transform: skewX(-16deg);
+      rotate: -8deg;
     }
   }
 
   .heading-name {
     font-family: var(--font-dela-gothic);
+    font-size: calc(40 * var(--rem));
 
     @media (--mql-md) {
-      font-size: calc(72 / var(--_container-w) * 100cqi);
+      font-size: calc(72 * var(--rem));
     }
   }
 
   .heading-age {
     font-family: var(--font-zen-dots);
+    font-size: calc(12 * var(--rem));
 
     @media (--mql-md) {
-      margin-bottom: calc(8 / var(--_container-w) * 100cqi);
-      font-size: calc(18 / var(--_container-w) * 100cqi);
+      margin-bottom: calc(8 * var(--px));
+      font-size: calc(18 * var(--rem));
     }
   }
 
   .info {
     display: grid;
+    row-gap: calc(24 * var(--px));
+    margin-top: calc(52 * var(--px));
 
     @media (--mql-md) {
-      row-gap: calc(24 / var(--_container-w) * 100cqi);
-      margin-top: calc(70 / var(--_container-w) * 100cqi);
+      margin-top: calc(70 * var(--px));
     }
   }
 
   .sec-title {
-    --_clip: calc(12 / 178 * 100%);
+    --_w: 170;
+    --_clip: calc(12 / 170 * 100%);
 
+    width: calc(var(--_w) * var(--px));
+    padding: calc(8 * var(--px)) calc(16 * var(--px)) calc(10 * var(--px));
     font-family: var(--font-dela-gothic);
+    font-size: calc(14 * var(--rem));
     line-height: 1;
     color: var(--color-pure-white);
     text-align: center;
@@ -161,71 +178,93 @@ const PageFooterData = {
     clip-path: polygon(var(--_clip) 0%, 100% 0%, calc(100% - var(--_clip)) 100%, 0% 100%);
 
     @media (--mql-md) {
-      width: calc(178 / var(--_container-w) * 100cqi);
-      padding: calc(8 / var(--_container-w) * 100cqi) calc(16 / var(--_container-w) * 100cqi)
-        calc(10 / var(--_container-w) * 100cqi);
-      font-size: calc(16 / var(--_container-w) * 100cqi);
+      --_w: 178;
+      --_clip: calc(12 / 178 * 100%);
+
+      font-size: calc(16 * var(--rem));
     }
 
     + * {
-      @media (--mql-md) {
-        margin-top: calc(12 / var(--_container-w) * 100cqi);
-      }
+      margin-top: calc(12 * var(--px));
     }
   }
 
   .sec-desc {
+    font-size: calc(12 * var(--rem));
     font-weight: 500;
 
     @media (--mql-md) {
-      font-size: calc(14 / var(--_container-w) * 100cqi);
+      font-size: calc(14 * var(--rem));
     }
   }
 
   .sec-list {
     display: grid;
-
-    @media (--mql-md) {
-      row-gap: calc(8 / var(--_container-w) * 100cqi);
-    }
+    row-gap: calc(8 * var(--px));
   }
 
   .sec-subtitle {
     font-family: var(--font-dela-gothic);
+    font-size: calc(14 * var(--rem));
 
     @media (--mql-md) {
-      font-size: calc(16 / var(--_container-w) * 100cqi);
+      font-size: calc(16 * var(--rem));
     }
 
     + * {
+      --_mt: 4;
+
+      margin-top: calc(var(--_mt) * var(--px));
+
       @media (--mql-md) {
-        margin-top: calc(2 / var(--_container-w) * 100cqi);
+        --_mt: 2;
       }
     }
   }
 
   .visual {
-    position: relative;
-  }
+    --_w: 320;
 
-  .vi {
+    position: relative;
+    grid-area: visual;
+    width: calc(var(--_w) * var(--px));
+    margin-top: calc(16 * var(--px));
+    margin-right: auto;
+    margin-left: auto;
+
     @media (--mql-md) {
-      width: calc(470 / var(--_container-w) * 100cqi);
+      --_w: 470;
+
+      margin-top: 0;
+      margin-right: 0;
+      margin-left: 0;
     }
   }
 
+  .vi {
+    width: 100%;
+  }
+
   .sns {
+    --_bottom: 12;
+    --_left: 10;
+    --_gap: 8;
+
     position: absolute;
+    bottom: calc(var(--_bottom) * var(--px));
+    left: calc(var(--_left) * var(--px));
     display: grid;
+    row-gap: calc(var(--_gap) * var(--px));
 
     @media (--mql-md) {
-      bottom: calc(100 / var(--_container-w) * 100cqi);
-      left: calc(18 / var(--_container-w) * 100cqi);
-      row-gap: calc(10 / var(--_container-w) * 100cqi);
+      --_bottom: 100;
+      --_left: 18;
+      --_gap: 10;
     }
   }
 
   .sns-link {
+    --_w: 32;
     --_clip-offset: calc(100% - 8 / 40 * 100%);
     --_clip-path: polygon(100% 0, 100% var(--_clip-offset), var(--_clip-offset) 100%, 0 100%, 0 0);
     --_border-offset: 2px;
@@ -238,12 +277,13 @@ const PageFooterData = {
     position: relative;
     display: grid;
     place-items: center;
+    width: calc(var(--_w) * var(--px));
     aspect-ratio: 1;
     filter: var(--_border);
     clip-path: var(--_clip-path);
 
     @media (--mql-md) {
-      width: calc(40 / var(--_container-w) * 100cqi);
+      --_w: 40;
     }
 
     &::before {
@@ -261,31 +301,27 @@ const PageFooterData = {
 
   .sns-logo {
     position: relative;
-
-    @media (--mql-md) {
-      width: calc(20 / var(--_container-w) * 100cqi);
-    }
+    width: 50%;
   }
 
   .deco {
-    position: absolute;
-    z-index: 1;
-    font-family: var(--font-zen-dots);
-    line-height: 1;
-    color: var(--color-pure-white);
-    white-space: nowrap;
-    opacity: 0.4;
-    transform: skewX(-16deg);
-    transform-origin: left top;
-    rotate: -8deg;
+    display: none;
 
     @media (--mql-md) {
-      --_base-w: 1280;
-      --_base-h: 720;
-
-      top: calc(282 / var(--_base-h) * 100%);
-      left: calc(24 / var(--_base-w) * 100%);
-      font-size: calc(120 / var(--_container-w) * 100cqi);
+      position: absolute;
+      top: calc(202 * var(--px));
+      left: calc(24 * var(--px));
+      z-index: 1;
+      display: block;
+      font-family: var(--font-zen-dots);
+      font-size: calc(140 * var(--rem));
+      line-height: 1;
+      color: var(--color-pure-white);
+      white-space: nowrap;
+      opacity: 0.4;
+      transform: skewX(-16deg);
+      transform-origin: left top;
+      rotate: -8deg;
     }
   }
 </style>

@@ -23,7 +23,7 @@ import siteNav from '@/data/siteNav';
         />
       </h1>
       <div class="vi">
-        <Image src={ImageVi} densities={[1, 2]} alt="" width={580} height={751} />
+        <Image src={ImageVi} alt="" />
       </div>
       <ul class="list">
         {
@@ -66,8 +66,8 @@ import siteNav from '@/data/siteNav';
   .p-home {
     position: relative;
     display: grid;
-    padding-top: calc(90 / var(--_container-w) * 100cqi);
-    padding-bottom: calc(16 / var(--_container-w) * 100cqi);
+    padding-top: calc(90 * var(--px));
+    padding-bottom: calc(16 * var(--px));
 
     @media (--mql-md) {
       padding-top: 0;
@@ -75,28 +75,25 @@ import siteNav from '@/data/siteNav';
     }
 
     :global(.calendar) {
-      --_top: 12;
-      --_left: 12;
-
       position: absolute;
-      top: calc(var(--_top) / var(--_container-w) * 100cqi);
-      left: calc(var(--_left) / var(--_container-w) * 100cqi);
+      top: calc(12 * var(--px));
+      left: calc(12 * var(--px));
 
       @media (--mql-md) {
-        --_top: 16;
-        --_left: 16;
+        top: calc(16 * var(--px));
+        left: calc(16 * var(--px));
       }
     }
 
     :global(.copyright) {
-      margin-top: calc(64 / var(--_container-w) * 100cqi);
-      margin-right: calc(16 / var(--_container-w) * 100cqi);
+      margin-top: calc(64 * var(--px));
+      margin-right: calc(16 * var(--px));
       margin-left: auto;
 
       @media (--mql-md) {
         position: absolute;
-        right: calc(24 / var(--_container-w) * 100cqi);
-        bottom: calc(24 / var(--_container-w) * 100cqi);
+        right: calc(24 * var(--px));
+        bottom: calc(24 * var(--px));
         margin-top: 0;
         margin-right: 0;
         margin-left: 0;
@@ -109,23 +106,20 @@ import siteNav from '@/data/siteNav';
 
     @media (--mql-md) {
       align-self: center;
-      height: calc(720 / var(--_container-w) * 100cqi);
+      height: calc(720 * var(--px));
     }
   }
 
   .title {
-    --_w: 300;
-
-    width: calc(var(--_w) / var(--_container-w) * 100cqi);
-    margin-right: calc(20 / var(--_container-w) * 100cqi);
+    width: calc(300 * var(--px));
+    margin-right: calc(20 * var(--px));
     margin-left: auto;
 
     @media (--mql-md) {
-      --_w: 320;
-
       position: absolute;
-      bottom: calc(24 / var(--_container-w) * 100cqi);
-      left: calc(24 / var(--_container-w) * 100cqi);
+      bottom: calc(24 * var(--px));
+      left: calc(24 * var(--px));
+      width: calc(320 * var(--px));
       margin-right: 0;
       margin-left: 0;
     }
@@ -138,17 +132,17 @@ import siteNav from '@/data/siteNav';
   .list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: calc(12 / var(--_container-w) * 100cqi);
-    margin-right: calc(12 / var(--_container-w) * 100cqi);
-    margin-left: calc(12 / var(--_container-w) * 100cqi);
+    gap: calc(12 * var(--px));
+    margin-right: calc(12 * var(--px));
+    margin-left: calc(12 * var(--px));
 
     @media (--mql-md) {
-      --_offset: (16 / var(--_container-w) * 100cqi);
+      --_offset: (16 * var(--px));
 
       position: absolute;
-      top: calc(196 / var(--_container-w) * 100cqi);
+      top: calc(196 * var(--px));
       left: 0;
-      gap: calc(16 / var(--_container-w) * 100cqi) 0;
+      gap: calc(16 * var(--px)) 0;
       width: calc(100% + var(--_offset) * 2);
       margin-right: 0;
       margin-left: 0;
@@ -157,6 +151,7 @@ import siteNav from '@/data/siteNav';
 
   .item {
     position: relative;
+    display: grid;
 
     @media (--mql-md) {
       rotate: -12deg;
@@ -170,13 +165,13 @@ import siteNav from '@/data/siteNav';
 
     &:nth-of-type(even) {
       @media (--mql-md) {
-        top: calc(22 / var(--_container-w) * 100cqi);
+        top: calc(22 * var(--px));
         translate: var(--_offset) 0;
       }
 
       .link {
         @media (--mql-md) {
-          padding-left: calc(302 / var(--_container-w) * 100cqi);
+          padding-left: calc(302 * var(--px));
         }
       }
     }
@@ -185,15 +180,15 @@ import siteNav from '@/data/siteNav';
   .link {
     display: grid;
     grid-template-columns: max-content 1fr;
-    column-gap: calc(10 / var(--_container-w) * 100cqi);
+    column-gap: calc(10 * var(--px));
     align-items: center;
-    padding: calc(12 / var(--_container-w) * 100cqi) calc(16 / var(--_container-w) * 100cqi);
+    padding: calc(12 * var(--px)) calc(16 * var(--px));
     color: var(--color-pure-white);
     background-color: var(--color-black);
 
     @media (--mql-md) {
-      column-gap: calc(16 / var(--_container-w) * 100cqi);
-      padding: calc(8 / var(--_container-w) * 100cqi) calc(78 / var(--_container-w) * 100cqi);
+      column-gap: calc(16 * var(--px));
+      padding: calc(8 * var(--px)) calc(78 * var(--px));
     }
 
     @media (any-hover: hover) {
@@ -205,22 +200,17 @@ import siteNav from '@/data/siteNav';
   }
 
   .link-icon {
-    --_w: 20;
-
-    width: calc(var(--_w) / var(--_container-w) * 100cqi);
+    width: calc(20 * var(--px));
 
     @media (--mql-md) {
-      --_w: 36;
-
+      width: calc(36 * var(--px));
       transform: skewX(-12deg);
     }
   }
 
   .link-text {
-    --_gap: 6;
-
     display: grid;
-    row-gap: calc(var(--_gap) / var(--_container-w) * 100cqi);
+    row-gap: calc(6 * var(--px));
 
     @media (--mql-md) {
       transform: skewX(-12deg);
@@ -228,51 +218,44 @@ import siteNav from '@/data/siteNav';
   }
 
   .link-ja {
-    --_fz: 16;
-
     font-family: var(--font-dela-gothic);
-    font-size: calc(var(--_fz) / var(--_container-w) * 100cqi);
+    font-size: calc(16 * var(--rem));
     line-height: 1;
     letter-spacing: 0.04em;
 
     @media (--mql-md) {
-      --_fz: 30;
+      font-size: calc(30 * var(--rem));
     }
   }
 
   .link-en {
-    --_fz: 10;
-
     font-family: var(--font-zen-dots);
-    font-size: calc(var(--_fz) / var(--_container-w) * 100cqi);
+    font-size: calc(10 * var(--rem));
     line-height: 1;
     letter-spacing: 0.04em;
 
     @media (--mql-md) {
-      --_fz: 14;
+      font-size: calc(14 * var(--rem));
     }
   }
 
   .vi {
-    --_w: 360;
-
     position: relative;
     z-index: 1;
-    width: calc(var(--_w) / var(--_container-w) * 100cqi);
-    margin-top: calc(16 / var(--_container-w) * 100cqi);
+    width: calc(360 * var(--px));
+    margin-top: calc(16 * var(--px));
     margin-right: auto;
     margin-left: auto;
 
     @media (--mql-md) {
-      --_w: 580;
-
-      right: calc(16 / var(--_container-w) * 100cqi);
+      right: calc(16 * var(--px));
+      width: calc(580 * var(--px));
       margin-top: 0;
     }
 
     img {
       width: 100%;
-      filter: drop-shadow(calc(-20 / var(--_container-w) * 100cqi) 0 0 rgb(255 179 237 / 30%));
+      filter: drop-shadow(calc(-20 * var(--px)) 0 0 rgb(255 179 237 / 30%));
     }
   }
 </style>

@@ -31,20 +31,18 @@ const {
   @import '@/styles/_mql.css';
 
   .c-menu-toggle {
-    --_container-w: var(--screens-xs);
     --_w: 60;
     --_h: 42;
 
     display: grid;
     place-items: center;
-    width: calc(var(--_w) / var(--_container-w) * 100cqi);
+    width: calc(var(--_w) * var(--px));
     aspect-ratio: 10 / 7;
     color: var(--_toggle-color, var(--color-pure-white));
     background-color: var(--_toggle-bg, var(--color-black));
     clip-path: polygon(0 0, 100% 0, 100% 100%, calc(40 / var(--_w) * 100%) 100%, 0 calc(20 / var(--_h) * 100%));
 
     @media (--mql-md) {
-      --_container-w: var(--screens-xl);
       --_w: 80;
       --_h: 56;
 
@@ -54,7 +52,7 @@ const {
 
     &[aria-expanded='true'] {
       .icon {
-        /* margin-left: calc(8 / var(--_container-w) * 100cqi); */
+        /* margin-left: calc(8 * var(--px)); */
         --_left: 0;
 
         .line {
@@ -68,7 +66,7 @@ const {
 
         &::before,
         &::after {
-          /* width: calc(38 / var(--_container-w) * 100cqi);
+          /* width: calc(38 * var(--px));
           translate: 0 0; */
           opacity: 0;
         }
@@ -82,8 +80,8 @@ const {
 
     display: grid;
     grid-template-areas: 'line';
-    margin-top: calc(var(--_top) / var(--_container-w) * 100cqi);
-    margin-left: calc(var(--_left) / var(--_container-w) * 100cqi);
+    margin-top: calc(var(--_top) * var(--px));
+    margin-left: calc(var(--_left) * var(--px));
 
     @media (--mql-md) {
       --_top: -6;
@@ -101,12 +99,12 @@ const {
       --_h: 2;
 
       grid-area: line;
-      width: calc(var(--_w) / var(--_container-w) * 100cqi);
-      height: calc(var(--_h) / var(--_container-w) * 100cqi);
+      width: calc(var(--_w) * var(--px));
+      height: calc(var(--_h) * var(--px));
       margin-left: auto;
       background-color: currentColor;
       border-radius: var(--infinity);
-      translate: 0 calc(var(--_y, 0) / var(--_container-w) * 100cqi);
+      translate: 0 calc(var(--_y, 0) * var(--px));
 
       @media (--mql-md) {
         --_h: 3;

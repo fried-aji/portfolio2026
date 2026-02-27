@@ -61,7 +61,7 @@ const PageFooterData = {
         <div class="item">
           <dt class="title">アニメーション</dt>
           <dd class="info">
-            <p class="desc">ページ遷移やマウスオーバーなどの演出の有無を設定します。</p>
+            <p class="desc">ページ遷移やマウスオーバーなどの<br class="u-md:hidden" />演出の有無を設定します。</p>
             <ul class="input-list">
               <li class="radio">
                 <ul class="radio-list">
@@ -201,11 +201,12 @@ const PageFooterData = {
   .content {
     display: grid;
     grid-template-areas: 'item';
+    width: calc(368 * var(--px));
+    margin: calc(100 * var(--px)) 0 calc(80 * var(--px));
 
     @media (--mql-md) {
-      width: calc(1100 / var(--_container-w) * 100cqi);
-      margin: calc(74 / var(--_container-w) * 100cqi) calc(64 / var(--_container-w) * 100cqi)
-        calc(44 / var(--_container-w) * 100cqi);
+      width: calc(1100 * var(--px));
+      margin: calc(74 * var(--px)) calc(64 * var(--px)) calc(44 * var(--px));
     }
   }
 
@@ -214,103 +215,92 @@ const PageFooterData = {
     z-index: 1;
     display: grid;
     grid-area: item;
+    gap: calc(40 * var(--px));
+    height: fit-content;
+    padding: calc(32 * var(--px)) calc(20 * var(--px)) calc(56 * var(--px));
 
     @media (--mql-md) {
       grid-template-columns: repeat(2, 1fr);
-      gap: calc(28 / var(--_container-w) * 100cqi) calc(80 / var(--_container-w) * 100cqi);
-      padding: calc(48 / var(--_container-w) * 100cqi) calc(72 / var(--_container-w) * 100cqi);
+      gap: calc(28 * var(--px)) calc(80 * var(--px));
+      padding: calc(48 * var(--px)) calc(72 * var(--px));
     }
   }
 
   .title {
     font-family: var(--font-dela-gothic);
+    font-size: calc(20 * var(--rem));
 
     @media (--mql-md) {
-      font-size: calc(24 / var(--_container-w) * 100cqi);
+      font-size: calc(24 * var(--rem));
     }
   }
 
   .info {
+    margin-top: calc(4 * var(--px));
+
     @media (--mql-md) {
-      margin-top: calc(4 / var(--_container-w) * 100cqi);
+      margin-top: calc(4 * var(--px));
     }
   }
 
   .desc {
+    font-size: calc(12 * var(--rem));
     font-weight: 500;
-
-    @media (--mql-md) {
-      font-size: calc(12 / var(--_container-w) * 100cqi);
-    }
-  }
-
-  .radio-label {
-    font-weight: 500;
-
-    @media (--mql-md) {
-      font-size: calc(14 / var(--_container-w) * 100cqi);
-    }
   }
 
   .input-list {
     display: grid;
+    row-gap: calc(14 * var(--px));
+    margin-top: calc(16 * var(--px));
 
     @media (--mql-md) {
-      row-gap: calc(16 / var(--_container-w) * 100cqi);
-      margin-top: calc(18 / var(--_container-w) * 100cqi);
+      row-gap: calc(16 * var(--px));
+      margin-top: calc(18 * var(--px));
     }
   }
 
   .input-reset {
+    padding: calc(4 * var(--px)) calc(16 * var(--px)) calc(3 * var(--px));
+    font-size: calc(10 * var(--rem));
     font-weight: 500;
     background-color: var(--color-pure-white);
     border-radius: var(--infinity);
 
     @media (--mql-md) {
-      padding: calc(6 / var(--_container-w) * 100cqi) calc(16 / var(--_container-w) * 100cqi)
-        calc(5 / var(--_container-w) * 100cqi);
-      font-size: calc(10 / var(--_container-w) * 100cqi);
+      padding: calc(6 * var(--px)) calc(16 * var(--px)) calc(5 * var(--px));
     }
   }
 
   .radio {
     display: flex;
+    column-gap: calc(16 * var(--px));
     align-items: center;
 
     @media (--mql-md) {
-      column-gap: calc(24 / var(--_container-w) * 100cqi);
+      column-gap: calc(24 * var(--px));
     }
   }
 
   .radio-list {
     display: flex;
     flex-wrap: wrap;
+    gap: calc(20 * var(--px));
     align-items: center;
-
-    @media (--mql-md) {
-      gap: calc(20 / var(--_container-w) * 100cqi);
-    }
   }
 
   .radio-item {
     display: grid;
     grid-template-columns: max-content 1fr;
+    column-gap: calc(8 * var(--px));
     align-items: center;
-
-    @media (--mql-md) {
-      column-gap: calc(8 / var(--_container-w) * 100cqi);
-    }
   }
 
   .radio-btn {
     --_border-color: rgb(168 168 168 / 30%);
 
     position: relative;
+    width: calc(20 * var(--px));
     aspect-ratio: 1;
-
-    @media (--mql-md) {
-      width: calc(20 / var(--_container-w) * 100cqi);
-    }
 
     &:checked {
       --_border-color: var(--color-black);
@@ -340,77 +330,83 @@ const PageFooterData = {
     }
   }
 
+  .radio-label {
+    font-size: calc(14 * var(--rem));
+    font-weight: 500;
+  }
+
   .radio-name {
     font-family: var(--font-dela-gothic);
+    font-size: calc(14 * var(--rem));
 
     @media (--mql-md) {
-      font-size: calc(15 / var(--_container-w) * 100cqi);
+      font-size: calc(15 * var(--rem));
     }
   }
 
   .progress {
     display: flex;
+    column-gap: calc(8 * var(--px));
     align-items: center;
 
     @media (--mql-md) {
-      column-gap: calc(10 / var(--_container-w) * 100cqi);
+      column-gap: calc(10 * var(--px));
     }
   }
 
   .progress-label {
     font-family: var(--font-dela-gothic);
+    font-size: calc(14 * var(--rem));
 
     @media (--mql-md) {
-      font-size: calc(15 / var(--_container-w) * 100cqi);
+      font-size: calc(15 * var(--rem));
     }
   }
 
   .progress-bar {
+    width: calc(200 * var(--px));
+    aspect-ratio: 200 / 22;
+    margin-left: calc(2 * var(--px));
     border: 1px solid var(--color-pure-white);
     border-radius: var(--infinity);
 
     @media (--mql-md) {
-      width: calc(280 / var(--_container-w) * 100cqi);
+      width: calc(280 * var(--px));
       aspect-ratio: 280 / 26;
-      margin-left: calc(2 / var(--_container-w) * 100cqi);
     }
 
-    &::-webkit-slider-thumb {
-      width: calc(24 / var(--_container-w) * 100cqi);
+    &::-webkit-slider-thumb,
+    &::-moz-range-thumb {
+      width: calc(20 * var(--px));
       aspect-ratio: 1;
       background-color: var(--color-pure-white);
       border-radius: var(--infinity);
+
+      @media (--mql-md) {
+        width: calc(24 * var(--px));
+      }
     }
   }
 
   .checkbox {
     display: grid;
     grid-template-columns: max-content 1fr;
+    column-gap: calc(8 * var(--px));
     align-items: center;
-
-    @media (--mql-md) {
-      column-gap: calc(8 / var(--_container-w) * 100cqi);
-    }
   }
 
   .checkbox-btn {
     --_border-color: rgb(168 168 168 / 30%);
 
+    width: calc(16 * var(--px));
     aspect-ratio: 1;
     background-color: var(--color-pure-white);
     border: 1px solid var(--_border-color);
-
-    @media (--mql-md) {
-      width: calc(18 / var(--_container-w) * 100cqi);
-    }
   }
 
   .checkbox-label {
+    font-size: calc(12 * var(--rem));
     font-weight: 500;
-
-    @media (--mql-md) {
-      font-size: calc(14 / var(--_container-w) * 100cqi);
-    }
   }
 
   .bg {
@@ -418,7 +414,7 @@ const PageFooterData = {
     pointer-events: none;
 
     @media (--mql-md) {
-      width: calc(1100 / var(--_container-w) * 100cqi);
+      width: calc(1100 * var(--px));
     }
 
     img {

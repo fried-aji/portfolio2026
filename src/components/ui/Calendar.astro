@@ -34,16 +34,10 @@ const {
   @import '@/styles/_mql.css';
 
   .c-calendar {
-    --_container-w: var(--screens-xs);
-
     display: grid;
-    row-gap: calc(4 / var(--_container-w) * 100cqi);
+    row-gap: calc(4 * var(--px));
     font-family: var(--font-zen-dots);
     letter-spacing: 0.04em;
-
-    @media (--mql-md) {
-      --_container-w: var(--screens-xl);
-    }
   }
 
   .upper {
@@ -52,29 +46,25 @@ const {
     line-height: 1;
 
     @media (--mql-md) {
-      column-gap: calc(4 / var(--_container-w) * 100cqi);
+      column-gap: calc(4 * var(--px));
     }
   }
 
   .meridiem,
   .sec,
   .lower {
-    --_fz: 10;
-
-    font-size: calc(var(--_fz) / var(--_container-w) * 100cqi);
+    font-size: calc(10 * var(--rem));
 
     @media (--mql-md) {
-      --_fz: 12;
+      font-size: calc(12 * var(--rem));
     }
   }
 
   .hour {
-    --_fz: 16;
-
-    font-size: calc(var(--_fz) / var(--_container-w) * 100cqi);
+    font-size: calc(16 * var(--rem));
 
     @media (--mql-md) {
-      --_fz: 20;
+      font-size: calc(20 * var(--rem));
     }
   }
 </style>

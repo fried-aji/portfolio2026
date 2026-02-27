@@ -36,29 +36,41 @@ const TagName = tag;
   @import '@/styles/_mql.css';
 
   .c-pagehdg {
+    --_w: 330;
+
     position: fixed;
     top: 0;
     left: 0;
     z-index: calc(var(--z-header) - 1);
+    width: calc(var(--_w) * var(--px));
+    padding: calc(12 * var(--px)) calc(12 * var(--px)) calc(32 * var(--px));
     color: var(--color-pure-white);
     letter-spacing: 0.04em;
     background-color: var(--color-black);
     clip-path: polygon(0 0, 0% 100%, 100% 0);
 
     @media (--mql-md) {
-      width: calc(664 / var(--screens-xl) * 100cqi);
+      --_w: 664;
+
       aspect-ratio: 664 / 74;
-      padding: calc(14 / var(--screens-xl) * 100cqi) calc(32 / var(--screens-xl) * 100cqi);
+      padding: calc(14 * var(--px)) calc(32 * var(--px));
     }
 
     .text {
+      position: relative;
+      top: calc(14 * var(--px));
       display: flex;
+      column-gap: calc(8 * var(--px));
       align-items: flex-end;
       width: max-content;
       line-height: 1;
+      transform: skewX(-10deg);
+      transform-origin: left top;
+      rotate: -10deg;
 
       @media (--mql-md) {
-        column-gap: calc(12 / var(--screens-xl) * 100cqi);
+        top: calc(12 * var(--px));
+        column-gap: calc(12 * var(--px));
         transform: skewX(-6deg);
         rotate: -6deg;
       }
@@ -66,17 +78,19 @@ const TagName = tag;
 
     .ja {
       font-family: var(--font-dela-gothic);
+      font-size: calc(20 * var(--rem));
 
       @media (--mql-md) {
-        font-size: calc(28 / var(--screens-xl) * 100cqi);
+        font-size: calc(28 * var(--rem));
       }
     }
 
     .en {
       font-family: var(--font-zen-dots);
+      font-size: calc(10 * var(--rem));
 
       @media (--mql-md) {
-        font-size: calc(12 / var(--screens-xl) * 100cqi);
+        font-size: calc(12 * var(--rem));
       }
     }
   }

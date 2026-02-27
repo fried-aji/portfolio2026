@@ -14,48 +14,79 @@ const {
 </div>
 
 <style>
-  .c-deco {
-    --_base-w: 1280;
-    --_base-h: 720;
+  @import '@/styles/_mql.css';
 
-    position: fixed;
+  .c-deco {
+    position: absolute;
     inset: 0;
     z-index: -1;
     width: 100%;
-    height: 100%;
+    height: calc(520 * var(--px));
     pointer-events: none;
-    background-color: rgb(255 255 255 / 40%);
-    backdrop-filter: blur(2px);
+
+    @media (--mql-md) {
+      margin: auto;
+    }
 
     &::before,
     &::after {
       position: absolute;
+      height: calc(720 * var(--px));
       content: '';
     }
 
     &::before {
-      top: calc(69 / var(--_base-h) * 100%);
+      --_w: 377;
+      --_h: 439;
+
+      top: calc(95 * var(--px));
       left: 0;
-      width: calc(864 / var(--_base-w) * 100%);
-      height: calc(630 / var(--_base-h) * 100%);
+      width: calc(var(--_w) * var(--px));
+      height: calc(var(--_h) * var(--px));
       background-color: var(--color-neon-blue);
       opacity: 0.4;
       clip-path: polygon(
-        0 calc(132 / 630 * 100%),
+        0 calc(84 / var(--_h) * 100%),
         100% 0%,
-        calc(580 / 864 * 100%) calc(100% - 122 / 630 * 100%),
+        calc(244 / var(--_w) * 100%) calc(357 / var(--_h) * 100%),
         0% 100%
       );
+
+      @media (--mql-md) {
+        --_w: 869;
+        --_h: 625;
+
+        /* top: calc(69 * var(--px)); */
+        top: calc(-12 * var(--px));
+        clip-path: polygon(
+          0 calc(132 / var(--_h) * 100%),
+          100% 0%,
+          calc(580 / var(--_w) * 100%) calc(508 / var(--_h) * 100%),
+          0% 100%
+        );
+      }
     }
 
     &::after {
-      top: 0;
+      --_w: 156;
+      --_h: 520;
+
+      top: calc(31 * var(--px));
       right: 0;
-      width: calc(700 / var(--_base-w) * 100%);
-      height: calc(1262 / var(--_base-h) * 100%);
+      width: calc(var(--_w) * var(--px));
+      height: calc(var(--_h) * var(--px));
       background-color: var(--color-pastel-pink);
       opacity: 0.2;
-      clip-path: polygon(calc(323 / 700 * 100%) 0, 100% 0%, 100% 100%, 0 calc(577 / 1262 * 100%));
+      clip-path: polygon(100% 0, 0 calc(420 / var(--_h) * 100%), 100% 100%);
+
+      @media (--mql-md) {
+        --_w: 700;
+        --_h: 1915;
+
+        /* top: calc(-653 * var(--px)); */
+        top: calc(-734 * var(--px));
+        clip-path: polygon(100% 0, 0 calc(1230 / var(--_h) * 100%), 100% 100%);
+      }
     }
   }
 </style>

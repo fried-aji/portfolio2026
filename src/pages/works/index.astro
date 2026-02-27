@@ -40,7 +40,7 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
 ---
 
 <Layout title={metaData.title} description={metaData.description}>
-  <main class="p-works">
+  <main class="p-works u-page-overlay">
     <PageHdg {...pageHdgData} />
     <div x-data="tabMenu" class="tab-menu">
       <div role="tablist" class="tab-list">
@@ -114,6 +114,7 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
   @import '@/styles/_mql.css';
 
   .p-works {
+    position: relative;
     display: grid;
     align-items: center;
   }
@@ -123,10 +124,9 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
     display: grid;
 
     @media (--mql-md) {
-      grid-template-columns: calc(384 / var(--_container-w) * 100cqi) calc(680 / var(--_container-w) * 100cqi);
-      gap: calc(42 / var(--_container-w) * 100cqi) calc(88 / var(--_container-w) * 100cqi);
-      margin: calc(120 / var(--_container-w) * 100cqi) calc(64 / var(--_container-w) * 100cqi)
-        calc(64 / var(--_container-w) * 100cqi);
+      grid-template-columns: calc(384 * var(--px)) calc(680 * var(--px));
+      gap: calc(42 * var(--px)) calc(88 * var(--px));
+      padding: calc(120 * var(--px)) calc(64 * var(--px)) calc(64 * var(--px));
     }
   }
 
@@ -135,8 +135,8 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
 
     @media (--mql-md) {
       grid-area: 1 / 1 / 2 / 2;
-      grid-template-columns: repeat(3, calc(120 / var(--_container-w) * 100cqi));
-      gap: calc(12 / var(--_container-w) * 100cqi);
+      grid-template-columns: repeat(3, calc(120 * var(--px)));
+      gap: calc(12 * var(--px));
     }
   }
 
@@ -157,13 +157,13 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
   .thumb {
     position: absolute;
     top: 0;
-    right: 0;
     bottom: 0;
     display: grid;
     align-items: center;
 
     @media (--mql-md) {
-      width: calc(680 / var(--_container-w) * 100cqi);
+      right: calc(64 * var(--px));
+      width: calc(680 * var(--px));
     }
   }
 
@@ -181,7 +181,7 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
     line-height: 1;
 
     @media (--mql-md) {
-      font-size: calc(12 / var(--_container-w) * 100cqi);
+      font-size: calc(12 * var(--rem));
     }
   }
 
@@ -189,7 +189,7 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
     font-family: var(--font-dela-gothic);
 
     @media (--mql-md) {
-      font-size: calc(36 / var(--_container-w) * 100cqi);
+      font-size: calc(36 * var(--rem));
     }
   }
 
@@ -197,24 +197,24 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
     font-weight: 500;
 
     @media (--mql-md) {
-      margin-top: calc(8 / var(--_container-w) * 100cqi);
-      font-size: calc(12 / var(--_container-w) * 100cqi);
+      margin-top: calc(8 * var(--px));
+      font-size: calc(12 * var(--rem));
     }
   }
 
   .detail {
-    --_line-bottom: calc(4 / var(--_container-w) * 100cqi);
+    --_line-bottom: calc(4 * var(--px));
 
     width: fit-content;
     font-family: var(--font-zen-dots);
     background-image: linear-gradient(var(--color-pure-white) 0 0);
     background-repeat: no-repeat;
     background-position: 0 calc(100% - var(--_line-bottom));
-    background-size: 100% calc(4 / var(--_container-w) * 100cqi);
+    background-size: 100% calc(4 * var(--px));
 
     @media (--mql-md) {
-      margin-top: calc(24 / var(--_container-w) * 100cqi);
-      font-size: calc(14 / var(--_container-w) * 100cqi);
+      margin-top: calc(24 * var(--px));
+      font-size: calc(14 * var(--rem));
     }
   }
 
@@ -229,12 +229,9 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
     opacity: 0.4;
 
     @media (--mql-md) {
-      --_base-w: 1280;
-      --_base-h: 720;
-
-      top: calc(308 / var(--_base-h) * 100%);
-      left: calc(24 / var(--_base-w) * 100%);
-      font-size: calc(120 / var(--_container-w) * 100cqi);
+      top: calc(228 * var(--px));
+      left: calc(24 * var(--px));
+      font-size: calc(140 * var(--rem));
     }
   }
 

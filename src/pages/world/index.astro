@@ -35,7 +35,7 @@ const PageFooterData = {
 ---
 
 <Layout {...metaData}>
-  <main class="p-world">
+  <main class="p-world u-page-overlay">
     <PageHdg {...pageHdgData} />
     <div class="outer">
       <section class="section">
@@ -43,7 +43,7 @@ const PageFooterData = {
         <p class="lead">最適化と感情の両立</p>
         <p class="desc">
           クリエイティブに取り組む上で大切にしている<br />「最適化」と「感情」をテーマに、<br
-          />機械的な精密性と人間らしい温かみを両立させるUI設計に努めました。
+          />機械的な精密性と人間らしい温かみを両立させる<br class="u-md:hidden" />UI設計に努めました。
         </p>
       </section>
       <section class="section">
@@ -73,7 +73,7 @@ const PageFooterData = {
           />「理想に相対する不完全な存在」という設定をもとに、<br />サイトに命を吹き込みました。
         </p>
         <div class="character-img">
-          <Image src={ImageVi} densities={[1, 2]} alt="" width={150} height={194} />
+          <Image src={ImageVi} densities={[1, 2]} alt="" />
         </div>
       </section>
       <section class="section">
@@ -106,30 +106,20 @@ const PageFooterData = {
 <style>
   @import '@/styles/_mql.css';
 
-  .p-world {
-    position: relative;
-
-    &::before {
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      content: '';
-      background-color: rgb(255 255 255 / 40%);
-      backdrop-filter: blur(2px);
-    }
-  }
+  /* .p-world {
+  
+  } */
 
   .outer {
+    margin: calc(290 / 862 * 100cqb) calc(24 * var(--px)) calc(90 / 862 * 100cqb);
+
     @media (--mql-md) {
-      margin: calc(274 / 720 * 100cqb) calc(120 / var(--_container-w) * 100cqi) 0;
+      margin: calc(234 / 720 * 100cqb) calc(120 * var(--px)) calc(64 / 720 * 100cqb);
     }
   }
 
   .section {
-    width: max-content;
+    width: fit-content;
     min-height: 100lvh;
     margin-right: auto;
     margin-left: auto;
@@ -142,83 +132,109 @@ const PageFooterData = {
 
   .title {
     font-family: var(--font-zen-dots);
+    font-size: calc(16 * var(--rem));
     line-height: 1;
 
     @media (--mql-md) {
-      font-size: calc(20 / var(--_container-w) * 100cqi);
+      font-size: calc(20 * var(--rem));
     }
 
     + .lead {
+      margin-top: calc(20 * var(--px));
+
       @media (--mql-md) {
-        margin-top: calc(24 / var(--_container-w) * 100cqi);
+        margin-top: calc(24 * var(--px));
       }
     }
 
     + .desc {
+      margin-top: calc(18 * var(--px));
+
       @media (--mql-md) {
-        margin-top: calc(20 / var(--_container-w) * 100cqi);
+        margin-top: calc(20 * var(--px));
       }
     }
   }
 
   .lead {
     font-family: var(--font-dela-gothic);
+    font-size: calc(28 * var(--rem));
     line-height: 1;
 
     @media (--mql-md) {
-      font-size: calc(32 / var(--_container-w) * 100cqi);
+      font-size: calc(32 * var(--rem));
     }
 
     + .desc {
+      margin-top: calc(32 * var(--px));
+
       @media (--mql-md) {
-        margin-top: calc(36 / var(--_container-w) * 100cqi);
+        margin-top: calc(36 * var(--px));
       }
     }
   }
 
   .desc {
+    font-size: calc(12 * var(--rem));
     font-weight: 500;
 
     @media (--mql-md) {
-      font-size: calc(14 / var(--_container-w) * 100cqi);
+      font-size: calc(14 * var(--rem));
     }
   }
 
   .design-list {
     display: flex;
     flex-wrap: wrap;
+    gap: calc(12 * var(--px));
     justify-content: center;
+    width: calc(304 * var(--px));
+    margin-top: calc(36 * var(--px));
 
     @media (--mql-md) {
-      gap: calc(20 / var(--_container-w) * 100cqi);
-      width: calc(580 / var(--_container-w) * 100cqi);
-      margin-top: calc(42 / var(--_container-w) * 100cqi);
+      gap: calc(20 * var(--px));
+      width: calc(580 * var(--px));
+      margin-top: calc(42 * var(--px));
     }
   }
 
   .design-item {
     display: grid;
     place-items: center;
+    height: calc(50 * var(--px));
     background-color: var(--color-pure-white);
     border: 1px solid rgb(168 168 168 / 30%);
+    border-radius: calc(4 * var(--px));
 
     @media (--mql-md) {
-      height: calc(80 / var(--_container-w) * 100cqi);
-      border-radius: calc(4 / var(--_container-w) * 100cqi);
+      height: calc(80 * var(--px));
     }
 
     &[data-type='logo'] {
+      width: calc(146 * var(--px));
+
       @media (--mql-md) {
-        width: calc(320 / var(--_container-w) * 100cqi);
-        margin-right: calc(130 / var(--_container-w) * 100cqi);
-        margin-left: calc(130 / var(--_container-w) * 100cqi);
+        width: calc(320 * var(--px));
+        margin-right: calc(130 * var(--px));
+        margin-left: calc(130 * var(--px));
+      }
+
+      svg {
+        width: calc(100 * var(--px));
+
+        @media (--mql-md) {
+          width: calc(180 * var(--px));
+        }
       }
     }
 
     &[data-type='font'] {
+      width: calc(146 * var(--px));
+      font-size: calc(12 * var(--rem));
+
       @media (--mql-md) {
-        width: calc(180 / var(--_container-w) * 100cqi);
-        font-size: calc(16 / var(--_container-w) * 100cqi);
+        width: calc(180 * var(--px));
+        font-size: calc(16 * var(--rem));
       }
     }
 
@@ -265,51 +281,56 @@ const PageFooterData = {
   .character-img {
     display: grid;
     place-items: flex-end center;
+    width: calc(200 * var(--px));
     aspect-ratio: 1;
+    margin-top: calc(36 * var(--px));
     margin-right: auto;
     margin-left: auto;
     background-color: var(--color-pure-white);
     border: 1px solid rgb(168 168 168 / 30%);
+    border-radius: calc(4 * var(--px));
 
     @media (--mql-md) {
-      width: calc(200 / var(--_container-w) * 100cqi);
-      margin-top: calc(42 / var(--_container-w) * 100cqi);
-      border-radius: calc(4 / var(--_container-w) * 100cqi);
+      margin-top: calc(42 * var(--px));
     }
 
     img {
-      @media (--mql-md) {
-        width: calc(150 / var(--_container-w) * 100cqi);
-      }
+      width: calc(150 * var(--px));
     }
   }
 
   .dev-list {
     display: flex;
     flex-wrap: wrap;
+    gap: calc(12 * var(--px));
     justify-content: center;
+    margin-top: calc(36 * var(--px));
 
     @media (--mql-md) {
-      gap: calc(32 / var(--_container-w) * 100cqi);
-      margin-top: calc(42 / var(--_container-w) * 100cqi);
+      gap: calc(32 * var(--px));
+      margin-top: calc(42 * var(--px));
     }
   }
 
   .dev-item {
     display: grid;
     place-items: center;
+    width: calc(146 * var(--px));
+    aspect-ratio: 73 / 25;
     background-color: var(--color-pure-white);
     border: 1px solid rgb(168 168 168 / 30%);
+    border-radius: calc(4 * var(--px));
 
     @media (--mql-md) {
-      width: calc(180 / var(--_container-w) * 100cqi);
+      width: calc(180 * var(--px));
       aspect-ratio: 9 / 4;
-      border-radius: calc(4 / var(--_container-w) * 100cqi);
     }
 
     img {
+      width: calc(70 * var(--px));
+
       @media (--mql-md) {
-        width: calc(110 / var(--_container-w) * 100cqi);
+        width: calc(110 * var(--px));
       }
     }
   }
@@ -317,17 +338,14 @@ const PageFooterData = {
   .contact {
     display: block;
     width: fit-content;
+    margin-top: calc(28 * var(--px));
     margin-right: auto;
     margin-left: auto;
     font-family: var(--font-dela-gothic);
+    font-size: calc(16 * var(--rem));
     background-image: linear-gradient(var(--color-neon-blue) 0 0);
     background-repeat: no-repeat;
     background-position: left bottom;
-    background-size: 100% calc(4 / var(--_container-w) * 100cqi);
-
-    @media (--mql-md) {
-      margin-top: calc(28 / var(--_container-w) * 100cqi);
-      font-size: calc(16 / var(--_container-w) * 100cqi);
-    }
+    background-size: 100% calc(4 * var(--px));
   }
 </style>
