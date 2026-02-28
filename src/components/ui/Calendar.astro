@@ -11,7 +11,8 @@ const {
 ---
 
 <time
-  datetime="2026-02-20 12:00:00"
+  x-data="calendar"
+  :datetime="datetime"
   class:list={[
     //
     'c-calendar',
@@ -19,14 +20,14 @@ const {
   ]}
 >
   <span class="upper">
-    <span class="meridiem">AM</span>
+    <span class="meridiem" x-text="meridiem">AM</span>
     <span class="time">
-      <span class="hour">12:00</span><span class="sec">.00</span>
+      <span class="hour" x-text="hour">12:00</span><span class="sec" x-text="sec">.00</span>
     </span>
   </span>
   <span class="lower">
-    <span class="date">02.20</span>
-    <span class="week">Fri</span>
+    <span class="date" x-text="date"></span>
+    <span class="week" x-text="week"></span>
   </span>
 </time>
 
@@ -42,11 +43,12 @@ const {
 
   .upper {
     display: flex;
+    column-gap: calc(4 * var(--px));
     align-items: flex-end;
     line-height: 1;
 
     @media (--mql-md) {
-      column-gap: calc(4 * var(--px));
+      column-gap: calc(6 * var(--px));
     }
   }
 
@@ -66,5 +68,9 @@ const {
     @media (--mql-md) {
       font-size: calc(20 * var(--rem));
     }
+  }
+
+  .week {
+    text-transform: uppercase;
   }
 </style>

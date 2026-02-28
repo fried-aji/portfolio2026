@@ -6,7 +6,12 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint:html": "markuplint 'src/**/*.{html,astro}'",
+    "lint:es": "eslint 'src/**/*.{js,ts,jsx,tsx,astro}'",
+    "lint:style": "stylelint 'src/**/*.{css,astro}'",
+    "lint:check": "pnpm run lint:html && pnpm run lint:style && pnpm run lint:es",
+    "lint:fix": "stylelint --fix 'src/**/*.{css,astro}' && eslint --fix 'src/**/*.{js,ts,jsx,tsx,astro}'"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
@@ -20,6 +25,7 @@
     "astro-icon": "^1.1.5",
     "embla-carousel": "^8.6.0",
     "gsap": "^3.14.2",
+    "lenis": "^1.3.17",
     "swup": "^4.8.2"
   },
   "devDependencies": {

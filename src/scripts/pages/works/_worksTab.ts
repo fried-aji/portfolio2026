@@ -33,7 +33,7 @@ Alpine.data('worksTab', (id: string) => {
       // 視差効果
       this.$watch('$store.mql.isReducedMotion', () => {
         this._destroyCarousel();
-        this.$nextTick(() => {
+        requestAnimationFrame(() => {
           this._initCarousel();
         });
       });

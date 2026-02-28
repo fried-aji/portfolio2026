@@ -7,3 +7,53 @@
     rotate: 360deg;
   }
 }
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes rotation-y {
+  0% {
+    rotate: y 0deg;
+  }
+
+  25% {
+    rotate: y calc(var(--_deg, 30deg) * -1);
+  }
+
+  50% {
+    rotate: y 0deg;
+  }
+
+  75% {
+    rotate: y var(--_deg, 30deg);
+  }
+
+  100% {
+    rotate: y 0deg;
+  }
+}
+
+@keyframes scale {
+  0% {
+    scale: 1 1;
+  }
+
+  50% {
+    scale: 1.05 1.05;
+  }
+
+  100% {
+    scale: 1;
+  }
+}

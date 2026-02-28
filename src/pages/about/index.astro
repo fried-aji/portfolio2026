@@ -173,9 +173,9 @@ const PageFooterData = {
     font-family: var(--font-dela-gothic);
     font-size: calc(14 * var(--rem));
     line-height: 1;
-    color: var(--color-pure-white);
+    color: var(--color-main);
     text-align: center;
-    background-color: var(--color-pure-black);
+    background-color: var(--color-sub);
     clip-path: polygon(var(--_clip) 0%, 100% 0%, calc(100% - var(--_clip)) 100%, 0% 100%);
 
     @media (--mql-md) {
@@ -268,6 +268,7 @@ const PageFooterData = {
     --_w: 32;
     --_clip-offset: calc(100% - 8 / 40 * 100%);
     --_clip-path: polygon(100% 0, 100% var(--_clip-offset), var(--_clip-offset) 100%, 0 100%, 0 0);
+    --_bg-color: var(--color-pure-white);
     --_border-offset: 2px;
     --_border-color: var(--color-lynch);
     --_border: drop-shadow(calc(var(--_border-offset) * -1) var(--_border-offset) 0 var(--_border-color))
@@ -287,6 +288,12 @@ const PageFooterData = {
       --_w: 40;
     }
 
+    @media (any-hover: hover) {
+      &:hover {
+        --_bg-color: var(--color-golden-yellow);
+      }
+    }
+
     &::before {
       position: absolute;
       inset: 0;
@@ -295,7 +302,7 @@ const PageFooterData = {
       margin: auto;
       pointer-events: none;
       content: '';
-      background-color: var(--color-pure-white);
+      background-color: var(--_bg-color);
       clip-path: var(--_clip-path);
     }
   }
@@ -317,7 +324,7 @@ const PageFooterData = {
       font-family: var(--font-zen-dots);
       font-size: calc(140 * var(--rem));
       line-height: 1;
-      color: var(--color-pure-white);
+      color: var(--color-main);
       white-space: nowrap;
       opacity: 0.4;
       transform: skewX(-16deg);

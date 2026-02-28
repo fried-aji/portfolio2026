@@ -224,8 +224,8 @@ const PageFooterData = {
     padding: calc(6 * var(--px)) calc(10 * var(--px));
     margin-top: calc(12 * var(--px));
     margin-left: auto;
-    color: var(--color-pure-white);
-    background-color: var(--color-black);
+    color: var(--color-main);
+    background-color: var(--color-sub);
     border-radius: var(--infinity);
 
     @media (--mql-md) {
@@ -241,6 +241,12 @@ const PageFooterData = {
 
     @media (--mql-md) {
       width: calc(18 * var(--px));
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: var(--color-golden-yellow);
+      }
     }
 
     &[data-type='prev'] {
@@ -296,7 +302,7 @@ const PageFooterData = {
       font-family: var(--font-zen-dots);
       font-size: calc(140 * var(--rem));
       line-height: 1;
-      color: var(--color-pure-white);
+      color: var(--color-main);
       white-space: nowrap;
       opacity: 0.4;
       transform: skewX(-16deg);
@@ -330,9 +336,9 @@ const PageFooterData = {
       font-family: var(--font-dela-gothic);
       font-size: calc(14 * var(--rem));
       line-height: 1;
-      color: var(--color-pure-white);
+      color: var(--color-main);
       text-align: center;
-      background-color: var(--color-black);
+      background-color: var(--color-sub);
       clip-path: polygon(var(--_clip) 0%, 100% 0%, calc(100% - var(--_clip)) 100%, 0% 100%);
 
       @media (--mql-md) {

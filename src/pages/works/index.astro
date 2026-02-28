@@ -159,11 +159,48 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
   }
 
   .tab {
+    position: relative;
     flex: 0 0 calc(100 * var(--px));
+    aspect-ratio: 16 / 9;
     margin-right: calc(10 * var(--px));
+    transition: scale 0.1s var(--ease-overshoot-out-dynamic);
 
     @media (--mql-md) {
       margin-right: 0;
+    }
+
+    &:not([aria-selected='true']) {
+      @media (any-hover: hover) {
+        &:hover {
+          opacity: 0.8;
+          scale: 1.05;
+          animation: rotation-y 5s ease-in-out infinite;
+        }
+      }
+    }
+
+    &[aria-selected='true'] {
+      &::before {
+        opacity: 0.4;
+      }
+    }
+
+    &::before {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      content: '';
+      background-color: var(--color-black);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 
@@ -205,6 +242,8 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
   }
 
   .info {
+    --_line-color: var(--color-golden-yellow);
+
     position: var(--_pos);
     display: block;
     padding-right: calc(16 * var(--px));
@@ -248,7 +287,7 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
     margin-top: calc(24 * var(--px));
     font-family: var(--font-zen-dots);
     font-size: calc(14 * var(--rem));
-    background-image: linear-gradient(var(--color-pure-white) 0 0);
+    background-image: linear-gradient(var(--_line-color) 0 0);
     background-repeat: no-repeat;
     background-position: 0 calc(100% - var(--_line-bottom));
     background-size: 100% calc(4 * var(--px));
@@ -267,7 +306,7 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
       font-family: var(--font-zen-dots);
       font-size: calc(140 * var(--rem));
       line-height: 1;
-      color: var(--color-pure-white);
+      color: var(--color-main);
       opacity: 0.4;
     }
   }

@@ -202,6 +202,7 @@ const PageFooterData = {
     display: grid;
     place-items: center;
     height: calc(50 * var(--px));
+    color: var(--color-black);
     background-color: var(--color-pure-white);
     border: 1px solid color-mix(in sRGB, var(--color-dark-gray) 30%, transparent 70%);
     border-radius: calc(4 * var(--px));
@@ -258,11 +259,11 @@ const PageFooterData = {
     }
 
     &:nth-child(1 of [data-type='color']) {
-      --_color-tip: var(--color-neon-blue);
+      --_color-tip: var(--color-main-blue);
     }
 
     &:nth-child(2 of [data-type='color']) {
-      --_color-tip: var(--color-pastel-pink);
+      --_color-tip: var(--color-main-pink);
     }
 
     &:nth-child(3 of [data-type='color']) {
@@ -317,6 +318,7 @@ const PageFooterData = {
     place-items: center;
     width: calc(146 * var(--px));
     aspect-ratio: 73 / 25;
+    color: var(--color-black);
     background-color: var(--color-pure-white);
     border: 1px solid color-mix(in sRGB, var(--color-dark-gray) 30%, transparent 70%);
     border-radius: calc(4 * var(--px));

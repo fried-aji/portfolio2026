@@ -1,46 +1,75 @@
-# Astro Starter Kit: Basics
+# 📢 Portfolio ver2.0
 
-```sh
-pnpm create astro@latest -- --template basics
+## 🌴 環境情報
+
+[Astro](https://astro.build/)
+
+## 👷 環境準備
+
+### 1. パッケージインストール
+
+```shell
+pnpm i
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### 2. 開発サーバー立ち上げ
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```shell
+pnpm run dev
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 💻 実装
 
-## 🧞 Commands
+### 1. ファイル構成
 
-All commands are run from the root of the project, from a terminal:
+```shell
+├── public/　#静的アセット
+├── src/　#作業ディレクトリ
+│   ├── assets/　#最適化用アセット
+│   ├── components/　#共通コンポーネント
+│   ├── data/　# 共通データ。Content Collectionsなど
+│   ├── icons/ 　#SVG（Astro Icon）
+│   ├── layouts/ #共通レイアウト
+│   ├── libs/ #SSG処理関連
+│   └── pages/　#各ページのHTML
+│   ├── styles/ #css（sass）
+│   ├── scripts/ #js（クライアントサイド）
+└── astro.config.ts　#開発環境設定ファイル
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+### 2. アセット
 
-## 👀 Want to learn more?
+[Astro Imagesコンポーネント](https://docs.astro.build/ja/guides/images/)で画像を最適化しています。  
+faviconなどの最適化不要のアセットは`public`に格納しています。
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```js
+---
+import { Image } from 'astro:assets';
+import ImageSample from '@/assets/sample.png';
+---
+
+<Image src={ImageSample} alt="" />
+```
+
+### 3. SVG
+
+[Astro Icon](https://www.astroicon.dev/)を使用することでインライン上でSVGファイルを簡単に出力できます。
+なお、Iconコンポーネントで参照するSVGファイルは`src/icons`に格納してください。
+
+```js
+---
+import { Icon } from "astro-icon";
+---
+
+<Icon name='icon_sample' />
+
+// => <svg data-icon="icon_sample"><symbol id="ai:local:icon_sample" viewBox="...">...</symbol><use href="#ai:local:icon_sample"></use></svg>
+```
+
+### 🏠 ビルド
+
+以下のコマンドで`dist/`に出力します。
+
+```shell
+pnpm run build
+```

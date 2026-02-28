@@ -30,7 +30,7 @@ const PageFooterData = {
   <main class="p-config u-page-overlay">
     <PageHdg {...pageHdgData} />
     <div class="content">
-      <dl class="list">
+      <dl x-data class="list">
         <div class="item">
           <dt class="title">カラーモード</dt>
           <dd class="info">
@@ -40,6 +40,7 @@ const PageFooterData = {
                 <ul class="radio-list">
                   <li class="radio-item">
                     <input
+                      x-model="$store.config.theme"
                       id="input-color-light"
                       type="radio"
                       name="colormode"
@@ -50,7 +51,14 @@ const PageFooterData = {
                     <label for="input-color-light" class="radio-label">ライト</label>
                   </li>
                   <li class="radio-item">
-                    <input id="input-color-dark" type="radio" name="colormode" value="dark" class="radio-btn" />
+                    <input
+                      x-model="$store.config.theme"
+                      id="input-color-dark"
+                      type="radio"
+                      name="colormode"
+                      value="dark"
+                      class="radio-btn"
+                    />
                     <label for="input-color-dark" class="radio-label">ダーク</label>
                   </li>
                 </ul>
@@ -66,11 +74,26 @@ const PageFooterData = {
               <li class="radio">
                 <ul class="radio-list">
                   <li class="radio-item">
-                    <input id="input-anime-on" type="radio" name="anime" value="on" checked class="radio-btn" />
+                    <input
+                      x-model="$store.config.anime"
+                      id="input-anime-on"
+                      type="radio"
+                      name="anime"
+                      value="true"
+                      checked
+                      class="radio-btn"
+                    />
                     <label for="input-anime-on" class="radio-label">ON</label>
                   </li>
                   <li class="radio-item">
-                    <input id="input-anime-off" type="radio" name="anime" value="off" class="radio-btn" />
+                    <input
+                      x-model="$store.config.anime"
+                      id="input-anime-off"
+                      type="radio"
+                      name="anime"
+                      value="false"
+                      class="radio-btn"
+                    />
                     <label for="input-anime-off" class="radio-label">OFF</label>
                   </li>
                 </ul>
@@ -85,12 +108,22 @@ const PageFooterData = {
             <ul class="input-list">
               <li class="progress">
                 <label for="input-sound-bgm" class="progress-label">BGM</label>
-                <input type="range" id="input-sound-bgm" name="sound" min="0" max="1" step="0.1" class="progress-bar" />
+                <input
+                  x-model="$store.config.sound.bgm"
+                  type="range"
+                  id="input-sound-bgm"
+                  name="sound"
+                  min="0"
+                  max="1"
+                  step="0.1"
+                  class="progress-bar"
+                />
                 <button type="button" class="input-reset">初期化</button>
               </li>
               <li class="progress">
                 <label for="input-sound-effect" class="progress-label">効果音</label>
                 <input
+                  x-model="$store.config.sound.effect"
                   type="range"
                   id="input-sound-effect"
                   name="sound"
@@ -102,7 +135,14 @@ const PageFooterData = {
                 <button type="button" class="input-reset">初期化</button>
               </li>
               <li class="checkbox">
-                <input type="checkbox" id="input-sound-inactive" name="sound" value="inactive" class="checkbox-btn" />
+                <input
+                  x-model="$store.config.sound.mute"
+                  type="checkbox"
+                  id="input-sound-inactive"
+                  name="sound"
+                  value="true"
+                  class="checkbox-btn"
+                />
                 <label for="input-sound-inactive" class="checkbox-label"
                   >タブが非アクティブの場合は音声をOFFにする</label
                 >
@@ -118,6 +158,7 @@ const PageFooterData = {
               <li class="progress">
                 <label for="input-mouse-speed" class="progress-label">速度</label>
                 <input
+                  x-model="$store.config.mouse.speed"
                   type="range"
                   id="input-mouse-speed"
                   name="mouse-speed"
@@ -136,7 +177,14 @@ const PageFooterData = {
                     <label for="input-mouse-normal" class="radio-label">通常</label>
                   </li>
                   <li class="radio-item">
-                    <input id="input-mouse-custom" type="radio" name="mouse" value="custom" class="radio-btn" />
+                    <input
+                      x-model="$store.config.mouse.design"
+                      id="input-mouse-custom"
+                      type="radio"
+                      name="mouse"
+                      value="custom"
+                      class="radio-btn"
+                    />
                     <label for="input-mouse-custom" class="radio-label">カスタム</label>
                   </li>
                 </ul>
@@ -152,6 +200,7 @@ const PageFooterData = {
               <li class="progress">
                 <label for="input-scroll-speed" class="progress-label">速度</label>
                 <input
+                  x-model="$store.config.scroll.speed"
                   type="range"
                   id="input-scroll-speed"
                   name="scroll-speed"
@@ -251,11 +300,18 @@ const PageFooterData = {
     padding: calc(4 * var(--px)) calc(16 * var(--px)) calc(3 * var(--px));
     font-size: calc(10 * var(--rem));
     font-weight: 500;
+    color: var(--color-black);
     background-color: var(--color-pure-white);
     border-radius: var(--infinity);
 
     @media (--mql-md) {
       padding: calc(6 * var(--px)) calc(16 * var(--px)) calc(5 * var(--px));
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: var(--color-golden-yellow);
+      }
     }
   }
 
@@ -390,6 +446,10 @@ const PageFooterData = {
     aspect-ratio: 1;
     background-color: var(--color-pure-white);
     border: 1px solid var(--_border-color);
+
+    &:checked {
+      background-color: var(--color-black);
+    }
   }
 
   .checkbox-label {

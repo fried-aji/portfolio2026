@@ -118,6 +118,12 @@ const {
       position: fixed;
       top: 0;
       right: 0;
+
+      @media (any-hover: hover) {
+        &:hover {
+          background-color: var(--color-golden-yellow);
+        }
+      }
     }
 
     :global(.calendar) {
@@ -168,7 +174,7 @@ const {
 
       background-image: radial-gradient(
         circle,
-        var(--color-electro-nlue) calc(var(--_size) / 2),
+        var(--color-sub-blue) calc(var(--_size) / 2),
         transparent calc(var(--_size) / 2)
       );
       background-position: 0 0;
@@ -204,12 +210,19 @@ const {
   }
 
   .upper-link {
+    display: block;
     font-family: var(--font-zen-dots);
     font-size: calc(28 * var(--rem));
     line-height: 1;
 
     @media (--mql-md) {
       font-size: calc(48 * var(--rem));
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: var(--color-golden-yellow);
+      }
     }
   }
 
@@ -242,6 +255,7 @@ const {
     --_w: 34;
     --_clip-offset: calc((1 - 10 / 40) * 100%);
     --_clip-path: polygon(0 0, 100% 0, 100% var(--_clip-offset), var(--_clip-offset) 100%, 0 100%);
+    --_bg-color: var(--color-pure-white);
     --_border-offset: 2px;
     --_border-color: var(--color-lynch);
     --_border: drop-shadow(calc(var(--_border-offset) * -1) var(--_border-offset) 0 var(--_border-color))
@@ -261,6 +275,12 @@ const {
       --_w: 40;
     }
 
+    @media (any-hover: hover) {
+      &:hover {
+        --_bg-color: var(--color-golden-yellow);
+      }
+    }
+
     &::before {
       position: absolute;
       inset: 0;
@@ -269,7 +289,7 @@ const {
       margin: auto;
       pointer-events: none;
       content: '';
-      background-color: var(--color-pure-white);
+      background-color: var(--_bg-color);
       clip-path: var(--_clip-path);
     }
   }

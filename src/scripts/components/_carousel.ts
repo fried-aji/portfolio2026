@@ -39,11 +39,6 @@ Alpine.data('carousel', () => {
       const option: EmblaOptionsType = {
         loop: true,
         duration: this.$store.mql.isReducedMotion ? 0 : 20,
-        breakpoints: {
-          '(min-width: 800px)': {
-            duration: this.$store.mql.isReducedMotion ? 0 : 25,
-          },
-        },
       };
 
       emblaApi = EmblaCarousel(this.$refs.viewport, option);

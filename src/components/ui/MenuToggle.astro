@@ -31,15 +31,15 @@ const {
   @import '@/styles/_mql.css';
 
   .c-menu-toggle {
-    --_w: 70;
-    --_h: 49;
+    --_w: 66;
+    --_h: 46;
 
     display: grid;
     place-items: center;
     width: calc(var(--_w) * var(--px));
     aspect-ratio: 10 / 7;
-    color: var(--_toggle-color, var(--color-pure-white));
-    background-color: var(--_toggle-bg, var(--color-black));
+    color: var(--_toggle-color, var(--color-main));
+    background-color: var(--_toggle-bg, var(--color-sub));
     clip-path: polygon(0 0, 100% 0, 100% 100%, calc(40 / var(--_w) * 100%) 100%, 0 calc(20 / var(--_h) * 100%));
 
     @media (--mql-md) {
@@ -55,7 +55,7 @@ const {
 
         .line {
           /* opacity: 0; */
-          --_w: 34;
+          --_w: 32;
 
           @media (--mql-md) {
             --_w: 38;
@@ -111,7 +111,7 @@ const {
 
     .line {
       /* --_w: 26; */
-      --_w: 32;
+      --_w: 30;
 
       @media (--mql-md) {
         --_w: 36;
@@ -120,7 +120,7 @@ const {
 
     &::before {
       /* --_w: 36; */
-      --_w: 42;
+      --_w: 40;
       --_y: -7;
 
       @media (--mql-md) {
@@ -131,7 +131,7 @@ const {
 
     &::after {
       /* --_w: 14; */
-      --_w: 20;
+      --_w: 18;
       --_y: 7;
 
       @media (--mql-md) {

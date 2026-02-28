@@ -114,6 +114,7 @@ import siteNav from '@/data/siteNav';
     width: calc(300 * var(--px));
     margin-right: calc(20 * var(--px));
     margin-left: auto;
+    color: var(--color-black);
 
     @media (--mql-md) {
       position: absolute;
@@ -183,8 +184,8 @@ import siteNav from '@/data/siteNav';
     column-gap: calc(10 * var(--px));
     align-items: center;
     padding: calc(12 * var(--px)) calc(16 * var(--px));
-    color: var(--color-pure-white);
-    background-color: var(--color-black);
+    color: var(--color-main);
+    background-color: var(--color-sub);
 
     @media (--mql-md) {
       column-gap: calc(16 * var(--px));
@@ -254,7 +255,7 @@ import siteNav from '@/data/siteNav';
     }
 
     img {
-      --_shadow-color: color-mix(in sRGB, var(--color-pastel-pink) 30%, transparent 70%);
+      --_shadow-color: color-mix(in sRGB, var(--color-main-pink) 30%, transparent 70%);
 
       width: 100%;
       filter: drop-shadow(calc(-20 * var(--px)) 0 0 var(--_shadow-color));
