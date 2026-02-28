@@ -1,6 +1,10 @@
 import Alpine from 'alpinejs';
+import type { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel';
+import EmblaCarousel from 'embla-carousel';
 
-Alpine.data('tabMenu', (id: string) => {
+Alpine.data('worksTab', (id: string) => {
+  let emblaApi: EmblaCarouselType;
+
   return {
     currentIndex: 0,
 
@@ -15,15 +19,61 @@ Alpine.data('tabMenu', (id: string) => {
       //       this.currentIndex = index;
       //     }
       //   }
+
+      this._initCarousel();
+
+      this.$watch('$store.mql.isMD', (mql) => {
+        if (mql) {
+          this._destroyCarousel();
+        } else {
+          this._initCarousel();
+        }
+      });
+
+      // 視差効果
+      this.$watch('$store.mql.isReducedMotion', () => {
+        this._destroyCarousel();
+        this.$nextTick(() => {
+          this._initCarousel();
+        });
+      });
     },
 
-    // destroy() {
-    // },
+    destroy() {
+      this._destroyCarousel();
+    },
+
+    _initCarousel() {
+      if (emblaApi) return;
+      if (this.$store.mql.isMD) return;
+      const option: EmblaOptionsType = {
+        active: true,
+        align: 'center',
+        loop: true,
+        duration: this.$store.mql.isReducedMotion ? 0 : 20,
+        breakpoints: {
+          '(width >= 800px)': {
+            active: false,
+          },
+        },
+      };
+
+      emblaApi = EmblaCarousel(this.$refs.tabControl, option);
+    },
+
+    _destroyCarousel() {
+      if (emblaApi) {
+        emblaApi.destroy();
+        emblaApi = null!;
+      }
+    },
 
     async onTabChange(index: number) {
       if (this.currentIndex === index) return;
-
       this.currentIndex = index;
+      if (emblaApi) {
+        emblaApi.scrollTo(this.currentIndex);
+      }
 
       // クエリパラメータを更新
       //   const params = new URLSearchParams(window.location.search);
