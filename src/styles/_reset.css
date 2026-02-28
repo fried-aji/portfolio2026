@@ -22,7 +22,7 @@
 }
 
 :where(body) {
-  min-height: 100lvh;
+  min-height: 100dvh;
   margin: unset;
 }
 

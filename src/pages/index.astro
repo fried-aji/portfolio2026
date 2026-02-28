@@ -254,8 +254,10 @@ import siteNav from '@/data/siteNav';
     }
 
     img {
+      --_shadow-color: color-mix(in sRGB, var(--color-pastel-pink) 30%, transparent 70%);
+
       width: 100%;
-      filter: drop-shadow(calc(-20 * var(--px)) 0 0 rgb(255 179 237 / 30%));
+      filter: drop-shadow(calc(-20 * var(--px)) 0 0 var(--_shadow-color));
     }
   }
 </style>

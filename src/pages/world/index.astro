@@ -114,19 +114,19 @@ const PageFooterData = {
     margin: calc(290 / 862 * 100cqb) calc(24 * var(--px)) calc(90 / 862 * 100cqb);
 
     @media (--mql-md) {
-      margin: calc(234 / 720 * 100cqb) calc(120 * var(--px)) calc(64 / 720 * 100cqb);
+      margin: calc(272 / 720 * 100cqb) calc(120 * var(--px)) calc(64 / 720 * 100cqb);
     }
   }
 
   .section {
     width: fit-content;
-    min-height: 100lvh;
+    min-height: 100dvh;
     margin-right: auto;
     margin-left: auto;
     text-align: center;
 
     &:last-child {
-      min-height: 50lvh;
+      min-height: 50dvh;
     }
   }
 
@@ -203,7 +203,7 @@ const PageFooterData = {
     place-items: center;
     height: calc(50 * var(--px));
     background-color: var(--color-pure-white);
-    border: 1px solid rgb(168 168 168 / 30%);
+    border: 1px solid color-mix(in sRGB, var(--color-dark-gray) 30%, transparent 70%);
     border-radius: calc(4 * var(--px));
 
     @media (--mql-md) {
@@ -287,7 +287,7 @@ const PageFooterData = {
     margin-right: auto;
     margin-left: auto;
     background-color: var(--color-pure-white);
-    border: 1px solid rgb(168 168 168 / 30%);
+    border: 1px solid color-mix(in sRGB, var(--color-dark-gray) 30%, transparent 70%);
     border-radius: calc(4 * var(--px));
 
     @media (--mql-md) {
@@ -318,7 +318,7 @@ const PageFooterData = {
     width: calc(146 * var(--px));
     aspect-ratio: 73 / 25;
     background-color: var(--color-pure-white);
-    border: 1px solid rgb(168 168 168 / 30%);
+    border: 1px solid color-mix(in sRGB, var(--color-dark-gray) 30%, transparent 70%);
     border-radius: calc(4 * var(--px));
 
     @media (--mql-md) {

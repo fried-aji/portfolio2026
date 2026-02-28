@@ -123,14 +123,19 @@ const PageFooterData = {
   .p-works-detail {
     position: relative;
     display: grid;
-    align-items: center;
+
+    @media (--mql-md) {
+      align-items: center;
+    }
   }
 
   .article {
     display: grid;
-    grid-template-areas: 'hdg hdg' 'body carousel';
+    grid-template-areas: 'hdg' 'carousel' 'body';
+    margin: calc(92 * var(--px)) calc(20 * var(--px)) calc(80 * var(--px));
 
     @media (--mql-md) {
+      grid-template-areas: 'hdg hdg' 'body carousel';
       grid-template-columns: 1fr max-content;
       gap: 0 calc(80 * var(--px));
       margin: calc(32 * var(--px)) calc(64 * var(--px)) calc(80 * var(--px));
@@ -140,18 +145,22 @@ const PageFooterData = {
   .heading {
     display: grid;
     grid-area: hdg;
+    margin-left: calc(4 * var(--px));
     line-height: 1;
-    transform: skewX(-16deg);
-    rotate: -8deg;
+    transform: skewX(-13deg);
+    rotate: -13deg;
 
     @media (--mql-md) {
       row-gap: calc(4 * var(--px));
       margin-left: calc(16 * var(--px));
+      transform: skewX(-16deg);
+      rotate: -8deg;
     }
   }
 
   .heading-client {
     font-family: var(--font-zen-dots);
+    font-size: calc(12 * var(--rem));
     color: var(--color-dark-gray);
 
     @media (--mql-md) {
@@ -161,6 +170,7 @@ const PageFooterData = {
 
   .heading-title {
     font-family: var(--font-dela-gothic);
+    font-size: calc(32 * var(--rem));
 
     @media (--mql-md) {
       font-size: calc(72 * var(--rem));
@@ -169,6 +179,7 @@ const PageFooterData = {
 
   .p-works-detail-body {
     grid-area: body;
+    margin-top: calc(56 * var(--px));
 
     @media (--mql-md) {
       margin-top: calc(116 * var(--px));
@@ -177,6 +188,7 @@ const PageFooterData = {
 
   .carousel {
     grid-area: carousel;
+    margin-top: calc(64 * var(--px));
 
     @media (--mql-md) {
       width: calc(670 * var(--px));
@@ -206,8 +218,11 @@ const PageFooterData = {
   .carousel-control {
     display: grid;
     grid-template-columns: repeat(3, max-content);
+    column-gap: calc(12 * var(--px));
     align-items: center;
     width: fit-content;
+    padding: calc(6 * var(--px)) calc(10 * var(--px));
+    margin-top: calc(12 * var(--px));
     margin-left: auto;
     color: var(--color-pure-white);
     background-color: var(--color-black);
@@ -221,6 +236,7 @@ const PageFooterData = {
   }
 
   .carousel-arrow {
+    width: calc(14 * var(--px));
     aspect-ratio: 1;
 
     @media (--mql-md) {
@@ -238,8 +254,10 @@ const PageFooterData = {
 
   .carousel-num {
     display: flex;
+    column-gap: calc(6 * var(--px));
     align-items: center;
     font-family: var(--font-zen-dots);
+    font-size: calc(12 * var(--rem));
     line-height: 1;
 
     @media (--mql-md) {
@@ -250,6 +268,7 @@ const PageFooterData = {
 
   .carousel-current,
   .carousel-total {
+    min-width: calc(23 * var(--px));
     text-align: center;
 
     @media (--mql-md) {
@@ -258,27 +277,31 @@ const PageFooterData = {
   }
 
   .carousel-line {
+    font-size: calc(10 * var(--rem));
+
     @media (--mql-md) {
       font-size: calc(10 * var(--rem));
     }
   }
 
   .deco {
-    position: absolute;
-    z-index: 1;
-    font-family: var(--font-zen-dots);
-    line-height: 1;
-    color: var(--color-pure-white);
-    white-space: nowrap;
-    opacity: 0.4;
-    transform: skewX(-16deg);
-    transform-origin: left top;
-    rotate: -8deg;
+    display: none;
 
     @media (--mql-md) {
+      position: absolute;
       top: calc(198 * var(--px));
       left: calc(24 * var(--px));
+      z-index: 1;
+      display: block;
+      font-family: var(--font-zen-dots);
       font-size: calc(140 * var(--rem));
+      line-height: 1;
+      color: var(--color-pure-white);
+      white-space: nowrap;
+      opacity: 0.4;
+      transform: skewX(-16deg);
+      transform-origin: left top;
+      rotate: -8deg;
     }
   }
 </style>
@@ -300,7 +323,12 @@ const PageFooterData = {
     h3 {
       --_clip: calc(12 / 178 * 100%);
 
+      width: fit-content;
+      min-width: calc(160 * var(--px));
+      padding: calc(8 * var(--px)) calc(16 * var(--px)) calc(10 * var(--px));
+      margin-top: calc(24 * var(--px));
       font-family: var(--font-dela-gothic);
+      font-size: calc(14 * var(--rem));
       line-height: 1;
       color: var(--color-pure-white);
       text-align: center;
@@ -308,20 +336,18 @@ const PageFooterData = {
       clip-path: polygon(var(--_clip) 0%, 100% 0%, calc(100% - var(--_clip)) 100%, 0% 100%);
 
       @media (--mql-md) {
-        width: calc(178 * var(--px));
+        min-width: calc(178 * var(--px));
         padding: calc(8 * var(--px)) calc(16 * var(--px)) calc(10 * var(--px));
-        margin-top: calc(24 * var(--px));
         font-size: calc(16 * var(--rem));
       }
 
       + * {
-        @media (--mql-md) {
-          margin-top: calc(12 * var(--px));
-        }
+        margin-top: calc(12 * var(--px));
       }
     }
 
     p {
+      font-size: calc(12 * var(--rem));
       font-weight: 500;
 
       @media (--mql-md) {

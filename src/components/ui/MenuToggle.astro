@@ -31,8 +31,8 @@ const {
   @import '@/styles/_mql.css';
 
   .c-menu-toggle {
-    --_w: 60;
-    --_h: 42;
+    --_w: 70;
+    --_h: 49;
 
     display: grid;
     place-items: center;
@@ -46,18 +46,16 @@ const {
       --_w: 80;
       --_h: 56;
 
-      /* aspect-ratio: var(--_w) / var(--_h); */
       clip-path: polygon(0 0, 100% 0, 100% 100%, calc(44 / var(--_w) * 100%) 100%, 0 calc(28 / var(--_h) * 100%));
     }
 
     &[aria-expanded='true'] {
       .icon {
-        /* margin-left: calc(8 * var(--px)); */
         --_left: 0;
 
         .line {
           /* opacity: 0; */
-          --_w: 30;
+          --_w: 34;
 
           @media (--mql-md) {
             --_w: 38;
@@ -112,7 +110,8 @@ const {
     }
 
     .line {
-      --_w: 26;
+      /* --_w: 26; */
+      --_w: 32;
 
       @media (--mql-md) {
         --_w: 36;
@@ -120,7 +119,8 @@ const {
     }
 
     &::before {
-      --_w: 36;
+      /* --_w: 36; */
+      --_w: 42;
       --_y: -7;
 
       @media (--mql-md) {
@@ -130,7 +130,8 @@ const {
     }
 
     &::after {
-      --_w: 14;
+      /* --_w: 14; */
+      --_w: 20;
       --_y: 7;
 
       @media (--mql-md) {

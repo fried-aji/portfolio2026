@@ -40,7 +40,7 @@ Alpine.data('carousel', () => {
         loop: true,
         duration: this.$store.mql.isReducedMotion ? 0 : 20,
         breakpoints: {
-          '(min-width: 768px)': {
+          '(min-width: 800px)': {
             duration: this.$store.mql.isReducedMotion ? 0 : 25,
           },
         },

@@ -105,7 +105,7 @@ const PageFooterData = {
   .col {
     display: grid;
     grid-template-areas: 'heading' 'visual' 'info';
-    margin: calc(98 * var(--px)) calc(16 * var(--px)) calc(80 * var(--px));
+    margin: calc(98 * var(--px)) calc(20 * var(--px)) calc(80 * var(--px));
 
     @media (--mql-md) {
       grid-template:
@@ -123,8 +123,8 @@ const PageFooterData = {
     align-items: flex-end;
     margin-left: calc(4 * var(--px));
     line-height: 1;
-    transform: skewX(-14deg);
-    rotate: -14deg;
+    transform: skewX(-13deg);
+    rotate: -13deg;
 
     @media (--mql-md) {
       column-gap: calc(16 * var(--px));
@@ -156,6 +156,7 @@ const PageFooterData = {
   .info {
     display: grid;
     row-gap: calc(24 * var(--px));
+    height: fit-content;
     margin-top: calc(52 * var(--px));
 
     @media (--mql-md) {
@@ -164,10 +165,10 @@ const PageFooterData = {
   }
 
   .sec-title {
-    --_w: 170;
     --_clip: calc(12 / 170 * 100%);
 
-    width: calc(var(--_w) * var(--px));
+    width: fit-content;
+    min-width: calc(160 * var(--px));
     padding: calc(8 * var(--px)) calc(16 * var(--px)) calc(10 * var(--px));
     font-family: var(--font-dela-gothic);
     font-size: calc(14 * var(--rem));
@@ -178,9 +179,9 @@ const PageFooterData = {
     clip-path: polygon(var(--_clip) 0%, 100% 0%, calc(100% - var(--_clip)) 100%, 0% 100%);
 
     @media (--mql-md) {
-      --_w: 178;
       --_clip: calc(12 / 178 * 100%);
 
+      min-width: calc(178 * var(--px));
       font-size: calc(16 * var(--rem));
     }
 

@@ -41,16 +41,24 @@ const {
   @import '@/styles/_mql.css';
 
   .c-page-footer {
-    position: sticky;
-    bottom: 0;
+    --_link-w: 120;
+
+    position: relative;
     z-index: calc(var(--z-header) - 1);
     display: grid;
-    grid-template-areas: 'link-1 desc link-2';
-    grid-template-columns: calc(80 * var(--px)) 1fr calc(80 * var(--px));
+    grid-template-areas: 'link-1 link-2';
+    grid-template-columns: repeat(2, calc(var(--_link-w) * var(--px)));
     align-items: center;
+    justify-content: space-between;
+    padding: 0 calc(12 * var(--px)) calc(24 * var(--px));
 
     @media (--mql-md) {
+      --_link-w: 140;
+
+      position: sticky;
+      bottom: 0;
       display: block;
+      padding: 0;
       background-color: var(--color-neon-blue);
     }
 
@@ -79,43 +87,37 @@ const {
   }
 
   .desc {
-    --_clip: calc(8 / 240 * 100%);
-
-    grid-area: desc;
-    width: calc(240 * var(--px));
-    padding: calc(6 * var(--px)) calc(12 * var(--px));
-    margin-right: auto;
-    margin-left: auto;
-    font-size: calc(8 * var(--rem));
-    font-weight: 500;
-    text-align: center;
-    background-color: var(--color-pure-white);
-    clip-path: polygon(var(--_clip) 0%, 100% 0%, calc(100% - var(--_clip)) 100%, 0% 100%);
+    display: none;
 
     @media (--mql-md) {
       --_clip: calc(20 / 600 * 100%);
 
+      display: block;
       width: calc(600 * var(--px));
       padding: calc(10 * var(--px)) calc(16 * var(--px)) calc(12 * var(--px));
+      margin-right: auto;
+      margin-left: auto;
       font-size: calc(12 * var(--rem));
+      font-weight: 500;
+      text-align: center;
+      background-color: var(--color-pure-white);
+      clip-path: polygon(var(--_clip) 0%, 100% 0%, calc(100% - var(--_clip)) 100%, 0% 100%);
     }
   }
 
   .link {
-    --_w: 80;
     --_clip: calc(7 / 80 * 100%);
     --_clip-path: polygon(var(--_clip) 0%, 100% 0%, calc(100% - var(--_clip)) 100%, 0% 100%);
 
     position: relative;
     display: grid;
     place-items: center;
-    width: calc(var(--_w) * var(--px));
-    padding: calc(4 * var(--px)) calc(8 * var(--px));
+    width: calc(var(--_link-w) * var(--px));
+    padding: calc(6 * var(--px)) calc(10 * var(--px));
     font-family: var(--font-dela-gothic);
-    font-size: calc(8 * var(--rem));
+    font-size: calc(12 * var(--rem));
 
     @media (--mql-md) {
-      --_w: 140;
       --_clip: calc(12 / 140 * 100%);
 
       position: absolute;
@@ -160,6 +162,8 @@ const {
     }
 
     &::before {
+      top: calc(2 * var(--px));
+      right: calc(-2 * var(--px));
       background-color: var(--color-black);
 
       @media (--mql-md) {

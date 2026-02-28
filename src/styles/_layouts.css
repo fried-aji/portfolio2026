@@ -6,7 +6,7 @@
   position: relative;
   display: grid;
   grid-template-rows: 1fr max-content;
-  min-height: 100lvh;
+  min-height: 100dvh;
   container-type: inline-size;
   overflow: clip;
 

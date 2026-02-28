@@ -9,7 +9,7 @@ const value = {
   XXL: window.matchMedia('(width >= 1440px)'),
   XL: window.matchMedia('(width >= 1280px)'),
   LG: window.matchMedia('(width >= 1024px)'),
-  MD: window.matchMedia('(width >= 768px)'),
+  MD: window.matchMedia('(width >= 800px)'),
   XS: window.matchMedia('(width >= 400px)'),
   // 視差効果
   reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)'),
