@@ -15,9 +15,9 @@ Alpine.data('carousel', () => {
       this._initCarousel();
 
       // 視差効果
-      this.$watch('$store.mql.isReducedMotion', () => {
+      this.$watch('$store.config.anime', () => {
         this.destroy();
-        this.$nextTick(() => {
+        requestAnimationFrame(() => {
           this._initCarousel();
         });
       });
@@ -38,7 +38,7 @@ Alpine.data('carousel', () => {
 
       const option: EmblaOptionsType = {
         loop: true,
-        duration: this.$store.mql.isReducedMotion ? 0 : 20,
+        duration: this.$store.config.anime ? 20 : 0,
       };
 
       emblaApi = EmblaCarousel(this.$refs.viewport, option);

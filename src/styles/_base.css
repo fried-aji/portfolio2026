@@ -16,6 +16,7 @@
 
   font-family: var(--font-mplus);
   color: var(--color-sub);
+  cursor: var(--cursor-base);
   background-color: var(--color-main);
   transition:
     color 0.2s ease,
@@ -29,6 +30,22 @@
     --color-main-pink: var(--color-fuchsia-pink);
     --color-sub-pink: var(--color-shiny-pink);
   }
+
+  &[data-animation='false'] {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+
+  &[data-cursor='custom'] {
+    --cursor-pointer: url('/img/global/cursor_pointer.svg'), pointer;
+    --cursor-base: url('/img/global/cursor_auto.svg'), auto;
+  }
 }
 
 body {
@@ -37,15 +54,16 @@ body {
   }
 }
 
+a,
 button {
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
 }
 
 input {
   padding: 0;
   margin: 0;
   appearance: none;
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   outline: unset;
   background-color: unset;
   border: unset;

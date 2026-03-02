@@ -3,8 +3,8 @@
 */
 import Alpine from 'alpinejs';
 
-const key = 'device';
-const value = {
+const storeKey = 'device';
+const storeValue = {
   // タッチデバイス
   isTouchDevice: 'ontouchstart' in window || navigator.maxTouchPoints > 0,
   // iOS
@@ -39,10 +39,10 @@ const value = {
   },
 };
 
-Alpine.store(key, value);
+Alpine.store(storeKey, storeValue);
 
 declare module 'alpinejs' {
   interface Stores {
-    [key]: typeof value;
+    [storeKey]: typeof storeValue;
   }
 }

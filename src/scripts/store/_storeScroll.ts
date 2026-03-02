@@ -8,33 +8,32 @@ import Lenis from 'lenis';
 import { Power4 } from 'gsap';
 import { linear, easeInOutQuad } from '@/scripts/utils/easing';
 
-const key = 'scroll';
-const value = {
+const storeKey = 'scroll';
+const storeValue = {
   isFixed: false,
   lenis: null! as Lenis,
 
   // init() {}
 
-  destroy() {
-    //
-  },
+  // destroy() {},
 
   onStart() {
-    this._initLenis();
-    Alpine.store('mql').reducedMotion.addEventListener('change', () => {
-      this.destroy();
-      requestAnimationFrame(() => {
-        this._initLenis();
-      });
-    });
-  },
+    Alpine.effect(() => {
+      const anime = Alpine.store('config').anime;
+      const speedFactor = Alpine.store('config').scroll.speed;
 
-  _initLenis() {
-    this.lenis = new Lenis({
-      autoRaf: true,
-      duration: Alpine.store('mql').isReducedMotion ? 0 : 0.5,
-      easing: Alpine.store('mql').isReducedMotion ? linear : Power4.easeOut,
-      smoothWheel: Alpine.store('mql').isReducedMotion ? false : true,
+      requestAnimationFrame(() => {
+        if (this.lenis) {
+          this.lenis.destroy();
+          this.lenis = null!;
+        }
+        this.lenis = new Lenis({
+          autoRaf: true,
+          duration: anime ? speedFactor : 0,
+          easing: anime ? Power4.easeOut : linear,
+          smoothWheel: anime,
+        });
+      });
     });
   },
 
@@ -57,10 +56,10 @@ const value = {
   },
 };
 
-Alpine.store(key, value);
+Alpine.store(storeKey, storeValue);
 
 declare module 'alpinejs' {
   interface Stores {
-    [key]: typeof value;
+    [storeKey]: typeof storeValue;
   }
 }

@@ -10,8 +10,8 @@ import SwupHeadPlugin from '@swup/head-plugin';
 import SwupScrollPlugin from '@swup/scroll-plugin';
 import SwupPreloadPlugin from '@swup/preload-plugin';
 
-const key = 'router';
-const value = {
+const storeKey = 'router';
+const storevalue = {
   swup: null! as Swup,
   // URL
   currentPath: window.location.pathname,
@@ -79,10 +79,10 @@ const value = {
   },
 };
 
-Alpine.store(key, value);
+Alpine.store(storeKey, storevalue);
 
 declare module 'alpinejs' {
   interface Stores {
-    [key]: typeof value;
+    [storeKey]: typeof storevalue;
   }
 }

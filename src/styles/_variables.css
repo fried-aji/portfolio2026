@@ -19,9 +19,13 @@
   --color-pastel-pink: #ffb3ed;
   --color-fuchsia-pink: #ff8ce4;
   --color-rose-pink: #ff9adc;
-  --color-shiny-pink: #ff76cf;
+  --color-shiny-pink: #ffa0de;
   --color-lynch: #697b93;
   --color-golden-yellow: #f3ff4c;
+
+  /* cursor */
+  --cursor-base: auto;
+  --cursor-pointer: pointer;
 
   /* z-index */
   --z-header: 10;

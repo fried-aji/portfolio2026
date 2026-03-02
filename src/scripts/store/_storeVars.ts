@@ -8,8 +8,8 @@ import { debounce } from '@/scripts/utils/debounce';
 const header = document.getElementById('header');
 let headerResizeObserver: ResizeObserver;
 
-const key = 'vars';
-const value = {
+const storeKey = 'vars';
+const storeValue = {
   vw: 0,
   vh: 0,
   scrollBarWidth: 0,
@@ -58,10 +58,10 @@ const value = {
   // },
 };
 
-Alpine.store(key, value);
+Alpine.store(storeKey, storeValue);
 
 declare module 'alpinejs' {
   interface Stores {
-    [key]: typeof value;
+    [storeKey]: typeof storeValue;
   }
 }

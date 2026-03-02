@@ -173,8 +173,11 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
       @media (any-hover: hover) {
         &:hover {
           opacity: 0.8;
-          scale: 1.05;
-          animation: rotation-y 5s ease-in-out infinite;
+
+          @media (--mql-md) {
+            scale: 1.05;
+            animation: rotation-y 5s ease-in-out infinite;
+          }
         }
       }
     }
@@ -242,7 +245,7 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
   }
 
   .info {
-    --_line-color: var(--color-golden-yellow);
+    --_line-color: var(--color-sub-blue);
 
     position: var(--_pos);
     display: block;

@@ -31,7 +31,7 @@ Alpine.data('worksTab', (id: string) => {
       });
 
       // 視差効果
-      this.$watch('$store.mql.isReducedMotion', () => {
+      this.$watch('$store.config.anime', () => {
         this._destroyCarousel();
         requestAnimationFrame(() => {
           this._initCarousel();
@@ -50,7 +50,7 @@ Alpine.data('worksTab', (id: string) => {
         active: true,
         align: 'center',
         loop: true,
-        duration: this.$store.mql.isReducedMotion ? 0 : 20,
+        duration: this.$store.config.anime ? 20 : 0,
         breakpoints: {
           '(width >= 800px)': {
             active: false,

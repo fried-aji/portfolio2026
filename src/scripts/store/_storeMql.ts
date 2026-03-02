@@ -3,10 +3,9 @@
 */
 import Alpine from 'alpinejs';
 
-const key = 'mql';
-const value = {
+const storeKey = 'mql';
+const storeValue = {
   // ブレイクポイント
-  XXL: window.matchMedia('(width >= 1440px)'),
   XL: window.matchMedia('(width >= 1280px)'),
   LG: window.matchMedia('(width >= 1024px)'),
   MD: window.matchMedia('(width >= 800px)'),
@@ -23,28 +22,38 @@ const value = {
 
   init() {
     this.onMatch();
-    this.XXL.addEventListener('change', this.onMatch.bind(this));
-    this.XL.addEventListener('change', this.onMatch.bind(this));
-    this.LG.addEventListener('change', this.onMatch.bind(this));
-    this.MD.addEventListener('change', this.onMatch.bind(this));
-    this.XS.addEventListener('change', this.onMatch.bind(this));
-    this.reducedMotion.addEventListener('change', this.onMatch.bind(this));
+    this.XL.addEventListener('change', () => {
+      this.isXL = this.XL.matches;
+    });
+    this.LG.addEventListener('change', () => {
+      this.isLG = this.LG.matches;
+    });
+    this.MD.addEventListener('change', () => {
+      this.isMD = this.MD.matches;
+    });
+    this.XS.addEventListener('change', () => {
+      this.isXS = this.XS.matches;
+    });
+    this.reducedMotion.addEventListener('change', () => {
+      this.isReducedMotion = this.reducedMotion.matches;
+      Alpine.store('config').anime = !this.reducedMotion.matches;
+    });
   },
 
   onMatch() {
-    this.isXXL = this.XXL.matches;
     this.isXL = this.XL.matches;
     this.isLG = this.LG.matches;
     this.isMD = this.MD.matches;
     this.isXS = this.XS.matches;
     this.isReducedMotion = this.reducedMotion.matches;
+    Alpine.store('config').anime = !this.reducedMotion.matches;
   },
 };
 
-Alpine.store(key, value);
+Alpine.store(storeKey, storeValue);
 
 declare module 'alpinejs' {
   interface Stores {
-    [key]: typeof value;
+    [storeKey]: typeof storeValue;
   }
 }

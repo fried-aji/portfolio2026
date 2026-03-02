@@ -75,7 +75,7 @@ const PageFooterData = {
                 <ul class="radio-list">
                   <li class="radio-item">
                     <input
-                      x-model="$store.config.anime"
+                      x-model.boolean="$store.config.anime"
                       id="input-anime-on"
                       type="radio"
                       name="anime"
@@ -87,7 +87,7 @@ const PageFooterData = {
                   </li>
                   <li class="radio-item">
                     <input
-                      x-model="$store.config.anime"
+                      x-model.boolean="$store.config.anime"
                       id="input-anime-off"
                       type="radio"
                       name="anime"
@@ -109,7 +109,7 @@ const PageFooterData = {
               <li class="progress">
                 <label for="input-sound-bgm" class="progress-label">BGM</label>
                 <input
-                  x-model="$store.config.sound.bgm"
+                  x-model.number="$store.config.sound.bgm"
                   type="range"
                   id="input-sound-bgm"
                   name="sound"
@@ -118,12 +118,12 @@ const PageFooterData = {
                   step="0.1"
                   class="progress-bar"
                 />
-                <button type="button" class="input-reset">初期化</button>
+                <button type="button" @click="$store.config.reset('sound.bgm')" class="input-reset">初期化</button>
               </li>
               <li class="progress">
                 <label for="input-sound-effect" class="progress-label">効果音</label>
                 <input
-                  x-model="$store.config.sound.effect"
+                  x-model.number="$store.config.sound.effect"
                   type="range"
                   id="input-sound-effect"
                   name="sound"
@@ -132,11 +132,11 @@ const PageFooterData = {
                   step="0.1"
                   class="progress-bar"
                 />
-                <button type="button" class="input-reset">初期化</button>
+                <button type="button" @click="$store.config.reset('sound.effect')" class="input-reset">初期化</button>
               </li>
               <li class="checkbox">
                 <input
-                  x-model="$store.config.sound.mute"
+                  x-model.boolean="$store.config.sound.mute"
                   type="checkbox"
                   id="input-sound-inactive"
                   name="sound"
@@ -158,7 +158,7 @@ const PageFooterData = {
               <li class="progress">
                 <label for="input-mouse-speed" class="progress-label">速度</label>
                 <input
-                  x-model="$store.config.mouse.speed"
+                  x-model.number.debounce="$store.config.mouse.speed"
                   type="range"
                   id="input-mouse-speed"
                   name="mouse-speed"
@@ -167,13 +167,21 @@ const PageFooterData = {
                   step="0.1"
                   class="progress-bar"
                 />
-                <button type="button" class="input-reset">初期化</button>
+                <button type="button" @click="$store.config.reset('mouse.speed')" class="input-reset">初期化</button>
               </li>
               <li class="radio">
                 <p class="radio-name">デザイン</p>
                 <ul class="radio-list">
                   <li class="radio-item">
-                    <input id="input-mouse-normal" type="radio" name="mouse" value="normal" checked class="radio-btn" />
+                    <input
+                      x-model="$store.config.mouse.design"
+                      id="input-mouse-normal"
+                      type="radio"
+                      name="mouse"
+                      value="normal"
+                      checked
+                      class="radio-btn"
+                    />
                     <label for="input-mouse-normal" class="radio-label">通常</label>
                   </li>
                   <li class="radio-item">
@@ -200,16 +208,16 @@ const PageFooterData = {
               <li class="progress">
                 <label for="input-scroll-speed" class="progress-label">速度</label>
                 <input
-                  x-model="$store.config.scroll.speed"
+                  x-model.number.debounce="$store.config.scroll.speed"
                   type="range"
                   id="input-scroll-speed"
                   name="scroll-speed"
-                  min="0"
+                  min="0.1"
                   max="1"
                   step="0.1"
                   class="progress-bar"
                 />
-                <button type="button" class="input-reset">初期化</button>
+                <button type="button" @click="$store.config.reset('scroll.speed')" class="input-reset">初期化</button>
               </li>
             </ul>
           </dd>
