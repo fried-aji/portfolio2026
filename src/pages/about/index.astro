@@ -4,6 +4,7 @@ import { Icon } from 'astro-icon/components';
 import ImageVi from '@/assets/global/img_vi.png';
 import Layout from '@/layouts/Layout.astro';
 import snsNav from '@/data/snsNav';
+import AstroLink from '@/components/helper/AstroLink.astro';
 import PageHdg from '@/components/ui/PageHdg.astro';
 import PageFooter from '@/components/ui/PageFooter.astro';
 import Deco from '@/components/ui/Deco.astro';
@@ -76,9 +77,9 @@ const PageFooterData = {
         <div class="sns">
           {
             snsNav.map((item) => (
-              <a href={item.href} target="_blank" class="sns-link">
+              <AstroLink href={item.href} target="_blank" class="sns-link">
                 <Icon name={`icon_${item.id}`} width={20} height={20} class="sns-logo" />
-              </a>
+              </AstroLink>
             ))
           }
         </div>

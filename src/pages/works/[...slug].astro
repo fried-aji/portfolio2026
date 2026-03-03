@@ -77,7 +77,8 @@ const PageFooterData = {
         </div>
         <div class="carousel-control">
           <button
-            @click="onPrev"
+            @click="onPrev(); $store.config.playSoundDecide();"
+            @mouseenter="$store.config.playSoundSelect()"
             type="button"
             aria-controls="works-carousel"
             data-type="prev"
@@ -94,7 +95,8 @@ const PageFooterData = {
             <span class="carousel-total">{String(entry.data.gallery).padStart(2, '0')}</span>
           </p>
           <button
-            @click="onNext"
+            @click="onNext(); $store.config.playSoundDecide();"
+            @mouseenter="$store.config.playSoundSelect()"
             type="button"
             aria-controls="works-carousel"
             data-type="next"

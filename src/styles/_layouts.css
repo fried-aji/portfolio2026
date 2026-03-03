@@ -14,3 +14,11 @@
     --_container-w: var(--screens-xl);
   }
 }
+
+body {
+  &:has(.l-sound[data-toggle='open']) {
+    .l-wrapper {
+      opacity: 0;
+    }
+  }
+}

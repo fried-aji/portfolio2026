@@ -2,6 +2,7 @@
 import '@/styles/app.css';
 import Header from '@/components/global/Header.astro';
 import Bg from '@/components/global/Bg.astro';
+import Sound from '@/components/global/sound.astro';
 
 interface Props {
   title?: string;
@@ -55,10 +56,13 @@ const lang = Astro.currentLocale;
     <script src="../scripts/app.ts"></script>
   </head>
   <body>
-    <Header />
-    <div id="swup" class="l-container swup-transition-container">
-      <slot />
+    <Sound />
+    <div class="l-wrapper">
+      <Header />
+      <div id="swup" class="l-container swup-transition-container">
+        <slot />
+      </div>
+      <Bg />
     </div>
-    <Bg />
   </body>
 </html>

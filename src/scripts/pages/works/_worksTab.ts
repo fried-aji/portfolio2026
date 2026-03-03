@@ -96,6 +96,7 @@ Alpine.data('worksTab', (id: string) => {
 
         ['@click']: () => {
           this.onTabChange(index);
+          this.$store.config.playSoundDecide();
         },
 
         ['@keyup']: (event: KeyboardEvent) => {
@@ -130,6 +131,11 @@ Alpine.data('worksTab', (id: string) => {
               break;
             }
           }
+        },
+
+        '@mouseenter': () => {
+          if (this.$store.device.isTouchDevice) return;
+          this.$store.config.playSoundSelect();
         },
       };
     },

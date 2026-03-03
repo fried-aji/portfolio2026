@@ -105,9 +105,16 @@ Alpine.data('globalMenu', () => {
       return {
         ['@click']: () => {
           this.onOpen();
+          this.$store.config.playSoundDecide();
         },
+
         [':aria-expanded']: () => {
           return this.isOpen ? 'true' : 'false';
+        },
+
+        '@mouseenter': () => {
+          if (this.$store.device.isTouchDevice) return;
+          this.$store.config.playSoundSelect();
         },
       };
     },
@@ -116,9 +123,16 @@ Alpine.data('globalMenu', () => {
       return {
         ['@click']: () => {
           this.onClose();
+          this.$store.config.playSoundDecide();
         },
+
         [':aria-expanded']: () => {
           return this.isOpen ? 'true' : 'false';
+        },
+
+        '@mouseenter': () => {
+          if (this.$store.device.isTouchDevice) return;
+          this.$store.config.playSoundSelect();
         },
       };
     },

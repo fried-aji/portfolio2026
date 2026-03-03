@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import ImageFrame from '@/components/helper/ImageFrame.astro';
+import AstroLink from '@/components/helper/AstroLink.astro';
 import PageHdg from '@/components/ui/PageHdg.astro';
 import PageFooter from '@/components/ui/PageFooter.astro';
 import Deco from '@/components/ui/Deco.astro';
@@ -76,14 +77,14 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
             <div class="thumb">
               <ImageFrame srcPaths={[`works/img_${item.id}01.jpg`]} />
             </div>
-            <a href={`/works/${item.id}/`} class="info">
+            <AstroLink href={`/works/${item.id}/`} class="info">
               <h2 id={`title-${item.id}`} class="title">
                 <span class="client">{item.data.client.en}</span>
                 <span class="page">{item.data.title.ja}</span>
               </h2>
               <p class="desc">{item.data.description}</p>
               <div class="detail">View Details</div>
-            </a>
+            </AstroLink>
           </div>
         ))
       }
@@ -209,7 +210,7 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
 
   .tab-panel {
     grid-area: 2 / 1 / 3 / 2;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.2s ease;
 
     @media (--mql-md) {
       grid-area: 2 / 1 / 3 / 2;

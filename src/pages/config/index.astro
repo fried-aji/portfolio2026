@@ -30,7 +30,7 @@ const PageFooterData = {
   <main class="p-config u-page-overlay">
     <PageHdg {...pageHdgData} />
     <div class="content">
-      <dl x-data class="list">
+      <dl x-data="config" class="list">
         <div class="item">
           <dt class="title">カラーモード</dt>
           <dd class="info">
@@ -40,6 +40,7 @@ const PageFooterData = {
                 <ul class="radio-list">
                   <li class="radio-item">
                     <input
+                      x-bind="bindInput"
                       x-model="$store.config.theme"
                       id="input-color-light"
                       type="radio"
@@ -52,6 +53,7 @@ const PageFooterData = {
                   </li>
                   <li class="radio-item">
                     <input
+                      x-bind="bindInput"
                       x-model="$store.config.theme"
                       id="input-color-dark"
                       type="radio"
@@ -75,6 +77,7 @@ const PageFooterData = {
                 <ul class="radio-list">
                   <li class="radio-item">
                     <input
+                      x-bind="bindInput"
                       x-model.boolean="$store.config.anime"
                       id="input-anime-on"
                       type="radio"
@@ -87,6 +90,7 @@ const PageFooterData = {
                   </li>
                   <li class="radio-item">
                     <input
+                      x-bind="bindInput"
                       x-model.boolean="$store.config.anime"
                       id="input-anime-off"
                       type="radio"
@@ -118,7 +122,7 @@ const PageFooterData = {
                   step="0.1"
                   class="progress-bar"
                 />
-                <button type="button" @click="$store.config.reset('sound.bgm')" class="input-reset">初期化</button>
+                <button x-bind="bindReset('sound.bgm')" type="button" class="input-reset">初期化</button>
               </li>
               <li class="progress">
                 <label for="input-sound-effect" class="progress-label">効果音</label>
@@ -132,10 +136,11 @@ const PageFooterData = {
                   step="0.1"
                   class="progress-bar"
                 />
-                <button type="button" @click="$store.config.reset('sound.effect')" class="input-reset">初期化</button>
+                <button x-bind="bindReset('sound.effect')" type="button" class="input-reset">初期化</button>
               </li>
               <li class="checkbox">
                 <input
+                  x-bind="bindInput"
                   x-model.boolean="$store.config.sound.mute"
                   type="checkbox"
                   id="input-sound-inactive"
@@ -143,59 +148,7 @@ const PageFooterData = {
                   value="true"
                   class="checkbox-btn"
                 />
-                <label for="input-sound-inactive" class="checkbox-label"
-                  >タブが非アクティブの場合は音声をOFFにする</label
-                >
-              </li>
-            </ul>
-          </dd>
-        </div>
-        <div class="item">
-          <dt class="title">マウスカーソル</dt>
-          <dd class="info">
-            <p class="desc">マウスカーソルの速度やデザインを設定します。</p>
-            <ul class="input-list">
-              <li class="progress">
-                <label for="input-mouse-speed" class="progress-label">速度</label>
-                <input
-                  x-model.number.debounce="$store.config.mouse.speed"
-                  type="range"
-                  id="input-mouse-speed"
-                  name="mouse-speed"
-                  min="0"
-                  max="1"
-                  step="0.1"
-                  class="progress-bar"
-                />
-                <button type="button" @click="$store.config.reset('mouse.speed')" class="input-reset">初期化</button>
-              </li>
-              <li class="radio">
-                <p class="radio-name">デザイン</p>
-                <ul class="radio-list">
-                  <li class="radio-item">
-                    <input
-                      x-model="$store.config.mouse.design"
-                      id="input-mouse-normal"
-                      type="radio"
-                      name="mouse"
-                      value="normal"
-                      checked
-                      class="radio-btn"
-                    />
-                    <label for="input-mouse-normal" class="radio-label">通常</label>
-                  </li>
-                  <li class="radio-item">
-                    <input
-                      x-model="$store.config.mouse.design"
-                      id="input-mouse-custom"
-                      type="radio"
-                      name="mouse"
-                      value="custom"
-                      class="radio-btn"
-                    />
-                    <label for="input-mouse-custom" class="radio-label">カスタム</label>
-                  </li>
-                </ul>
+                <label for="input-sound-inactive" class="checkbox-label">全ての音声をOFFにする</label>
               </li>
             </ul>
           </dd>
@@ -217,7 +170,45 @@ const PageFooterData = {
                   step="0.1"
                   class="progress-bar"
                 />
-                <button type="button" @click="$store.config.reset('scroll.speed')" class="input-reset">初期化</button>
+                <button x-bind="bindReset('scroll.speed')" type="button" class="input-reset">初期化</button>
+              </li>
+            </ul>
+          </dd>
+        </div>
+        <div class="item">
+          <dt class="title">マウスカーソル</dt>
+          <dd class="info">
+            <p class="desc">マウスカーソルのデザインを設定します。</p>
+            <ul class="input-list">
+              <li class="radio">
+                <p class="radio-name">デザイン</p>
+                <ul class="radio-list">
+                  <li class="radio-item">
+                    <input
+                      x-bind="bindInput"
+                      x-model="$store.config.mouse.design"
+                      id="input-mouse-normal"
+                      type="radio"
+                      name="mouse"
+                      value="normal"
+                      checked
+                      class="radio-btn"
+                    />
+                    <label for="input-mouse-normal" class="radio-label">通常</label>
+                  </li>
+                  <li class="radio-item">
+                    <input
+                      x-bind="bindInput"
+                      x-model="$store.config.mouse.design"
+                      id="input-mouse-custom"
+                      type="radio"
+                      name="mouse"
+                      value="custom"
+                      class="radio-btn"
+                    />
+                    <label for="input-mouse-custom" class="radio-label">カスタム</label>
+                  </li>
+                </ul>
               </li>
             </ul>
           </dd>
@@ -450,13 +441,31 @@ const PageFooterData = {
   .checkbox-btn {
     --_border-color: color-mix(in sRGB, var(--color-dark-gray) 30%, transparent 70%);
 
+    position: relative;
     width: calc(16 * var(--px));
     aspect-ratio: 1;
     background-color: var(--color-pure-white);
     border: 1px solid var(--_border-color);
 
     &:checked {
-      background-color: var(--color-black);
+      --_border-color: var(--color-black);
+
+      &::after {
+        display: block;
+      }
+    }
+
+    &::after {
+      position: absolute;
+      inset: 0;
+      display: none;
+      width: calc(11 * var(--px));
+      aspect-ratio: 12 / 9;
+      margin: auto;
+      content: '';
+      background-image: url('/img/global/icon_check.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
     }
   }
 

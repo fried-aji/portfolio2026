@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 import ImageVi from '@/assets/global/img_vi.png';
 import LogoCf from '@/assets/global/logo_cloudflare.png';
 import Layout from '@/layouts/Layout.astro';
+import AstroLink from '@/components/helper/AstroLink.astro';
 import PageHdg from '@/components/ui/PageHdg.astro';
 import PageFooter from '@/components/ui/PageFooter.astro';
 
@@ -96,7 +97,7 @@ const PageFooterData = {
           本サイトを通してクリエイティブ対する姿勢が<br />ご理解いただければ嬉しい限りです。<br
           />私という人間に少しでも興味が湧いたようでしたら<br />ぜひお気軽にお問い合わせください。
         </p>
-        <a href="mailto:ittentoppariku@gmail.com" class="contact">お問い合わせはこちら</a>
+        <AstroLink href="mailto:ittentoppariku@gmail.com" class="contact">お問い合わせはこちら</AstroLink>
       </div>
     </div>
   </main>
@@ -339,6 +340,8 @@ const PageFooterData = {
   }
 
   .contact {
+    --_line-color: var(--color-sub-blue);
+
     display: block;
     width: fit-content;
     margin-top: calc(28 * var(--px));
@@ -346,9 +349,15 @@ const PageFooterData = {
     margin-left: auto;
     font-family: var(--font-dela-gothic);
     font-size: calc(16 * var(--rem));
-    background-image: linear-gradient(var(--color-neon-blue) 0 0);
+    background-image: linear-gradient(var(--_line-color) 0 0);
     background-repeat: no-repeat;
     background-position: left bottom;
     background-size: 100% calc(4 * var(--px));
+
+    @media (any-hover: hover) {
+      &:hover {
+        --_line-color: var(--color-golden-yellow);
+      }
+    }
   }
 </style>
