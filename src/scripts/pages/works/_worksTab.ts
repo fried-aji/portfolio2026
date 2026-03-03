@@ -146,16 +146,16 @@ Alpine.data('worksTab', (id: string) => {
           return this.currentIndex == index;
         },
         ['x-transition:enter-start']: () => {
-          return 'is-hidden';
+          return 'is-enter-start';
         },
         ['x-transition:enter-end']: () => {
-          return 'is-show';
+          return 'is-enter-end';
         },
         ['x-transition:leave-start']: () => {
-          return 'is-show';
+          return 'is-leave-start';
         },
         ['x-transition:leave-end']: () => {
-          return 'is-hidden';
+          return 'is-leave-end';
         },
       };
     },

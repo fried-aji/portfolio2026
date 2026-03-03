@@ -19,8 +19,8 @@
   cursor: var(--cursor-base);
   background-color: var(--color-main);
   transition:
-    color 0.2s ease,
-    background-color 0.2s ease;
+    color 0.2s var(--ease-out-cubic),
+    background-color 0.2s var(--ease-out-cubic);
 
   &[data-theme='dark'] {
     --color-main: var(--color-black);

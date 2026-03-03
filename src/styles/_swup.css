@@ -5,13 +5,30 @@ html {
     }
 
     .swup-transition-container {
-      transition: opacity 0.4s ease;
+      transition: opacity 0.3s var(--ease-out-cubic);
+    }
+
+    [data-transition-slide] {
+      transition:
+        opacity 0.2s var(--ease-out-cubic),
+        translate 0.2s var(--ease-out-cubic);
     }
   }
 
   &.is-animating {
     .swup-transition-container {
       opacity: 0;
+    }
+
+    [data-transition-slide] {
+      opacity: 0;
+      translate: 2% 0;
+    }
+  }
+
+  &.is-leaving {
+    [data-transition-slide] {
+      translate: -2% 0;
     }
   }
 }

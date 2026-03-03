@@ -6,9 +6,17 @@ Alpine.data('sound', () => {
     isOpen: true,
 
     init() {
-      //
-      (this.$refs.dialog as HTMLDialogElement).showModal();
-      this.$store.scroll.onFixed(true);
+      const dialog = this.$refs.dialog as HTMLDialogElement;
+      const isSettingSound = sessionStorage.getItem('isSettingSound');
+
+      if (isSettingSound) {
+        this.$store.config.sound.mute = isSettingSound === 'true';
+        dialog.remove();
+        return;
+      } else {
+        dialog.showModal();
+        this.$store.scroll.onFixed(true);
+      }
     },
 
     destroy() {
@@ -37,9 +45,11 @@ Alpine.data('sound', () => {
           requestAnimationFrame(async () => {
             await waitAnimation(dialog);
             dialog.close();
-            dialog.remove();
             this.$store.scroll.onFixed(false);
+            this.$store.page.isSettingSound = true;
+            sessionStorage.setItem('isSettingSound', `${enable}`);
             this.$store.config.sound.mute = enable;
+            dialog.remove();
           });
         },
       };

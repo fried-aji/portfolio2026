@@ -3,6 +3,7 @@ import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import ImageVi from '@/assets/global/img_vi.png';
 import Layout from '@/layouts/Layout.astro';
+import SplitText from '@/components/helper/SplitText.astro';
 import AstroLink from '@/components/helper/AstroLink.astro';
 import Calendar from '@/components/ui/Calendar.astro';
 import Copyright from '@/components/ui/Copyright.astro';
@@ -10,7 +11,7 @@ import siteNav from '@/data/siteNav';
 ---
 
 <Layout>
-  <main class="p-home">
+  <main x-data="home" class="p-home">
     <div class="container">
       <h1 class="title">
         <Icon
@@ -22,13 +23,13 @@ import siteNav from '@/data/siteNav';
           class="title-logo"
         />
       </h1>
-      <div class="vi">
+      <div x-ref="vi" class="vi">
         <Image src={ImageVi} alt="" />
       </div>
       <ul class="list">
         {
-          siteNav.map((item) => (
-            <li class="item">
+          siteNav.map((item, index) => (
+            <li data-item class="item">
               <AstroLink
                 href={item.href.url}
                 target={item.href.target ?? undefined}
@@ -46,8 +47,13 @@ import siteNav from '@/data/siteNav';
                   class="link-icon"
                 />
                 <span class="link-text">
-                  <span class="link-ja">{item.title.ja}</span>
-                  <span class="link-en">{item.title.en}</span>
+                  <span class="link-ja">
+                    <span class="u-sr-only">{item.title.ja}</span>
+                    <SplitText text={item.title.ja} aria-hidden="true" class="link-split" />
+                  </span>
+                  <span aria-hidden="true" class="link-en">
+                    <SplitText text={item.title.en} class="link-split" />
+                  </span>
                 </span>
               </AstroLink>
             </li>
@@ -175,6 +181,14 @@ import siteNav from '@/data/siteNav';
         }
       }
     }
+
+    @media (scripting: enabled) {
+      &.is-show {
+        .link-split {
+          translate: 0 0;
+        }
+      }
+    }
   }
 
   .link {
@@ -218,6 +232,7 @@ import siteNav from '@/data/siteNav';
   }
 
   .link-ja {
+    overflow: hidden;
     font-family: var(--font-dela-gothic);
     font-size: calc(16 * var(--rem));
     line-height: 1;
@@ -229,6 +244,7 @@ import siteNav from '@/data/siteNav';
   }
 
   .link-en {
+    overflow: hidden;
     font-family: var(--font-zen-dots);
     font-size: calc(10 * var(--rem));
     line-height: 1;
@@ -236,6 +252,15 @@ import siteNav from '@/data/siteNav';
 
     @media (--mql-md) {
       font-size: calc(14 * var(--rem));
+    }
+  }
+
+  .link-split {
+    display: inline-block;
+    transition: translate 0.4s var(--ease-overshoot-out-dramatic) calc(var(--index) * 0.06s);
+
+    @media (scripting: enabled) {
+      translate: 0 -100%;
     }
   }
 

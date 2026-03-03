@@ -1,4 +1,6 @@
 ---
+import SplitText from '@/components/helper/SplitText.astro';
+
 interface Props {
   class?: string;
   tag?: 'h1' | 'h2' | 'h3';
@@ -20,15 +22,22 @@ const TagName = tag;
 ---
 
 <header
+  x-data="inview"
+  x-bind="bindTarget"
   class:list={[
     //
     'c-pagehdg',
     className,
   ]}
 >
-  <div class="text">
-    <TagName class="ja">{title.ja}</TagName>
-    <div aria-hidden="true" class="en">{title.en}</div>
+  <div class="col">
+    <div class="ja">
+      <TagName class="u-sr-only">{title.ja}</TagName>
+      <SplitText text={title.ja} aria-hidden="true" class="split" />
+    </div>
+    <div aria-hidden="true" class="en">
+      <SplitText text={title.en} class="split" />
+    </div>
   </div>
 </header>
 
@@ -56,7 +65,20 @@ const TagName = tag;
       padding: calc(14 * var(--px)) calc(32 * var(--px));
     }
 
-    .text {
+    @media (scripting: enabled) {
+      translate: 0 -20%;
+      transition: translate 0.25s var(--ease-out-cubic);
+
+      &[data-inview='true'] {
+        translate: 0 0;
+
+        .split {
+          translate: 0 0;
+        }
+      }
+    }
+
+    .col {
       position: relative;
       top: calc(14 * var(--px));
       display: flex;
@@ -77,6 +99,7 @@ const TagName = tag;
     }
 
     .ja {
+      overflow: hidden;
       font-family: var(--font-dela-gothic);
       font-size: calc(20 * var(--rem));
 
@@ -86,11 +109,21 @@ const TagName = tag;
     }
 
     .en {
+      overflow: hidden;
       font-family: var(--font-zen-dots);
       font-size: calc(10 * var(--rem));
 
       @media (--mql-md) {
         font-size: calc(12 * var(--rem));
+      }
+    }
+
+    .split {
+      display: inline-block;
+      transition: translate 0.4s var(--ease-overshoot-out-dramatic) calc(var(--index) * 0.06s);
+
+      @media (scripting: enabled) {
+        translate: 0 -100%;
       }
     }
   }

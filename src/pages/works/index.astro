@@ -41,11 +41,11 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
 ---
 
 <Layout title={metaData.title} description={metaData.description}>
-  <main class="p-works u-page-overlay">
+  <main x-data="inview" class="p-works u-page-overlay">
     <PageHdg {...pageHdgData} />
-    <div x-data="worksTab" class="tab-menu">
+    <div data-transition-slide x-data="worksTab" class="tab-menu">
       <div x-ref="tabControl" class="tab-control">
-        <div role="tablist" class="tab-list">
+        <div x-bind="bindTarget" role="tablist" class="tab-list">
           {
             worksData.map((item, index) => (
               <button
@@ -57,6 +57,7 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
                   //
                   'tab',
                 ]}
+                style={`--index: ${index}`}
               >
                 <ImageFrame srcPaths={[`works/img_${item.id}01.jpg`]} />
               </button>
@@ -157,6 +158,17 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
       grid-template-columns: repeat(3, calc(120 * var(--px)));
       gap: calc(12 * var(--px));
     }
+
+    @media (scripting: enabled) {
+      &[data-inview='true'] {
+        @media (--mql-md) {
+          .tab {
+            opacity: 1;
+            scale: 1;
+          }
+        }
+      }
+    }
   }
 
   .tab {
@@ -164,20 +176,29 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
     flex: 0 0 calc(100 * var(--px));
     aspect-ratio: 16 / 9;
     margin-right: calc(10 * var(--px));
-    transition: scale 0.1s var(--ease-overshoot-out-dynamic);
+    transition:
+      scale 0.3s var(--ease-overshoot-out-dynamic) calc(var(--index, 0) * 0.02s),
+      opacity 0.15s var(--ease-out-cubic) calc(var(--index, 0) * 0.02s);
 
     @media (--mql-md) {
       margin-right: 0;
+
+      @media (scripting: enabled) {
+        opacity: 0;
+        scale: 0.8;
+      }
     }
 
     &:not([aria-selected='true']) {
       @media (any-hover: hover) {
         &:hover {
-          opacity: 0.8;
+          img {
+            opacity: 0.8;
 
-          @media (--mql-md) {
-            scale: 1.05;
-            animation: rotation-y 5s ease-in-out infinite;
+            @media (--mql-md) {
+              scale: 1.05;
+              animation: rotation-y 5s ease-in-out infinite;
+            }
           }
         }
       }
@@ -198,28 +219,69 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
       content: '';
       background-color: var(--color-black);
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.2s var(--ease-out-cubic);
     }
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: scale 0.1s var(--ease-overshoot-out-dynamic);
     }
   }
 
   .tab-panel {
     grid-area: 2 / 1 / 3 / 2;
-    transition: opacity 0.2s ease;
+    transition-duration: 0.3s;
 
     @media (--mql-md) {
       grid-area: 2 / 1 / 3 / 2;
     }
 
-    &.is-hidden {
+    &.is-enter-start,
+    &.is-leave-end {
       --_pos: absolute;
+    }
 
-      opacity: 0;
+    &.is-enter-start {
+      .info {
+        opacity: 0;
+        translate: 20% 0;
+      }
+
+      .thumb {
+        img {
+          opacity: 0;
+          translate: 20% 0;
+        }
+      }
+    }
+
+    &.is-enter-end,
+    &.is-leave-start {
+      .info {
+        translate: 0 0;
+      }
+
+      .thumb {
+        img {
+          translate: 0 0;
+        }
+      }
+    }
+
+    &.is-leave-end {
+      .info {
+        opacity: 0;
+        translate: -20% 0;
+      }
+
+      .thumb {
+        img {
+          opacity: 0;
+          translate: -20% 0;
+        }
+      }
     }
   }
 
@@ -231,6 +293,7 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
     width: calc(360 * var(--px));
     aspect-ratio: 16 / 9;
     margin: 0 auto;
+    overflow: hidden;
 
     @media (--mql-md) {
       inset: 0 calc(64 * var(--px)) 0 auto;
@@ -239,9 +302,13 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
     }
 
     img {
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition:
+        translate 0.15s var(--ease-out-cubic),
+        opacity 0.2s var(--ease-out-cubic);
     }
   }
 
@@ -252,10 +319,19 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
     display: block;
     padding-right: calc(16 * var(--px));
     padding-left: calc(16 * var(--px));
+    transition:
+      translate 0.15s var(--ease-out-cubic),
+      opacity 0.2s var(--ease-out-cubic);
 
     @media (--mql-md) {
       padding-right: 0;
       padding-left: 0;
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        --_line-color: var(--color-golden-yellow);
+      }
     }
   }
 
@@ -321,7 +397,7 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
     transform: skewX(-16deg);
     transform-origin: left top;
     rotate: -8deg;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s var(--ease-out-cubic);
 
     &.is-hidden {
       position: absolute;
