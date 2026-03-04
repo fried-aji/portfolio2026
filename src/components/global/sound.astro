@@ -3,39 +3,8 @@ import { Image } from 'astro:assets';
 import ImageMenu from '@/assets/global/img_menu.jpg';
 ---
 
-{
-  /*  
 <dialog
-  x-data="sound"
-  x-ref="dialog"
-  x-bind="bindDialog"
-  aria-label="サウンド切り替え"
-  data-lenis-prevent
-  data-toggle="open"
-  class:list={[
-    //
-    'l-sound',
-  ]}
->
-  <div class="body">
-    <h2 class="title">サウンドをONにしますか？</h2>
-    <p class="desc">※選択後もコンフィグページから変更可能です。</p>
-    <div class="control">
-      <button x-bind="bindButton(false)" type="button" class="button">
-        <span class="button-text">はい</span>
-      </button>
-      <button x-bind="bindButton(true)" type="button" class="button">
-        <span class="button-text">いいえ</span>
-      </button>
-    </div>
-  </div>
-  <div class="bg">
-    <Image src={ImageMenu} densities={[1, 2]} alt="" width={1280} height={720} />
-  </div>
-</dialog>
-*/
-}
-<dialog
+  x-cloak
   x-data="sound"
   x-ref="dialog"
   x-bind="bindDialog"

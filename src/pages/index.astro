@@ -11,9 +11,9 @@ import siteNav from '@/data/siteNav';
 ---
 
 <Layout>
-  <main x-data="home" class="p-home">
+  <main x-data="home" x-bind="bindMagnetMouse" class="p-home">
     <div class="container">
-      <h1 class="title">
+      <h1 x-ref="title" class="title">
         <Icon
           name="logo_site"
           role="img"
@@ -24,7 +24,13 @@ import siteNav from '@/data/siteNav';
         />
       </h1>
       <div x-ref="vi" class="vi">
-        <Image src={ImageVi} alt="" />
+        <Image x-ref="viImage" src={ImageVi} alt="" />
+        <div x-ref="viTransitionMd" class="vi-transition" data-type="md">
+          {Array.from({ length: 12 }).map((_, index) => <div data-line />)}
+        </div>
+        <div x-ref="viTransitionSm" class="vi-transition" data-type="sm">
+          {Array.from({ length: 16 }).map((_, index) => <div data-line />)}
+        </div>
       </div>
       <ul class="list">
         {
@@ -61,8 +67,8 @@ import siteNav from '@/data/siteNav';
         }
       </ul>
     </div>
-    <Calendar class="calendar" />
-    <Copyright class="copyright" />
+    <Calendar id="home-calendar" class="calendar" />
+    <Copyright x-ref="copyright" class="copyright" />
   </main>
 </Layout>
 
@@ -183,7 +189,7 @@ import siteNav from '@/data/siteNav';
     }
 
     @media (scripting: enabled) {
-      &.is-show {
+      &[data-show] {
         .link-split {
           translate: 0 0;
         }
@@ -271,6 +277,7 @@ import siteNav from '@/data/siteNav';
     margin-top: calc(16 * var(--px));
     margin-right: auto;
     margin-left: auto;
+    perspective: 2000px;
 
     @media (--mql-md) {
       right: calc(16 * var(--px));
@@ -283,6 +290,197 @@ import siteNav from '@/data/siteNav';
 
       width: 100%;
       filter: drop-shadow(calc(-20 * var(--px)) 0 0 var(--_shadow-color));
+    }
+  }
+
+  .vi-transition {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    overflow: hidden;
+
+    div {
+      transform: scaleX(0) translateX(-100%);
+      transform-origin: left center;
+
+      &:nth-child(3n + 1 of div) {
+        background-color: var(--color-sub-blue);
+      }
+
+      &:nth-child(3n + 2 of div) {
+        background-color: var(--color-sub-pink);
+      }
+
+      &:nth-child(3n + 3 of div) {
+        background-color: var(--color-sub);
+      }
+    }
+
+    &[data-type='sm'] {
+      /* display: none; */
+
+      div {
+        height: calc(5 * var(--px));
+
+        &:nth-child(1 of div) {
+          width: 40%;
+          margin-left: calc(90 * var(--px));
+        }
+
+        &:nth-child(2 of div) {
+          width: 40%;
+          margin-top: calc(70 * var(--px));
+          margin-left: calc(300 * var(--px));
+        }
+
+        &:nth-child(3 of div) {
+          width: 70%;
+          margin-top: calc(50 * var(--px));
+          margin-left: calc(40 * var(--px));
+        }
+
+        &:nth-child(4 of div) {
+          width: 30%;
+          margin-top: calc(50 * var(--px));
+          margin-left: calc(320 * var(--px));
+        }
+
+        &:nth-child(5 of div) {
+          width: 50%;
+          margin-top: calc(50 * var(--px));
+          margin-left: calc(240 * var(--px));
+        }
+
+        &:nth-child(6 of div) {
+          width: 40%;
+          margin-top: calc(40 * var(--px));
+          margin-left: calc(60 * var(--px));
+        }
+
+        &:nth-child(7 of div) {
+          width: 70%;
+          margin-top: calc(30 * var(--px));
+          margin-left: calc(80 * var(--px));
+        }
+
+        &:nth-child(8 of div) {
+          width: 25%;
+          margin-top: calc(50 * var(--px));
+          margin-left: calc(20 * var(--px));
+        }
+
+        &:nth-child(9 of div) {
+          width: 35%;
+          margin-top: calc(30 * var(--px));
+          margin-left: calc(350 * var(--px));
+        }
+
+        &:nth-child(10 of div) {
+          width: 40%;
+          margin-top: calc(30 * var(--px));
+          margin-left: calc(160 * var(--px));
+        }
+
+        &:nth-child(11 of div) {
+          width: 45%;
+          margin-top: calc(50 * var(--px));
+          margin-left: calc(60 * var(--px));
+        }
+
+        &:nth-child(12 of div) {
+          width: 55%;
+          margin-top: calc(30 * var(--px));
+          margin-left: calc(180 * var(--px));
+        }
+
+        &:nth-child(13 of div) {
+          width: 40%;
+          margin-top: calc(60 * var(--px));
+          margin-left: calc(20 * var(--px));
+        }
+
+        &:nth-child(14 of div) {
+          width: 30%;
+          margin-top: calc(20 * var(--px));
+          margin-left: calc(360 * var(--px));
+        }
+
+        &:nth-child(15 of div) {
+          width: 20%;
+          margin-top: calc(60 * var(--px));
+          margin-left: calc(50 * var(--px));
+        }
+
+        &:nth-child(16 of div) {
+          width: 60%;
+          margin-top: calc(30 * var(--px));
+          margin-left: calc(200 * var(--px));
+        }
+      }
+    }
+
+    &[data-type='md'] {
+      div {
+        &:nth-child(1 of div) {
+          height: calc(10 * var(--px));
+          margin-top: calc(10 * var(--px));
+        }
+
+        &:nth-child(2 of div) {
+          height: calc(40 * var(--px));
+          margin-top: calc(10 * var(--px));
+        }
+
+        &:nth-child(3 of div) {
+          height: calc(40 * var(--px));
+          margin-top: calc(15 * var(--px));
+        }
+
+        &:nth-child(4 of div) {
+          height: calc(50 * var(--px));
+          margin-top: calc(50 * var(--px));
+        }
+
+        &:nth-child(5 of div) {
+          height: calc(20 * var(--px));
+          margin-top: calc(24 * var(--px));
+        }
+
+        &:nth-child(6 of div) {
+          height: calc(40 * var(--px));
+          margin-top: calc(64 * var(--px));
+        }
+
+        &:nth-child(7 of div) {
+          height: calc(15 * var(--px));
+          margin-top: calc(50 * var(--px));
+        }
+
+        &:nth-child(8 of div) {
+          height: calc(40 * var(--px));
+          margin-top: calc(20 * var(--px));
+        }
+
+        &:nth-child(9 of div) {
+          height: calc(15 * var(--px));
+          margin-top: calc(15 * var(--px));
+        }
+
+        &:nth-child(10 of div) {
+          height: calc(45 * var(--px));
+          margin-top: calc(24 * var(--px));
+        }
+
+        &:nth-child(11 of div) {
+          height: calc(50 * var(--px));
+          margin-top: calc(40 * var(--px));
+        }
+
+        &:nth-child(12 of div) {
+          height: calc(30 * var(--px));
+          margin-top: calc(40 * var(--px));
+        }
+      }
     }
   }
 </style>

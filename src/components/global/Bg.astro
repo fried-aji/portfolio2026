@@ -65,8 +65,8 @@ const circleData = [
 ];
 ---
 
-<div role="img" aria-hidden="true" class="l-bg">
-  <div class="base">
+<div role="img" aria-hidden="true" id="bg" class="l-bg">
+  <div data-base class="base">
     <div class="upper">
       <div class="upper-left">
         <Icon name="shape_dot" width={612} height={556} class="upper-dot" data-device="pc" />
@@ -92,7 +92,7 @@ const circleData = [
       </div>
     </div>
   </div>
-  <div class="anime">
+  <div data-anime class="anime">
     {
       circleData.map((item) => (
         <picture class="circle">

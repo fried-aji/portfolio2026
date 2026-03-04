@@ -6,6 +6,7 @@ import Alpine from 'alpinejs';
 const storeKey = 'page';
 const storeValue = {
   isSettingSound: false,
+  isHomeLoading: false,
 
   init() {
     //
