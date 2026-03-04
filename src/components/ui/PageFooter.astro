@@ -41,7 +41,7 @@ const {
   @import '@/styles/_mql.css';
 
   .c-page-footer {
-    --_link-w: 120;
+    --_link-w: 130;
 
     position: relative;
     z-index: calc(var(--z-header) - 1);
@@ -50,7 +50,7 @@ const {
     grid-template-columns: repeat(2, calc(var(--_link-w) * var(--px)));
     align-items: center;
     justify-content: space-between;
-    padding: 0 calc(12 * var(--px)) calc(24 * var(--px));
+    padding: 0 calc(12 * var(--px)) calc(32 * var(--px));
 
     @media (--mql-md) {
       --_link-w: 140;
@@ -114,7 +114,7 @@ const {
     display: grid;
     place-items: center;
     width: calc(var(--_link-w) * var(--px));
-    padding: calc(6 * var(--px)) calc(10 * var(--px));
+    padding: calc(7 * var(--px)) calc(12 * var(--px));
     font-family: var(--font-dela-gothic);
     font-size: calc(12 * var(--rem));
     color: var(--color-black);

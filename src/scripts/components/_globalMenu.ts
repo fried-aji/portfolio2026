@@ -73,7 +73,7 @@ Alpine.data('globalMenu', () => {
       requestAnimationFrame(async () => {
         if (dialogEl) {
           await waitAnimation(dialogEl);
-          dialogEl.scrollTop = 0;
+          this.$refs.scroller.scrollTop = 0;
           dialogEl.close();
           this.isAnimating = false;
         }
@@ -95,6 +95,14 @@ Alpine.data('globalMenu', () => {
           e.preventDefault();
           if (this.isAnimating) return;
           if (this.isOpen) {
+            this.onClose();
+          }
+        },
+
+        ['@click.outside']: (e: MouseEvent) => {
+          if (this.isAnimating) return;
+          if (this.isOpen) {
+            this.isOpen = false;
             this.onClose();
           }
         },

@@ -15,6 +15,12 @@ Alpine.data('home', () => {
 
     init() {
       const itemEl = this.$el.querySelectorAll<HTMLElement>('[data-item]');
+      if (!this.$store.config.anime) {
+        for (const item of itemEl) {
+          item.dataset.show = '';
+        }
+        return;
+      }
       const lineMd = this.$refs.viTransitionMd.querySelectorAll('[data-line]');
       const lineSm = this.$refs.viTransitionSm.querySelectorAll('[data-line]');
       const viImage = this.$refs.viImage;
@@ -209,17 +215,14 @@ Alpine.data('home', () => {
           );
       }
 
-      if (timeline) {
-        const isSettingSound = sessionStorage.getItem('isSettingSound');
-        if (isSettingSound) {
-          timeline.play();
-        } else {
-          this.$watch('$store.page.isSettingSound', (isSettingSound) => {
-            if (isSettingSound) {
-              timeline.play();
-            }
-          });
-        }
+      if (this.$store.page.isSettingSound) {
+        timeline?.play();
+      } else {
+        this.$watch('$store.page.isSettingSound', (isSettingSound) => {
+          if (isSettingSound) {
+            timeline?.play();
+          }
+        });
       }
     },
 

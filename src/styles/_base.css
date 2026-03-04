@@ -52,6 +52,24 @@ body {
   &.is-fixed {
     overflow: hidden;
   }
+
+  &::before {
+    position: fixed;
+    z-index: var(--z-header);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    content: '';
+    background-color: color-mix(in sRGB, var(--color-lynch) 60%, transparent 40%);
+    opacity: 0;
+    transition: opacity 0.2s var(--ease-out-cubic);
+  }
+
+  &:has(.l-menu[data-toggle='open']) {
+    &::before {
+      opacity: 1;
+    }
+  }
 }
 
 a,
@@ -74,6 +92,7 @@ input[type='range'] {
   &::-webkit-slider-thumb,
   &::-moz-range-thumb {
     appearance: none;
+    border: unset;
   }
 }
 

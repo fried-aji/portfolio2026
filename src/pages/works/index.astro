@@ -232,10 +232,11 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
 
   .tab-panel {
     grid-area: 2 / 1 / 3 / 2;
-    transition-duration: 0.3s;
+    transition-duration: 0.4s;
 
     @media (--mql-md) {
       grid-area: 2 / 1 / 3 / 2;
+      transition-duration: 0.3s;
     }
 
     &.is-enter-start,
@@ -246,7 +247,10 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
     &.is-enter-start {
       .info {
         opacity: 0;
-        translate: 20% 0;
+
+        @media (--mql-md) {
+          translate: 20% 0;
+        }
       }
 
       .thumb {
@@ -260,10 +264,16 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
     &.is-enter-end,
     &.is-leave-start {
       .info {
-        translate: 0 0;
+        opacity: 1;
+
+        @media (--mql-md) {
+          translate: 0 0;
+        }
       }
 
       .thumb {
+        opacity: 1;
+
         img {
           translate: 0 0;
         }
@@ -273,7 +283,10 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
     &.is-leave-end {
       .info {
         opacity: 0;
-        translate: -20% 0;
+
+        @media (--mql-md) {
+          translate: -20% 0;
+        }
       }
 
       .thumb {
@@ -307,8 +320,14 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
       height: 100%;
       object-fit: cover;
       transition:
-        translate 0.15s var(--ease-out-cubic),
-        opacity 0.2s var(--ease-out-cubic);
+        translate 0.25s var(--ease-out-cubic),
+        opacity 0.4s var(--ease-out-cubic);
+
+      @media (--mql-md) {
+        transition:
+          translate 0.15s var(--ease-out-cubic),
+          opacity 0.2s var(--ease-out-cubic);
+      }
     }
   }
 
@@ -319,13 +338,14 @@ const worksData: CollectionEntry<'works'>[] = works.toSorted(
     display: block;
     padding-right: calc(16 * var(--px));
     padding-left: calc(16 * var(--px));
-    transition:
-      translate 0.15s var(--ease-out-cubic),
-      opacity 0.2s var(--ease-out-cubic);
+    transition: opacity 0.4s var(--ease-out-cubic);
 
     @media (--mql-md) {
       padding-right: 0;
       padding-left: 0;
+      transition:
+        translate 0.15s var(--ease-out-cubic),
+        opacity 0.2s var(--ease-out-cubic);
     }
 
     @media (any-hover: hover) {

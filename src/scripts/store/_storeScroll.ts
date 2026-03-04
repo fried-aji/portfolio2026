@@ -41,6 +41,11 @@ const storeValue = {
   onFixed(enable: boolean) {
     this.isFixed = enable;
     document.body.classList.toggle('is-fixed', enable);
+    if (enable) {
+      this.lenis.stop();
+    } else {
+      this.lenis.start();
+    }
   },
 
   onScrollTo(target: number | string | HTMLElement, options: ScrollToOptions = {}) {

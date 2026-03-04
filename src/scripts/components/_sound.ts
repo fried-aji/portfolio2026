@@ -7,16 +7,8 @@ Alpine.data('sound', () => {
 
     init() {
       const dialog = this.$refs.dialog as HTMLDialogElement;
-      const isSettingSound = sessionStorage.getItem('isSettingSound');
-
-      if (isSettingSound) {
-        this.$store.config.sound.mute = isSettingSound === 'true';
-        dialog.remove();
-        return;
-      } else {
-        dialog.showModal();
-        this.$store.scroll.onFixed(true);
-      }
+      dialog.showModal();
+      this.$store.scroll.onFixed(true);
     },
 
     destroy() {
@@ -47,7 +39,6 @@ Alpine.data('sound', () => {
             dialog.close();
             this.$store.scroll.onFixed(false);
             this.$store.page.isSettingSound = true;
-            sessionStorage.setItem('isSettingSound', `${enable}`);
             this.$store.config.sound.mute = enable;
             dialog.remove();
           });

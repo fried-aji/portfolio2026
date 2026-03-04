@@ -1,10 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { Image } from 'astro:assets';
-import ImageMenu from '@/assets/global/img_menu.jpg';
 import AstroLink from '@/components/helper/AstroLink.astro';
 import MenuToggle from '@/components/ui/MenuToggle.astro';
-import Calendar from '@/components/ui/Calendar.astro';
 import siteNav from '@/data/siteNav';
 import snsNav from '@/data/snsNav';
 
@@ -26,12 +23,7 @@ const {
     'l-header',
   ]}
 >
-  <nav
-    x-data="globalMenu"
-    aria-label="グローバルナビゲーション"
-    class:list={//
-    'nav'}
-  >
+  <nav x-data="globalMenu" aria-label="グローバルナビゲーション" class:list={'nav'}>
     <MenuToggle title="全てのメニューを開く" x-bind="bindOpen" aria-expanded="false" class="open" />
     <dialog
       x-bind="bindDialog"
@@ -39,24 +31,37 @@ const {
       aria-label="全てのメニュー"
       class:list={[
         //
-        'menu',
+        'l-menu',
       ]}
     >
       <MenuToggle title="全てのメニューを閉じる" x-bind="bindClose" aria-expanded="false" class="close" />
-      <Calendar class="calendar" />
-      <div class="outer">
-        <ul class="upper">
-          {
-            siteNav.map((item) => (
-              <li class="upper-item">
-                <AstroLink href={item.href.url} target={item.href.target ?? undefined} class="upper-link">
-                  {item.title.en}
-                </AstroLink>
-              </li>
-            ))
-          }
-        </ul>
-        <div class="lower">
+      <div x-ref="scroller" class="outer">
+        <div class="inner">
+          <ul class="list">
+            <li class="list-item">
+              <AstroLink href="/" class="list-link">
+                <Icon name="icon_home" role="img" aria-hidden="true" width={24} height={24} class="list-icon" />
+                <span class="list-text">ホーム</span>
+              </AstroLink>
+            </li>
+            {
+              siteNav.map((item) => (
+                <li class="list-item">
+                  <AstroLink href={item.href.url} target={item.href.target ?? undefined} class="list-link">
+                    <Icon
+                      name={`icon_${item.icon.id}`}
+                      role="img"
+                      aria-hidden="true"
+                      width={24}
+                      height={24}
+                      class="list-icon"
+                    />
+                    <span class="list-text">{item.title.ja}</span>
+                  </AstroLink>
+                </li>
+              ))
+            }
+          </ul>
           <div class="sns">
             {
               snsNav.map((item) => (
@@ -66,13 +71,7 @@ const {
               ))
             }
           </div>
-          <AstroLink href="/" class="home">
-            <Icon name="logo_site" role="img" aria-label="ホームに戻る" width={300} height={60} class="home-logo" />
-          </AstroLink>
         </div>
-      </div>
-      <div class="bg">
-        <Image src={ImageMenu} densities={[1, 2]} alt="" width={1280} height={720} />
       </div>
     </dialog>
   </nav>
@@ -100,160 +99,225 @@ const {
     }
   }
 
-  .menu {
-    width: 100%;
+  .l-menu {
+    --_w: 230;
+    --_clip-path: polygon(
+      calc(164 / var(--_w) * 100%) 0,
+      100% 0,
+      100% calc(814 / 849 * 100%),
+      0 100%,
+      0% calc(35 / 849 * 100%)
+    );
+
+    width: calc(var(--_w) * var(--px));
     height: 100%;
-    overflow-y: auto;
+    margin-left: auto;
     overscroll-behavior: contain;
-    color: var(--color-pure-white);
-    transition: opacity 0.2s var(--ease-out-cubic);
+    color: var(--color-black);
+    transition:
+      opacity 0.2s var(--ease-out-cubic),
+      translate 0.2s var(--ease-out-cubic);
 
     &[data-toggle='close'] {
       opacity: 0;
+
+      &::after {
+        scale: 0 1;
+      }
+
+      .outer {
+        translate: 100% 0;
+      }
+    }
+
+    @media (--mql-md) {
+      --_w: 280;
+      --_clip-path: polygon(
+        calc(200 / var(--_w) * 100%) 0,
+        100% 0,
+        100% calc(685 / 720 * 100%),
+        0 100%,
+        0% calc(35 / 720 * 100%)
+      );
+    }
+
+    &::after {
+      position: absolute;
+      top: calc(10 * var(--px));
+      left: calc(-10 * var(--px));
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      content: '';
+      background-color: var(--color-black);
+      clip-path: var(--_clip-path);
+      transform-origin: right center;
+      transition: scale 0.3s var(--ease-out-cubic);
     }
 
     :global(.close) {
-      --_toggle-color: var(--color-black);
-      --_toggle-bg: var(--color-pure-white);
+      --_toggle-color: var(--color-pure-white);
+      --_toggle-bg: var(--color-black);
 
       position: fixed;
       top: 0;
       right: 0;
+      z-index: var(--z-header);
 
       @media (any-hover: hover) {
         &:hover {
+          --_toggle-color: var(--color-black);
+
           background-color: var(--color-golden-yellow);
         }
       }
     }
-
-    :global(.calendar) {
-      --_top: 12;
-      --_left: 12;
-
-      position: absolute;
-      top: calc(var(--_top) * var(--px));
-      left: calc(var(--_left) * var(--px));
-
-      @media (--mql-md) {
-        --_top: 16;
-        --_left: 16;
-      }
-    }
   }
 
-  .bg {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    width: 100%;
+  .outer {
     height: 100%;
+    overflow-y: auto;
+    background-color: var(--color-pure-white);
+    clip-path: var(--_clip-path);
+    transition: translate 0.2s var(--ease-out-cubic);
+  }
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+  .inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    row-gap: calc(56 * var(--px));
+    min-height: 100%;
+    padding: calc(88 * var(--px)) calc(20 * var(--px)) calc(56 * var(--px));
+
+    @media (--mql-md) {
+      row-gap: calc(64 * var(--px));
+      padding: calc(104 * var(--px)) calc(20 * var(--px)) calc(64 * var(--px));
     }
 
     &::before,
     &::after {
       position: absolute;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    &::before {
+      --_size: 4px;
+      --_gap: 10px;
+
       inset: 0;
       width: 100%;
       height: 100%;
       content: '';
-    }
-
-    &::before {
-      background-color: color-mix(in sRGB, var(--color-lynch) 30%, transparent 70%);
-      backdrop-filter: blur(6px);
-    }
-
-    &::after {
-      --_size: 1px;
-      --_gap: 2px;
-
       background-image: radial-gradient(
         circle,
-        var(--color-sub-blue) calc(var(--_size) / 2),
+        var(--color-dark-gray) calc(var(--_size) / 2),
         transparent calc(var(--_size) / 2)
       );
       background-position: 0 0;
       background-size: calc(var(--_size) + var(--_gap)) calc(var(--_size) + var(--_gap));
-    }
-  }
-
-  .outer {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    min-height: calc(100% + 1px);
-    padding: calc(120 * var(--px)) calc(20 * var(--px)) calc(48 * var(--px));
-
-    @media (--mql-md) {
-      row-gap: calc(80 * var(--px));
-      padding: calc(160 * var(--px)) calc(40 * var(--px)) calc(42 * var(--px));
-    }
-  }
-
-  .upper {
-    display: grid;
-    gap: calc(42 * var(--px));
-    width: max-content;
-    margin-right: calc(12 * var(--px));
-    margin-left: calc(12 * var(--px));
-
-    @media (--mql-md) {
-      grid-template-columns: repeat(2, 1fr);
-      gap: calc(80 * var(--px)) calc(120 * var(--px));
-      margin-right: calc(40 * var(--px));
-      margin-left: calc(40 * var(--px));
-    }
-  }
-
-  .upper-link {
-    display: block;
-    font-family: var(--font-zen-dots);
-    font-size: calc(28 * var(--rem));
-    line-height: 1;
-
-    @media (--mql-md) {
-      font-size: calc(48 * var(--rem));
+      opacity: 0.15;
     }
 
-    @media (any-hover: hover) {
-      &:hover {
-        color: var(--color-golden-yellow);
+    &::after {
+      top: 0;
+      bottom: 0;
+      left: calc(-43 * var(--px));
+      width: fit-content;
+      height: fit-content;
+      margin-top: auto;
+      margin-bottom: auto;
+      font-family: var(--font-zen-dots);
+      font-size: calc(120 * var(--px));
+      line-height: 1;
+      color: var(--color-dark-gray);
+      white-space: nowrap;
+      content: 'MENU';
+      opacity: 0.1;
+      rotate: -90deg;
+
+      @media (--mql-md) {
+        left: calc(-38 * var(--px));
+        font-size: calc(140 * var(--px));
       }
     }
   }
 
-  .lower {
+  .list {
     display: grid;
-    grid-template-columns: 1fr max-content;
-    column-gap: calc(24 * var(--px));
-    align-items: flex-end;
-    align-self: flex-end;
-    margin-top: calc(120 * var(--px));
+    row-gap: calc(24 * var(--px));
+    padding-right: calc(8 * var(--px));
+    padding-left: calc(8 * var(--px));
 
     @media (--mql-md) {
-      margin-top: 0;
+      row-gap: calc(30 * var(--px));
+      padding-right: calc(12 * var(--px));
+      padding-left: calc(12 * var(--px));
     }
   }
 
-  .sns {
-    --_gap: 10;
+  .list-item {
+    display: grid;
+  }
 
+  .list-link {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: calc(10 * var(--px));
+    align-items: center;
+    font-family: var(--font-dela-gothic);
+    font-size: calc(20 * var(--rem));
+
+    @media (--mql-md) {
+      column-gap: calc(12 * var(--px));
+      font-size: calc(24 * var(--rem));
+    }
+
+    @media (any-hover: hover) {
+      &:hover {
+        --_line-w: 100%;
+      }
+    }
+
+    &[aria-current='page'],
+    &[aria-current='true'] {
+      --_line-w: 100%;
+    }
+  }
+
+  .list-icon {
+    width: calc(20 * var(--px));
+
+    @media (--mql-md) {
+      width: calc(24 * var(--px));
+    }
+  }
+
+  .list-text {
+    width: fit-content;
+    background-image: linear-gradient(var(--color-golden-yellow) 0 0);
+    background-repeat: no-repeat;
+    background-position: 0 calc(100% - 2 * var(--px));
+    background-size: var(--_line-w, 0) calc(4 * var(--px));
+  }
+
+  .sns {
     display: flex;
-    column-gap: calc(var(--_gap) * var(--px));
+    column-gap: calc(10 * var(--px));
+    align-self: flex-end;
+    justify-content: flex-end;
     height: fit-content;
 
     @media (--mql-md) {
-      --_gap: 16;
+      column-gap: calc(10 * var(--px));
     }
   }
 
   .sns-link {
-    --_w: 34;
+    --_w: 36;
     --_clip-offset: calc((1 - 10 / 40) * 100%);
     --_clip-path: polygon(0 0, 100% 0, 100% var(--_clip-offset), var(--_clip-offset) 100%, 0 100%);
     --_bg-color: var(--color-pure-white);
@@ -271,10 +335,6 @@ const {
     aspect-ratio: 1;
     filter: var(--_border);
     clip-path: var(--_clip-path);
-
-    @media (--mql-md) {
-      --_w: 40;
-    }
 
     @media (any-hover: hover) {
       &:hover {
@@ -299,19 +359,5 @@ const {
     position: relative;
     z-index: 1;
     width: 50%;
-  }
-
-  .home {
-    --_w: 181;
-
-    width: calc(var(--_w) * var(--px));
-
-    @media (--mql-md) {
-      --_w: 320;
-    }
-
-    svg {
-      width: 100%;
-    }
   }
 </style>

@@ -421,13 +421,20 @@ const PageFooterData = {
     &::-webkit-slider-thumb,
     &::-moz-range-thumb {
       width: calc(20 * var(--px));
-      aspect-ratio: 1;
       background-color: var(--color-pure-white);
       border-radius: var(--infinity);
 
       @media (--mql-md) {
         width: calc(24 * var(--px));
       }
+    }
+
+    &::-webkit-slider-thumb {
+      aspect-ratio: 1;
+    }
+
+    &::-moz-range-thumb {
+      height: calc(20 * var(--px));
     }
   }
 
