@@ -8,20 +8,6 @@
   }
 }
 
-@keyframes blink {
-  0% {
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
 @keyframes rotation-y {
   0% {
     rotate: y 0deg;
@@ -44,24 +30,10 @@
   }
 }
 
-@keyframes scale {
-  0% {
-    scale: 1 1;
-  }
-
-  50% {
-    scale: 1.05 1.05;
-  }
-
-  100% {
-    scale: 1;
-  }
-}
-
 @keyframes fade-up {
   from {
     opacity: 0;
-    translate: 0 2%;
+    translate: 0 var(--_y, 2%);
   }
 
   to {

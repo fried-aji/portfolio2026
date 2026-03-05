@@ -5,8 +5,8 @@
 import Alpine from 'alpinejs';
 import type { ScrollToOptions } from 'lenis';
 import Lenis from 'lenis';
-import { Power4 } from 'gsap';
-import { linear, easeInOutQuad } from '@/scripts/utils/easing';
+import { Power1, Power4 } from 'gsap';
+import { linear } from '@/scripts/utils/easing';
 
 const storeKey = 'scroll';
 const storeValue = {
@@ -18,26 +18,37 @@ const storeValue = {
   // destroy() {},
 
   onStart() {
-    Alpine.effect(() => {
-      const anime = Alpine.store('config').anime;
-      const speedFactor = Alpine.store('config').scroll.speed;
+    this._initLenis();
 
-      requestAnimationFrame(() => {
-        if (this.lenis) {
-          this.lenis.destroy();
-          this.lenis = null!;
-        }
-        this.lenis = new Lenis({
-          autoRaf: true,
-          duration: anime ? speedFactor : 0,
-          easing: anime ? Power4.easeOut : linear,
-          smoothWheel: anime,
+    if (this.lenis) {
+      Alpine.effect(() => {
+        const anime = Alpine.store('config').anime;
+        const speedFactor = Alpine.store('config').scroll.speed;
+
+        requestAnimationFrame(() => {
+          if (this.lenis) {
+            this.lenis.destroy();
+            this.lenis = null!;
+          }
+          this._initLenis(anime, speedFactor);
         });
       });
+    }
+  },
+
+  _initLenis(
+    //
+    anime: boolean = Alpine.store('config').anime,
+    speedFactor: number = Alpine.store('config').scroll.speed,
+  ) {
+    this.lenis = new Lenis({
+      autoRaf: true,
+      duration: anime ? speedFactor : 0,
+      easing: anime ? Power4.easeOut : linear,
+      smoothWheel: anime,
     });
   },
 
-  // 背景固定
   onFixed(enable: boolean) {
     this.isFixed = enable;
     document.body.classList.toggle('is-fixed', enable);
@@ -52,8 +63,8 @@ const storeValue = {
     if (this.lenis) {
       this.lenis.scrollTo(target, {
         offset: options.offset || 0,
-        duration: options.duration || 0.8,
-        easing: options.easing || easeInOutQuad,
+        duration: options.duration || 0.5,
+        easing: options.easing || Power1.easeInOut,
         lock: options.lock || true,
         ...options,
       });

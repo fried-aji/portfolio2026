@@ -30,12 +30,6 @@ Alpine.data('globalMenu', () => {
           );
         }
       }
-
-      // this.$watch('$store.mql.isMD', (mql: boolean) => {
-      //   if (mql && this.isOpen) {
-      //     this.onClose();
-      //   }
-      // });
     },
 
     destroy() {

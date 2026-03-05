@@ -2,13 +2,13 @@ import Alpine from 'alpinejs';
 
 Alpine.data('config', () => {
   return {
-    init() {
-      //
-    },
+    // init() {
+    //   //
+    // },
 
-    destroy() {
-      //
-    },
+    // destroy() {
+    //   //
+    // },
 
     // bind
     bindReset(key: string) {

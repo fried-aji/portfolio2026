@@ -9,7 +9,7 @@ import PageHdg from '@/components/ui/PageHdg.astro';
 import PageFooter from '@/components/ui/PageFooter.astro';
 
 const metaData = {
-  title: 'セカイ | Naganoma Rikuのポートフォリオ',
+  title: 'セカイ | ナガノマ リクのポートフォリオサイト',
   description: '本サイト制作の経緯や世界観についてご紹介します。',
 };
 
@@ -60,11 +60,7 @@ const PageFooterData = {
           <li class="design-item" data-type="font" data-font="ja-sub">Dela Gothic One</li>
           <li class="design-item" data-type="font" data-font="en">Zen Dots</li>
           <li class="design-item" data-type="font" data-font="ja">Mplus 1p</li>
-          <li class="design-item" data-type="color"></li>
-          <li class="design-item" data-type="color"></li>
-          <li class="design-item" data-type="color"></li>
-          <li class="design-item" data-type="color"></li>
-          <li class="design-item" data-type="color"></li>
+          {Array.from({ length: 5 }).map((_, index) => <li class="design-item" data-type="color" />)}
         </ul>
       </section>
       <section class="section">

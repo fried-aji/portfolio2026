@@ -13,12 +13,10 @@ import SwupPreloadPlugin from '@swup/preload-plugin';
 const storeKey = 'router';
 const storevalue = {
   swup: null! as Swup,
-  // URL
   currentPath: window.location.pathname,
   currentHref: window.location.href,
   currentUrl: window.location.pathname + window.location.search,
-  // 遷移状態
-  isTransitioning: false,
+  currentSearch: window.location.search,
 
   // init（自動実行）だと無限ループになるので手動で呼び出す
   onStart() {
@@ -27,22 +25,13 @@ const storevalue = {
       linkToSelf: 'scroll',
       animationSelector: '[class*="swup-transition-"]',
       containers: ['#swup'],
-      /*
-      フック呼び出し
-      https://swup.js.org/hooks/
-      */
       hooks: {
-        'visit:start': () => {
-          this.isTransitioning = true;
-        },
-        'visit:end': () => {
-          this.isTransitioning = false;
-        },
         'page:load': (visit) => {
           // https://swup.js.org/api/properties/#location
           this.currentHref = this.swup.location.href;
           this.currentUrl = this.swup.location.url;
           this.currentPath = this.swup.location.pathname;
+          this.currentSearch = this.swup.location.search;
         },
       },
       plugins: [
@@ -57,6 +46,20 @@ const storevalue = {
             samePageWithHash: !Alpine.store('mql').isReducedMotion,
             samePage: !Alpine.store('mql').isReducedMotion,
           },
+          scrollFunction: (_el, top, left, animate, start, end) => {
+            if (!animate) {
+              start();
+              window.scrollTo(left, top);
+              end();
+              return;
+            }
+            start();
+            Alpine.store('scroll').onScrollTo(top, {
+              onComplete: () => {
+                end();
+              },
+            });
+          },
         }),
         new SwupPreloadPlugin(),
       ],
@@ -68,7 +71,6 @@ const storevalue = {
     const currentPathArray = this.currentPath.split('/').filter(Boolean);
     const hrefPath = new URL(href, window.location.origin).pathname;
     const hrefArray = hrefPath.split('/').filter(Boolean);
-
     if (this.currentPath === hrefPath) {
       return 'page';
     } else if (hrefArray.length > 0 && hrefArray.every((item, i) => currentPathArray[i] === item)) {

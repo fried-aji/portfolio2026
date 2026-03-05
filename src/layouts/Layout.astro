@@ -11,8 +11,8 @@ interface Props {
 
 const {
   //
-  title = 'Naganoma Rikuのポートフォリオ',
-  description = 'Naganoma Rikuのポートフォリオです。',
+  title = 'ナガノマ リクのポートフォリオサイト',
+  description = 'ナガノマ リクのポートフォリオサイトです。',
 } = Astro.props;
 
 const { site } = Astro;
@@ -23,12 +23,14 @@ const lang = Astro.currentLocale;
 ---
 
 <!doctype html>
-<html lang="ja">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="format-detection" content="telephone=no" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    {/* OGP */}
     <meta property="og:site_name" content={title} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

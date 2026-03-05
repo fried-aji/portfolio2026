@@ -2,21 +2,24 @@ import Alpine from 'alpinejs';
 import { waitAnimation } from '@/scripts/utils/waitAnimation';
 
 Alpine.data('sound', () => {
+  let dialogEl: HTMLDialogElement;
+
   return {
     isOpen: true,
 
     init() {
-      const dialog = this.$refs.dialog as HTMLDialogElement;
-      dialog.showModal();
+      dialogEl = this.$refs.dialog as HTMLDialogElement;
+      dialogEl.showModal();
       this.$store.scroll.onFixed(true);
     },
 
     destroy() {
-      //
+      if (dialogEl) {
+        dialogEl = null!;
+      }
     },
 
     // bind
-
     bindDialog() {
       return {
         [':data-toggle']: () => {
@@ -32,15 +35,14 @@ Alpine.data('sound', () => {
     bindButton(enable: boolean) {
       return {
         ['@click']: () => {
-          const dialog = this.$refs.dialog as HTMLDialogElement;
           this.isOpen = false;
+          this.$store.scroll.onFixed(false);
           requestAnimationFrame(async () => {
-            await waitAnimation(dialog);
-            dialog.close();
-            this.$store.scroll.onFixed(false);
+            await waitAnimation(dialogEl);
+            dialogEl.close();
             this.$store.page.isSettingSound = true;
             this.$store.config.sound.mute = enable;
-            dialog.remove();
+            dialogEl.remove();
           });
         },
       };

@@ -2,7 +2,7 @@ import Alpine from 'alpinejs';
 import type { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel';
 import EmblaCarousel from 'embla-carousel';
 
-Alpine.data('worksTab', (id: string) => {
+Alpine.data('worksTab', () => {
   let emblaApi: EmblaCarouselType;
 
   return {
@@ -10,15 +10,14 @@ Alpine.data('worksTab', (id: string) => {
 
     init() {
       // クエリパラメータをチェックしてcurrentIndexを設定
-      //   const params = new URLSearchParams(window.location.search);
-      //   const tabParam = params.get('tab');
-      //   const indexParam = params.get('index');
-      //   if (tabParam === id && indexParam !== null) {
-      //     const index = Number.parseInt(indexParam, 10);
-      //     if (!Number.isNaN(index) && index >= 0) {
-      //       this.currentIndex = index;
-      //     }
-      //   }
+      const params = new URLSearchParams(this.$store.router.currentSearch);
+      const indexParam = params.get('index');
+      if (indexParam !== null) {
+        const index = Number.parseInt(indexParam, 10);
+        if (!Number.isNaN(index) && index >= 0) {
+          this.currentIndex = index;
+        }
+      }
 
       this._initCarousel();
 
@@ -76,11 +75,10 @@ Alpine.data('worksTab', (id: string) => {
       }
 
       // クエリパラメータを更新
-      //   const params = new URLSearchParams(window.location.search);
-      //   params.set('tab', id);
-      //   params.set('index', index.toString());
-      //   const newUrl = `${window.location.pathname}?${params.toString()}`;
-      //   window.history.pushState({}, '', newUrl);
+      const params = new URLSearchParams(this.$store.router.currentSearch);
+      params.set('index', index.toString());
+      const newUrl = `${this.$store.router.currentPath}?${params.toString()}`;
+      window.history.pushState({}, '', newUrl);
     },
 
     // x-bind
