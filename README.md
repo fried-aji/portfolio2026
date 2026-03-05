@@ -1,4 +1,4 @@
-# 📢 Portfolio ver2.0
+# 📢 [Portfolio ver2.0](https://rikunaganoma.com/)
 
 ## 🌴 環境情報
 
@@ -30,9 +30,8 @@ pnpm run dev
 │   ├── data/　# 共通データ。Content Collectionsなど
 │   ├── icons/ 　#SVG（Astro Icon）
 │   ├── layouts/ #共通レイアウト
-│   ├── libs/ #SSG処理関連
 │   └── pages/　#各ページのHTML
-│   ├── styles/ #css（sass）
+│   ├── styles/ #css
 │   ├── scripts/ #js（クライアントサイド）
 └── astro.config.ts　#開発環境設定ファイル
 ```

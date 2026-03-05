@@ -17,7 +17,7 @@ export default defineConfig({
     locales: ['ja'],
     defaultLocale: 'ja',
   },
-  site: 'https://sample.co.jp',
+  site: 'http://rikunaganoma.com',
   server: {
     host: true,
     open: true,
