@@ -32,9 +32,11 @@ Alpine.data('home', () => {
       const header = document.getElementById('header');
       const calendar = document.getElementById('home-calendar');
 
-      gsap.set(this.$el, {
-        pointerEvents: 'none',
-      });
+      if (!this.$store.device.isTouchDevice) {
+        gsap.set(this.$el, {
+          pointerEvents: 'none',
+        });
+      }
 
       const lineKeyframes = {
         '0%': {
