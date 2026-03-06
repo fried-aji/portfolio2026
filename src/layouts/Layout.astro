@@ -16,7 +16,7 @@ const {
 } = Astro.props;
 
 const { site } = Astro;
-const ogImage = `${site}img/ogp.png`;
+const ogImage = `${site}/ogp.png`;
 const currentPath = Astro.url.pathname;
 const canonicalURL = new URL(currentPath, Astro.site);
 const lang = Astro.currentLocale;

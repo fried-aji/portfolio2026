@@ -32,6 +32,10 @@ Alpine.data('home', () => {
       const header = document.getElementById('header');
       const calendar = document.getElementById('home-calendar');
 
+      gsap.set(this.$el, {
+        pointerEvents: 'none',
+      });
+
       const lineKeyframes = {
         '0%': {
           scaleX: 0,
@@ -253,6 +257,9 @@ Alpine.data('home', () => {
 
     _setupMagnet() {
       if (this.$store.device.isTouchDevice) return;
+      gsap.set(this.$el, {
+        clearProps: 'pointerEvents',
+      });
       this.isMagnetReady = true;
     },
 
