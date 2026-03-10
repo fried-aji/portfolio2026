@@ -7,6 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "deploy": "pnpm run build && pnpm wrangler deploy",
     "lint:html": "markuplint 'src/**/*.{html,astro}'",
     "lint:es": "eslint 'src/**/*.{js,ts,jsx,tsx,astro}'",
     "lint:style": "stylelint 'src/**/*.{css,astro}'",

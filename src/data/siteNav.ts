@@ -54,7 +54,7 @@ export const siteNav = [
       en: 'CONTACT',
     },
     href: {
-      url: 'mailto:ittentoppariku@gmail.com',
+      url: 'mailto:riku.naganoma@gmail.com',
     },
     icon: {
       id: 'email',
