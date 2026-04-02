@@ -1,0 +1,83 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PrimaryButton from '@/components/ui/PrimaryButton.astro';
+
+const metaData = {
+  title: '404 Not Found | ナガノマ リクのポートフォリオサイト',
+  description: 'ページが見つかりませんでした。',
+};
+---
+
+<Layout {...metaData}>
+  <main class="p-404 u-page-overlay">
+    <div class="outer">
+      <h1 class="title">404 Not Found</h1>
+      <p class="desc">
+        お探しのページが見つかりませんでした。<br />
+        URLが変更されたか、削除された可能性があります。<br />
+        URLがお間違いないかご確認の上、ホームよりお探しください。
+      </p>
+      <PrimaryButton tag="a" href="/" text="ホームに戻る" class="link" />
+    </div>
+  </main>
+</Layout>
+
+<style>
+  @import '@/styles/_mql.css';
+
+  .p-404 {
+    display: grid;
+    place-content: center;
+  }
+
+  .outer {
+    padding: calc(20 * var(--px));
+    text-align: center;
+
+    @media (--mql-md) {
+      padding: calc(40 * var(--px));
+    }
+  }
+
+  .title {
+    font-family: var(--font-dela-gothic);
+    font-size: calc(20 * var(--rem));
+
+    @media (--mql-md) {
+      font-size: calc(28 * var(--rem));
+    }
+
+    + * {
+      margin-top: calc(18 * var(--px));
+
+      @media (--mql-md) {
+        margin-top: calc(24 * var(--px));
+      }
+    }
+  }
+
+  .desc {
+    font-size: calc(12 * var(--rem));
+    font-weight: 500;
+    line-height: 1.75;
+
+    @media (--mql-md) {
+      font-size: calc(14 * var(--rem));
+    }
+  }
+
+  .link {
+    width: calc(200 * var(--px));
+    padding: calc(6 * var(--px)) calc(16 * var(--px));
+    margin-top: calc(36 * var(--px));
+    margin-right: auto;
+    margin-left: auto;
+    font-size: calc(14 * var(--rem));
+
+    @media (--mql-md) {
+      width: calc(240 * var(--px));
+      margin-top: calc(48 * var(--px));
+      font-size: calc(16 * var(--rem));
+    }
+  }
+</style>
