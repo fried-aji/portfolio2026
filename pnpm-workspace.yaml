@@ -1,0 +1,14 @@
+# allowBuildsで指定したパッケージ以外のインストール時スクリプトの実行を禁止
+strictDepBuilds: true
+
+# インストール時にスクリプトを実行できるパッケージを指定
+allowBuilds:
+  esbuild: true
+  sharp: true
+  workerd: true
+
+# リリース後3日未満のパッケージへの更新を禁止
+minimumReleaseAge: 4320
+
+# 無効なpeerDependenciesがある場合（バージョン不整合など）にコマンドを停止
+strictPeerDependencies: true
