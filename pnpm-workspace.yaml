@@ -1,3 +1,6 @@
+packages:
+  - '.'
+
 # allowBuildsで指定したパッケージ以外のインストール時スクリプトの実行を禁止
 strictDepBuilds: true
 
